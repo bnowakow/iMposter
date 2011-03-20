@@ -20,7 +20,7 @@ namespace iMposter.View.Sample
     /// </summary>
     public partial class CameraFaceDetect : Page
     {
-        protected FaceDetector faceDetector;
+        protected IFaceDetector faceDetector;
 
         public CameraFaceDetect()
         {
@@ -31,7 +31,11 @@ namespace iMposter.View.Sample
 
         private void detectButton_Click(object sender, RoutedEventArgs e)
         {
-            imageViewer.Source = faceDetector.DetectFaces();
+            var faces = faceDetector.DetectFaces();
+            if (faces.Count > 0)
+            {
+                imageViewer.Source = faces.First();
+            }
         }
     }
 }

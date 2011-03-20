@@ -7,6 +7,7 @@ using Emgu.CV;
 using System.Runtime.InteropServices;
 using System.Windows;
 using Emgu.CV.Structure;
+using System.Drawing;
 
 namespace iMposter.Model
 {
@@ -15,6 +16,11 @@ namespace iMposter.Model
         public static BitmapSource ToBitmapSource(this Image<Bgr, byte> image)
         {
             return IImageToBitmapSource(image);
+        }
+
+        public static Int32Rect ToInt32Rect(this Rectangle rectangle)
+        {
+            return new Int32Rect(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
         }
 
         /// <summary>

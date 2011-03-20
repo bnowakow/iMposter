@@ -10,37 +10,42 @@ using Emgu.CV.Structure;
 using System.Windows.Media.Imaging;
 using System.Drawing;
 using Emgu.CV.CvEnum;
+using System.Windows;
 
 namespace iMposter.Controller.Face
 {
-    public class FaceDetector
+    public class FaceDetector : IFaceDetector
     {
-        protected CameraImage cameraImage;
+        protected ICameraImage cameraImage;
         protected HaarCascade haarCascade;
-        protected double haarScaleFactor = 1.4;
-        protected int haarMinNeighbours = 4;
+        protected double haarScaleFactor = ControllerSettings.Default.haarScaleFactor;
+        protected int haarMinNeighbours = ControllerSettings.Default.haarMinNeighbours;
+        protected int haarMinFaceImageDivider = ControllerSettings.Default.haarMinFaceImageDivider;
 
         public FaceDetector()
         {
             cameraImage = new CameraImage();
-            // TODO read from config which haar cascade file should be used
-            haarCascade = new HaarCascade(@"Face\haarcascade_frontalface_alt2.xml");
+            haarCascade = new HaarCascade(@ControllerSettings.Default.haarCascadeFile);
         }
 
-        public BitmapSource DetectFaces()
+        public List<BitmapSource> DetectFaces()
         {
             Image<Bgr, byte> image = cameraImage.GetNextImage();
             Image<Gray, byte> grayImage = image.Convert<Gray, byte>();
-            // TODO read from config what minimum resolotion of face should it have according to camera resolution and faces distance
-            int minFaceImageDivider = 20;
-            Size faceMinSize = new Size(image.Width / minFaceImageDivider, image.Height / minFaceImageDivider);
+            System.Drawing.Size faceMinSize = new System.Drawing.Size(image.Width / haarMinFaceImageDivider, image.Height / haarMinFaceImageDivider);
             var faces = grayImage.DetectHaarCascade(haarCascade, haarScaleFactor, haarMinNeighbours, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, faceMinSize)[0];
             // TODO detect faces that lays on each other
+            // TODO hash faces - SURF feature detector in CSharp - http://www.emgu.com/wiki/index.php/SURF_feature_detector_in_CSharp
+            // TODO detect face sharpeness to enlarge face region
+            List<BitmapSource> faceBitmaps = new List<BitmapSource>();
             foreach (var face in faces)
             {
-                image.Draw(face.rect, new Bgr(0, double.MaxValue, 0), 3);
+                //image.Draw(face.rect, new Bgr(0, double.MaxValue, 0), 3);
+                CroppedBitmap faceBitmap = new CroppedBitmap(image.ToBitmapSource(), face.rect.ToInt32Rect());
+                faceBitmaps.Add(faceBitmap);
             }
-            return image.ToBitmapSource();
+
+            return faceBitmaps;
         }
     }
 }

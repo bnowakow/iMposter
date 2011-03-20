@@ -8,7 +8,7 @@
 	Title="CameraFaceDetect">
 
     <Grid>
-        <Image x:Name="imageViewer" HorizontalAlignment="Left" Margin="12,12,0,0" Stretch="UniformToFill" VerticalAlignment="Top" />
+        <Image x:Name="imageViewer" HorizontalAlignment="Left" Margin="12,12,0,0" Stretch="None" VerticalAlignment="Top" />
         <Button Content="Detect" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" Name="detectButton" VerticalAlignment="Top" Width="75" Click="detectButton_Click" />
     </Grid>
 </Page>

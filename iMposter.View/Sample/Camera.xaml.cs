@@ -28,7 +28,7 @@ namespace iMposter.View.Sample
             //System.Windows.Forms.Application.Idle
             //System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.ContextIdle, null);
 
-            CameraImage ci = new CameraImage();
+            ICameraImage ci = new CameraImage();
             // Need to add references for Emgu.CV and Emgu.Util in order to get extension method working
             //BitmapSource bs = ci.GetNextImage().ToBitmapSource();
             //imageViewer.Source = bs;

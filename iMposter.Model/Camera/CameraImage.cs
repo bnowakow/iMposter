@@ -16,10 +16,8 @@ namespace iMposter.Model.Camera
 
         public CameraImage()
         {
-            // TODO read from config which camera should be used
-            capture = new Capture();
+            capture = new Capture(ModelSettings.Default.cameraIndex);
             // Initialize capture stream to not receive an empty frame
-            //capture.QueryFrame();
             //System.Threading.Thread.Sleep(1000);
         }
 

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="iMposter.Controller" GeneratedClassName="ControllerSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="haarScaleFactor" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1.4</Value>
+    </Setting>
+    <Setting Name="haarMinNeighbours" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="haarCascadeFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Face\haarcascade_frontalface_alt2.xml</Value>
+    </Setting>
+    <Setting Name="haarMinFaceImageDivider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
