@@ -55,6 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Sample\Camera.xaml.cs">
+      <DependentUpon>Camera.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sample\CameraFaceDetect.xaml.cs">
+      <DependentUpon>CameraFaceDetect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sample\House.xaml.cs">
       <DependentUpon>House.xaml</DependentUpon>
     </Compile>
@@ -70,6 +76,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Sample\Camera.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sample\CameraFaceDetect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sample\House.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +112,16 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iMposter.Controller\iMposter.Controller.csproj">
+      <Project>{BCD95457-FDF1-4D0E-8501-445B7E5940BA}</Project>
+      <Name>iMposter.Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iMposter.Model\iMposter.Model.csproj">
+      <Project>{F6AB9309-66A6-446C-A604-B01A5D101F91}</Project>
+      <Name>iMposter.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
