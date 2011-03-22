@@ -1,8 +1,7 @@
 ﻿<Application x:Class="iMposter.View.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="Sample\CameraFaceDetect.xaml">
+             StartupUri="Wall.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

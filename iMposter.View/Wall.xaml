@@ -1,0 +1,72 @@
+﻿<Window x:Class="iMposter.View.Wall"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"        
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:iMposter.View"
+        mc:Ignorable="d" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Wall" WindowState="Maximized" WindowStyle="SingleBorderWindow"  d:DesignHeight="288">
+    <Window.Resources>
+
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="#FF000000">
+        <Grid x:Name="frame" Margin="5,5,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border x:Name="border" Grid.Row="2" BorderThickness="0">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF162C41" Offset="0.02"/>
+                        <GradientStop Color="#FF263340" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Border.Background>
+                    <RadialGradientBrush GradientOrigin="0.502,-0.012" RadiusX="0.648">
+                        <GradientStop Color="#FF000000" Offset="1"/>
+                        <GradientStop Color="#FF2B5278"/>
+                    </RadialGradientBrush>
+                </Border.Background>
+                <Grid x:Name="wallLayout">
+                    <!-- Content omg -->
+                    <local:PeriodicTableControl HorizontalAlignment="Center" Margin="0,0,0,93" VerticalAlignment="Bottom" Width="1024" Height="768" BorderBrush="Aquamarine" BorderThickness="3"/>
+                    <!-- /Content omg -->
+                    <Ellipse x:Name="lightFloor" Width="1258" Height="206" HorizontalAlignment="Center" Margin="0,0,0,-93" VerticalAlignment="Bottom" Opacity="0.3" IsHitTestVisible="False">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF1C6EC1"/>
+                                <GradientStop Offset="1"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Rectangle x:Name="shadowLeft" HorizontalAlignment="Left" Width="300" IsHitTestVisible="False">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                <GradientStop Color="#CC000000"/>
+                                <GradientStop Offset="0.996"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle x:Name="shadowRight" HorizontalAlignment="Right" Width="300" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                <GradientStop Color="#CC000000"/>
+                                <GradientStop Offset="0.996"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Grid>
+</Window>

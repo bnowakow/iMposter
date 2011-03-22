@@ -19,56 +19,39 @@
                 </OrthographicCamera.Transform>
             </OrthographicCamera>
         </Viewport3D.Camera>
-        <Viewport3D.Children>
-            <ModelVisual3D x:Name="Light">
-                <ModelVisual3D.Content>
-                    <AmbientLight/>
-                </ModelVisual3D.Content>
-            </ModelVisual3D>
-            <ModelVisual3D>
-                <ModelVisual3D.Content>
-                    <Model3DGroup x:Name="house">
 
-                        <GeometryModel3D x:Name="roof">
-                            <GeometryModel3D.Material>
-                                <DiffuseMaterial Brush="Blue"/>
-                            </GeometryModel3D.Material>
-                            <GeometryModel3D.Geometry>
-                                <MeshGeometry3D Positions="-1,1,1 0,2,1 0,2,-1 -1,1,-1 0,2,1 1,1,1
-                                     1,1,-1 0,2,-1"
-                          TriangleIndices="0 1 2 0 2 3 4 5 6 4 6 7"/>
-                            </GeometryModel3D.Geometry>
-                        </GeometryModel3D>
+        <!-- Button on 3D -->
+        <Viewport2DVisual3D>
+            <!-- Give the plane a slight rotation -->
+            <Viewport2DVisual3D.Transform>
+                <RotateTransform3D>
+                    <RotateTransform3D.Rotation>
+                        <AxisAngleRotation3D Angle="40" Axis="0, 1, 0" />
+                    </RotateTransform3D.Rotation>
+                </RotateTransform3D>
+            </Viewport2DVisual3D.Transform>
 
-                        <GeometryModel3D x:Name="sides">
-                            <GeometryModel3D.Material>
-                                <DiffuseMaterial Brush="Green"/>
-                            </GeometryModel3D.Material>
-                            <GeometryModel3D.Geometry>
-                                <MeshGeometry3D Positions="-1,1,1 -1,1,-1 -1,-1,-1 -1,-1,1 1,1,-1
-                                     1,1,1 1,-1,1 1,-1,-1"
-                          TriangleIndices="0 1 2 0 2 3 4 5 6 4 6 7"/>
-                            </GeometryModel3D.Geometry>
-                        </GeometryModel3D>
+            <!-- The Geometry, Material, and Visual for the Viewport2DVisual3D -->
+            <Viewport2DVisual3D.Geometry>
+                <MeshGeometry3D Positions="-1,1,0 -1,-1,0 1,-1,0 1,1,0"
+                            TextureCoordinates="0,0 0,1 1,1 1,0" TriangleIndices="0 1 2 0 2 3"/>
+            </Viewport2DVisual3D.Geometry>
 
-                        <GeometryModel3D x:Name="ends">
-                            <GeometryModel3D.Material>
-                                <DiffuseMaterial Brush="Red"/>
-                            </GeometryModel3D.Material>
-                            <GeometryModel3D.Geometry>
-                                <MeshGeometry3D
-            Positions="-0.25,0,1 -1,1,1 -1,-1,1 -0.25,-1,1 -0.25,0,1
-              -1,-1,1 0.25,0,1 1,-1,1 1,1,1 0.25,0,1 0.25,-1,1 1,-1,1
-              1,1,1 0,2,1 -1,1,1 -1,1,1 -0.25,0,1 0.25,0,1 1,1,1 1,1,-1
-              1,-1,-1 -1,-1,-1 -1,1,-1 1,1,-1 -1,1,-1 0,2,-1"
-            TriangleIndices="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 15
-             17 18 19 20 21 19 21 22 23 24 25"/>
-                            </GeometryModel3D.Geometry>
-                        </GeometryModel3D>
+            <Viewport2DVisual3D.Material>
+                <DiffuseMaterial Viewport2DVisual3D.IsVisualHostMaterial="True" Brush="White"/>
+            </Viewport2DVisual3D.Material>
 
-                    </Model3DGroup>
-                </ModelVisual3D.Content>
-            </ModelVisual3D>
-        </Viewport3D.Children>
+            <StackPanel>
+                <Image Source="strong-hamster-small.jpg" Width="100" />
+                <Button>Omg</Button>
+            </StackPanel>
+        </Viewport2DVisual3D>
+
+        <!-- Lights -->
+        <ModelVisual3D>
+            <ModelVisual3D.Content>
+                <DirectionalLight Color="#FFFFFFFF" Direction="0,0,-1"/>
+            </ModelVisual3D.Content>
+        </ModelVisual3D>
     </Viewport3D>
 </Page>
