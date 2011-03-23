@@ -29,7 +29,7 @@ namespace iMposter.Controller.Interaction
                     periodicTableControl.GetElement(5, 5).Source = faces.First();
                 }
             }
-            //periodicTableControl.GetElement(5, 5).Source = new BitmapImage(new Uri(@"Sample\strong-hamster-small.jpg", UriKind.Relative));
+            //speriodicTableControl.GetElement(5, 5).Source = new BitmapImage(new Uri(@"Sample\strong-hamster-small.jpg", UriKind.Relative));
         }
     }
 }
