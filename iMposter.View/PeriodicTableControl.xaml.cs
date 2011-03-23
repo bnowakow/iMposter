@@ -16,15 +16,17 @@ using iMposter.Model.Camera;
 using System.Windows.Threading;
 using iMposter.Controller.Face;
 using System.IO;
+using iMposter.Controller.Interaction;
 
 namespace iMposter.View
 {
     /// <summary>
     /// Interaction logic for PeriodicTableControl.xaml
     /// </summary>
-    public partial class PeriodicTableControl : UserControl
+    public partial class PeriodicTableControl : UserControl, IPeriodicTableControl
     {
         protected bool[,] elementExists;
+        protected Image[,] elementImage;
         protected int columnNumber = 18;
         protected int rowNumber = 7;
         protected int elementWidth = 165;
@@ -54,6 +56,7 @@ namespace iMposter.View
         }
 
         protected void InitializePeriodicTableElements() {
+            elementImage = new Image[rowNumber, columnNumber];
             for (int row = 0; row < rowNumber; row++) 
             {
                 for (int column = 0; column < columnNumber; column++)
@@ -81,6 +84,7 @@ namespace iMposter.View
                         viewport.Geometry = mesh;
                         viewport.Material = material;
                         viewport.Visual = image;
+                        elementImage[row, column] = image;
 
                         this.mainViewport.Children.Add(viewport);
                     }
@@ -107,6 +111,19 @@ namespace iMposter.View
                 }
             }
         }
+        #endregion
+
+        #region IPeriodicTableControl Members
+
+        public Image GetElement(int row, int column)
+        {
+            if (elementExists[row, column])
+            {
+                return elementImage[row, column];
+            }
+            return new Image();
+        }
+
         #endregion
     }
 }

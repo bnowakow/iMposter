@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using iMposter.Controller.Interaction;
 
 namespace iMposter.View
 {
@@ -18,9 +19,12 @@ namespace iMposter.View
     /// </summary>
     public partial class Wall : Window
     {
+        protected IPeriodicTableInteractionControler periodicTableInteractionControler;
+
         public Wall()
         {
             InitializeComponent();
+            periodicTableInteractionControler = new PeriodicTableInteractionControler(periodicTableControl);
         }
     }
 }

@@ -8,6 +8,9 @@
 	Title="Camera">
 
     <Grid>
-        <Image x:Name="imageViewer" HorizontalAlignment="Left" Margin="12,12,0,0" Stretch="UniformToFill" VerticalAlignment="Top" />
+        <StackPanel>
+            <Button Content="Capture" />
+            <Image x:Name="imageViewer" HorizontalAlignment="Left" Margin="12,12,0,0" Stretch="UniformToFill" VerticalAlignment="Top" />
+        </StackPanel>
     </Grid>
 </Page>

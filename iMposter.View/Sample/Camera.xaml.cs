@@ -21,6 +21,8 @@ namespace iMposter.View.Sample
     /// </summary>
     public partial class Camera : Page
     {
+        protected ICameraImage ci;
+
         public Camera()
         {
             InitializeComponent();
@@ -28,10 +30,14 @@ namespace iMposter.View.Sample
             //System.Windows.Forms.Application.Idle
             //System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.ContextIdle, null);
 
-            ICameraImage ci = new CameraImage();
+            ci = new CameraImage();            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
             // Need to add references for Emgu.CV and Emgu.Util in order to get extension method working
-            //BitmapSource bs = ci.GetNextImage().ToBitmapSource();
-            //imageViewer.Source = bs;
+            BitmapSource bs = ci.GetNextImage().ToBitmapSource();
+            imageViewer.Source = bs;
         }
     }
 }

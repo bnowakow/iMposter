@@ -30,7 +30,7 @@
                 </Border.Background>
                 <Grid x:Name="wallLayout">
                     <!-- Content omg -->
-                    <local:PeriodicTableControl HorizontalAlignment="Center" Margin="0,0,0,93" VerticalAlignment="Bottom" Width="1024" Height="768" BorderBrush="Aquamarine" BorderThickness="3"/>
+                    <local:PeriodicTableControl x:Name="periodicTableControl" HorizontalAlignment="Center" Margin="0,0,0,93" VerticalAlignment="Bottom" Width="1024" Height="768" BorderBrush="Aquamarine" BorderThickness="3"/>
                     <!-- /Content omg -->
                     <Ellipse x:Name="lightFloor" Width="1258" Height="206" HorizontalAlignment="Center" Margin="0,0,0,-93" VerticalAlignment="Bottom" Opacity="0.3" IsHitTestVisible="False">
                         <Ellipse.Fill>
