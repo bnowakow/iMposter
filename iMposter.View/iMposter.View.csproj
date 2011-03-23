@@ -151,6 +151,9 @@
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="opencv_video220.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Img\Elements\01_01.jpg" />
     <Content Include="opencv_calib3d220.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
