@@ -34,5 +34,17 @@ namespace iMposter.Model {
                 this["cameraIndex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool useFakeCamera {
+            get {
+                return ((bool)(this["useFakeCamera"]));
+            }
+            set {
+                this["useFakeCamera"] = value;
+            }
+        }
     }
 }

@@ -13,10 +13,22 @@ namespace iMposter.Model.Camera
     public class CameraImage : ICameraImage
     {
         protected Capture capture;
+        protected bool useFakeCamera = ModelSettings.Default.useFakeCamera;
 
         public CameraImage()
         {
-            capture = new Capture(ModelSettings.Default.cameraIndex);
+            try
+            {
+                capture = new Capture(ModelSettings.Default.cameraIndex);
+            }
+            catch (Exception e)
+            {
+                if (e.Message == "Error: Unable to create capture from camera" + ModelSettings.Default.cameraIndex)
+                {
+                    // There is no camera in the system
+                    useFakeCamera = true;
+                }
+            }
             // Initialize capture stream to not receive an empty frame
             //System.Threading.Thread.Sleep(1000);
         }
@@ -24,7 +36,14 @@ namespace iMposter.Model.Camera
         public Image<Bgr, byte> GetNextImage()
         {
             Image<Bgr, byte> image;
-            image = capture.QueryFrame();
+            if (!useFakeCamera)
+            {
+                image = capture.QueryFrame();
+            }
+            else
+            {
+                image = new Image<Bgr, byte>(@"Camera\FakeCamera\strong-hamster-small.jpg");
+            }
             return image;
         }
     }
