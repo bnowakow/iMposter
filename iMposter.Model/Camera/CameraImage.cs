@@ -42,7 +42,8 @@ namespace iMposter.Model.Camera
             }
             else
             {
-                image = new Image<Bgr, byte>(@"Camera\FakeCamera\strong-hamster-small.jpg");
+                // TODO use random image from FakeCamera folder each time
+                image = new Image<Bgr, byte>(@"Camera\FakeCamera\FakeCameraCapture_01.jpg");
             }
             return image;
         }

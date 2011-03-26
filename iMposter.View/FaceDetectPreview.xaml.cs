@@ -7,28 +7,25 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using iMposter.Model.Camera;
 using System.Windows.Threading;
 using iMposter.Model;
+using System.Windows.Media.Imaging;
 
 namespace iMposter.View
 {
     /// <summary>
-    /// Interaction logic for CameraPreview.xaml
+    /// Interaction logic for FaceDetectPreview.xaml
     /// </summary>
-    public partial class CameraPreview : UserControl
+    public partial class FaceDetectPreview : UserControl
     {
         protected ICameraImage ci;
         protected DispatcherTimer dt;
 
-        public CameraPreview()
+        public FaceDetectPreview()
         {
             InitializeComponent();
-            
         }
 
         void dt_Tick(object sender, EventArgs e)
@@ -38,7 +35,7 @@ namespace iMposter.View
             cameraPreview.Source = bs;
         }
 
-        private void captureButton_Click(object sender, RoutedEventArgs e)
+        private void captureFaceButton_Click(object sender, RoutedEventArgs e)
         {
             ci = new CameraImage();
             dt = new DispatcherTimer();

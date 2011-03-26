@@ -44,10 +44,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\Emgu\Emgu.Util.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +66,9 @@
     </ApplicationDefinition>
     <Compile Include="CameraPreview.xaml.cs">
       <DependentUpon>CameraPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FaceDetectPreview.xaml.cs">
+      <DependentUpon>FaceDetectPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="PeriodicTableControl.xaml.cs">
       <DependentUpon>PeriodicTableControl.xaml</DependentUpon>
@@ -92,6 +93,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="FaceDetectPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PeriodicTableControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
