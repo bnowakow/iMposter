@@ -125,5 +125,20 @@ namespace iMposter.View
         }
 
         #endregion
+
+        public bool[,] GetElementExists()
+        {
+            return elementExists;
+        }
+
+        public int GetRowNumber()
+        {
+            return rowNumber;
+        }
+
+        public int GetColumnNumber()
+        {
+            return columnNumber;
+        }
     }
 }

@@ -11,11 +11,15 @@ namespace iMposter.Controller.Interaction
     {
         protected IPeriodicTableControl periodicTableControl;
         protected IFaceDetector faceDetector;
+        protected bool[,] elementImageOverridden;
 
         public PeriodicTableInteractionControler(IPeriodicTableControl periodicTableControl)
         {
             this.periodicTableControl = periodicTableControl;
             this.faceDetector = new FaceDetector();
+
+            this.elementImageOverridden = new bool[periodicTableControl.GetRowNumber(), periodicTableControl.GetColumnNumber()];
+
             this.Omg();
         }
 

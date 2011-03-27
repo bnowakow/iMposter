@@ -9,5 +9,8 @@ namespace iMposter.Controller.Interaction
     public interface IPeriodicTableControl
     {
         Image GetElement(int row, int column);
+        bool[,] GetElementExists();
+        int GetRowNumber();
+        int GetColumnNumber();
     }
 }
