@@ -12,5 +12,6 @@ namespace iMposter.Controller.Interaction
         bool[,] GetElementExists();
         int GetRowNumber();
         int GetColumnNumber();
+        void InitializePeriodicTableElements(bool[,] elementExists, int rowNumber, int columnNumber);
     }
 }

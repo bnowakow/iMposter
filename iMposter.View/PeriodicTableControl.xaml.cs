@@ -25,18 +25,16 @@ namespace iMposter.View
     /// </summary>
     public partial class PeriodicTableControl : UserControl, IPeriodicTableControl
     {
-        protected bool[,] elementExists;
         protected Image[,] elementImage;
-        protected int columnNumber = 18;
-        protected int rowNumber = 7;
+        protected bool[,] elementExists;
+        protected int rowNumber;
+        protected int columnNumber;
         protected int elementWidth = 165;
 
         public PeriodicTableControl()
         {
             InitializeComponent();
-            InitializePeriodicTableElementsExistance();
-            InitializePeriodicTableElements();
-
+            
             //this.MouseMove += new MouseEventHandler(PeriodicTableControl_MouseMove);
             //this.MouseWheel += new MouseWheelEventHandler(PeriodicTableControl_MouseWheel);
         }
@@ -55,7 +53,11 @@ namespace iMposter.View
             camera.Position = new Point3D(10.0 - (e.GetPosition(this).X / this.ActualWidth * 10.0), e.GetPosition(this).Y / this.ActualHeight * 10.0, camera.Position.Z);
         }
 
-        protected void InitializePeriodicTableElements() {
+        public void InitializePeriodicTableElements(bool[,] elementExists, int rowNumber, int columnNumber)
+        {
+            this.elementExists = elementExists;
+            this.rowNumber = rowNumber;
+            this.columnNumber = columnNumber;
             elementImage = new Image[rowNumber, columnNumber];
             for (int row = 0; row < rowNumber; row++) 
             {
@@ -91,27 +93,6 @@ namespace iMposter.View
                 }
             }
         }
-
-        #region InitializePeriodicTableElementsExistance
-        private void InitializePeriodicTableElementsExistance()
-        {
-            elementExists = new bool[rowNumber, columnNumber];
-            for (int row = 0; row < rowNumber; row++) 
-            {
-                for (int column = 0; column < columnNumber; column++)
-                {
-                    if ((row == 0 && column > 0 && column < 17) || (row < 3 && column > 1 && column < 12))
-                    {
-                        elementExists[row, column] = false;
-                    }
-                    else
-                    {
-                        elementExists[row, column] = true;
-                    }
-                }
-            }
-        }
-        #endregion
 
         #region IPeriodicTableControl Members
 
