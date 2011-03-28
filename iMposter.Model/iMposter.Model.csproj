@@ -46,6 +46,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +63,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>ModelSettings.settings</DependentUpon>
     </Compile>
+    <Compile Include="PeriodicTable\Element.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

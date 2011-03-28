@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using iMposter.Model.PeriodicTable;
 
 namespace iMposter.Controller.Interaction
 {
     public interface IPeriodicTableControl
     {
-        Image GetElement(int row, int column);
-        bool[,] GetElementExists();
-        int GetRowNumber();
-        int GetColumnNumber();
-        void InitializePeriodicTableElements(bool[,] elementExists, int rowNumber, int columnNumber);
+        void InitializePeriodicTableElements(List<Element> elements);
     }
 }
