@@ -45,7 +45,7 @@ namespace iMposter.Controller.Interaction
                 Element randomElement = GetRandomNotOverriddenElementElement();
                 if (randomElement != null)
                 {
-                    // TODO animate transition
+                    // TODO animate transition - http://blogs.windowsclient.net/swt62/archive/2009/12/10/fade-out-status-bar-in-wpf.aspx
                     randomElement.NewImageSource = face;
                     randomElement.IsOverridden = true;
 
