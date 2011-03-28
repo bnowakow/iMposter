@@ -26,7 +26,7 @@ namespace iMposter.View
     /// </summary>
     public partial class PeriodicTableControl : UserControl, IPeriodicTableControl
     {
-        protected List<Element> elements;
+        protected IList<Element> elements;
         protected int elementWidth = 165;
 
         public PeriodicTableControl()
@@ -51,7 +51,7 @@ namespace iMposter.View
             camera.Position = new Point3D(10.0 - (e.GetPosition(this).X / this.ActualWidth * 10.0), e.GetPosition(this).Y / this.ActualHeight * 10.0, camera.Position.Z);
         }
 
-        public void InitializePeriodicTableElements(List<Element> elements)
+        public void InitializePeriodicTableElements(IList<Element> elements)
         {
             this.elements = elements;
 
@@ -78,6 +78,7 @@ namespace iMposter.View
                 viewport.Geometry = mesh;
                 viewport.Material = material;
                 viewport.Visual = image;
+                element.DefaultImageSource = image.Source;
                 element.Image = image;
 
                 this.mainViewport.Children.Add(viewport);

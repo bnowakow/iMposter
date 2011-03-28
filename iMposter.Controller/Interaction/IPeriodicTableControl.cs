@@ -9,6 +9,6 @@ namespace iMposter.Controller.Interaction
 {
     public interface IPeriodicTableControl
     {
-        void InitializePeriodicTableElements(List<Element> elements);
+        void InitializePeriodicTableElements(IList<Element> elements);
     }
 }

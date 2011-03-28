@@ -15,7 +15,7 @@ namespace iMposter.Controller.Interaction
     {
         protected IPeriodicTableControl periodicTableControl;
         protected IFaceDetector faceDetector;
-        protected DispatcherTimer dt;
+        protected DispatcherTimer collectFacesTimer;
 
         protected List<Element> elements;
 
@@ -30,26 +30,56 @@ namespace iMposter.Controller.Interaction
 
             this.periodicTableControl.InitializePeriodicTableElements(elements);
 
-            dt = new DispatcherTimer();
-            dt.Tick += new EventHandler(CollectFacesFromCapture);
-            dt.Interval = TimeSpan.FromMilliseconds(1000);
-            dt.Start();
+            collectFacesTimer = new DispatcherTimer();
+            collectFacesTimer.Tick += new EventHandler(CollectFacesFromCapture);
+            collectFacesTimer.Interval = TimeSpan.FromMilliseconds(5000);
+            collectFacesTimer.Start();
         }
 
         protected void CollectFacesFromCapture(object sender, EventArgs e)
         {
             var faces = faceDetector.DetectFaces();
+            int timeOffset = 0;
             foreach (var face in faces)
             {
                 Element randomElement = GetRandomNotOverriddenElementElement();
                 if (randomElement != null)
                 {
                     // TODO animate transition
-                    // TODO set callback and timeout for renewal of oryginal image
-                    randomElement.Image.Source = face;
+                    randomElement.NewImageSource = face;
                     randomElement.IsOverridden = true;
+
+                    DispatcherTimer elementTimer = new DispatcherTimer();
+                    elementTimer.Interval = TimeSpan.FromMilliseconds(++timeOffset * 1000);
+                    elementTimer.Tag = randomElement;
+                    elementTimer.Tick += new EventHandler(ElementOverrideByNewCallback);
+                    elementTimer.Start();
                 }
             }
+        }
+
+        protected void ElementOverrideByNewCallback(object sender, EventArgs e)
+        {
+            (sender as DispatcherTimer).Stop();
+
+            Element element = (Element)(sender as DispatcherTimer).Tag;
+            if (element.NewImageSource != null)
+            {
+                element.SetNewImage();
+                element.NewImageSource = null;
+
+                DispatcherTimer elementTimer = new DispatcherTimer();
+                elementTimer.Interval = TimeSpan.FromMilliseconds(5000);
+                elementTimer.Tag = element;
+                elementTimer.Tick += new EventHandler(ElementOverrideByDefaultCallback);
+                elementTimer.Start();
+            }
+        }
+
+        protected void ElementOverrideByDefaultCallback(object sender, EventArgs e)
+        {
+            Element element = (Element)(sender as DispatcherTimer).Tag;
+            element.RevertDefaultImage();
         }
 
         protected Element GetRandomNotOverriddenElementElement()
