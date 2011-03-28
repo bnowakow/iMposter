@@ -7,6 +7,7 @@ using Emgu.CV.Structure;
 using System.Runtime.InteropServices;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.IO;
 
 namespace iMposter.Model.Camera
 {
@@ -42,8 +43,12 @@ namespace iMposter.Model.Camera
             }
             else
             {
-                // TODO use random image from FakeCamera folder each time
-                image = new Image<Bgr, byte>(@"Camera\FakeCamera\FakeCameraCapture_01.jpg");
+                // Use random image from FakeCamera folder each time
+                DirectoryInfo fakeCameraCaptureDirectory = new DirectoryInfo(@"Camera\FakeCamera\");
+                FileInfo[] fakeCameraCaptureFiles = fakeCameraCaptureDirectory.GetFiles("FakeCameraCapture_*.jpg");
+                Random random = new Random();
+                int randomFileIndex = random.Next(0, fakeCameraCaptureFiles.Count());
+                image = new Image<Bgr, byte>(@"Camera\FakeCamera\" + fakeCameraCaptureFiles[randomFileIndex]);
             }
             return image;
         }
