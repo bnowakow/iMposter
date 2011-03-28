@@ -47,6 +47,7 @@ namespace iMposter.Controller.Interaction
                     // TODO animate transition
                     // TODO set callback and timeout for renewal of oryginal image
                     randomElement.Image.Source = face;
+                    randomElement.IsOverridden = true;
                 }
             }
         }
