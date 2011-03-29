@@ -7,6 +7,7 @@ using iMposter.Controller.Face;
 using System.Windows.Threading;
 using System.Drawing;
 using iMposter.Model.PeriodicTable;
+using System.Windows.Media.Animation;
 
 
 namespace iMposter.Controller.Interaction
@@ -65,6 +66,7 @@ namespace iMposter.Controller.Interaction
             Element element = (Element)(sender as DispatcherTimer).Tag;
             if (element.NewImageSource != null)
             {
+                element.FadeOutElementImage();
                 element.SetNewImage();
                 element.NewImageSource = null;
 
@@ -112,6 +114,7 @@ namespace iMposter.Controller.Interaction
                     if (!((row == 0 && column > 0 && column < 17) || (row < 3 && column > 1 && column < 12)))
                     {
                         Element element = new Element(new Point(column, row));
+                        element.FadeElementImage = periodicTableControl.FadeElementImage;
                         elements.Add(element);
                     }
                 }

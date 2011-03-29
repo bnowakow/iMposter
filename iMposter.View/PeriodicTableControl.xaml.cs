@@ -18,6 +18,7 @@ using iMposter.Controller.Face;
 using System.IO;
 using iMposter.Controller.Interaction;
 using iMposter.Model.PeriodicTable;
+using System.Windows.Media.Animation;
 
 namespace iMposter.View
 {
@@ -32,7 +33,7 @@ namespace iMposter.View
         public PeriodicTableControl()
         {
             InitializeComponent();
-            
+
             //this.MouseMove += new MouseEventHandler(PeriodicTableControl_MouseMove);
             //this.MouseWheel += new MouseWheelEventHandler(PeriodicTableControl_MouseWheel);
         }
@@ -72,7 +73,7 @@ namespace iMposter.View
                 Image image = new Image();
                 image.Width = elementWidth;
                 image.Source = new BitmapImage(new Uri(@"Img\Elements\01_01.jpg", UriKind.Relative));
-
+                
                 Viewport2DVisual3D viewport = new Viewport2DVisual3D();
                 viewport.Transform = tranformGroup;
                 viewport.Geometry = mesh;
@@ -83,6 +84,21 @@ namespace iMposter.View
 
                 this.mainViewport.Children.Add(viewport);
             }
+        }
+
+        public void FadeElementImage(Element element, double from, double to)
+        {
+            Storyboard fade = new Storyboard();
+            DoubleAnimation fadeOutAnimation = new DoubleAnimation()
+            {
+                From = from,
+                To = to,
+                Duration = new Duration(TimeSpan.FromSeconds(10)),
+            };
+            Storyboard.SetTargetProperty(fadeOutAnimation, new PropertyPath("(Opacity)"));
+            Storyboard.SetTarget(fadeOutAnimation, element.Image);
+            fade.Children.Add(fadeOutAnimation);
+            fade.Begin();
         }
     }
 }

@@ -6,9 +6,12 @@ using System.Drawing;
 using System.Windows.Controls;
 using ControlsImage = System.Windows.Controls.Image;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace iMposter.Model.PeriodicTable
 {
+    public delegate void FadeElementImageDelegate(Element element, double from, double to);
+
     public class Element
     {
         public Point Location { get; set; }
@@ -16,7 +19,8 @@ namespace iMposter.Model.PeriodicTable
         public ControlsImage Image { get; set; }
         public ImageSource DefaultImageSource { get; set; }
         public ImageSource NewImageSource { get; set; }
-
+        public FadeElementImageDelegate FadeElementImage { get; set; }
+        
         public Element(Point Location)
         {
             this.Location = Location;
@@ -36,6 +40,16 @@ namespace iMposter.Model.PeriodicTable
         {
             Image.Source = DefaultImageSource;
             IsOverridden = false;
+        }
+
+        public void FadeInElementImage()
+        {
+            FadeElementImage(this, 0, 1);
+        }
+
+        public void FadeOutElementImage()
+        {
+            FadeElementImage(this, 1, 0);
         }
     }
 }
