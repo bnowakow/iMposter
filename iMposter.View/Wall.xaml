@@ -35,7 +35,14 @@
                             <local:CameraPreview Height="200" Width="200"/>
                             <local:FaceDetectPreview Height="200" Width="200"/>
                         </StackPanel-->
-                        <local:PeriodicTableControl x:Name="periodicTableControl" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="1024" Height="768" BorderBrush="Transparent" BorderThickness="3"/>
+                        <local:PeriodicTableControl x:Name="periodicTableControl" 
+                                                    HorizontalAlignment="Center" 
+                                                    VerticalAlignment="Bottom" 
+                                                    Height="768" 
+                                                    BorderBrush="Transparent" 
+                                                    BorderThickness="3" 
+                                                    Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}" 
+                                                    Margin="0,0,0,206" />
                     </StackPanel>
                     <!-- /Content omg -->
                     <Ellipse x:Name="lightFloor" Width="1258" Height="206" HorizontalAlignment="Center" Margin="0,0,0,-93" VerticalAlignment="Bottom" Opacity="0.3" IsHitTestVisible="False">
