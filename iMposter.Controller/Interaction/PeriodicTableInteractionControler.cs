@@ -20,7 +20,7 @@ namespace iMposter.Controller.Interaction
         protected DispatcherTimer collectFacesTimer;
         protected DispatcherTimer processFacesTimer;
 
-        // TODO thread synchronization
+        // TODO check if thread synchronization is needed
         protected List<BitmapSource> facesToProcess;
         protected IList<Element> elements;
 
@@ -39,24 +39,6 @@ namespace iMposter.Controller.Interaction
 
             InitializeCollectThread();
             InitializeProcessThread();
-        }
-        #endregion
-
-        #region Initialize collect and process threads
-        protected void InitializeCollectThread()
-        {
-            collectFacesTimer = new DispatcherTimer();
-            collectFacesTimer.Tick += new EventHandler(CollectFacesFromCapture);
-            collectFacesTimer.Interval = TimeSpan.FromSeconds(ControllerSettings.Default.interactionTableFaceCaptureSecondInterval);
-            collectFacesTimer.Start();
-        }
-
-        protected void InitializeProcessThread()
-        {
-            processFacesTimer = new DispatcherTimer();
-            processFacesTimer.Tick += new EventHandler(ProcessFacesFromCapture);
-            processFacesTimer.Interval = TimeSpan.FromSeconds(ControllerSettings.Default.interactionTableFaceProcessSecondInterval);
-            processFacesTimer.Start();
         }
         #endregion
 
@@ -131,6 +113,23 @@ namespace iMposter.Controller.Interaction
             }
         }
 
+        #region Initialize collect and process threads
+        protected void InitializeCollectThread()
+        {
+            collectFacesTimer = new DispatcherTimer();
+            collectFacesTimer.Tick += new EventHandler(CollectFacesFromCapture);
+            collectFacesTimer.Interval = TimeSpan.FromSeconds(ControllerSettings.Default.interactionTableFaceCaptureSecondInterval);
+            collectFacesTimer.Start();
+        }
+
+        protected void InitializeProcessThread()
+        {
+            processFacesTimer = new DispatcherTimer();
+            processFacesTimer.Tick += new EventHandler(ProcessFacesFromCapture);
+            processFacesTimer.Interval = TimeSpan.FromSeconds(ControllerSettings.Default.interactionTableFaceProcessSecondInterval);
+            processFacesTimer.Start();
+        }
+        #endregion
         #region InitializePeriodicTableElementsExistance
         protected void InitializePeriodicTableElementsExistance()
         {
