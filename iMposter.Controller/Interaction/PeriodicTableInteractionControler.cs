@@ -27,26 +27,38 @@ namespace iMposter.Controller.Interaction
         protected int columnNumber = 18;
         protected int rowNumber = 7;
 
+        #region Constructor
         public PeriodicTableInteractionControler(IPeriodicTableControl periodicTableControl)
         {
             this.periodicTableControl = periodicTableControl;
             this.faceDetector = new FaceDetector();
-            InitializePeriodicTableElementsExistance();
-
-            this.periodicTableControl.InitializePeriodicTableElements(elements);
-
             this.facesToProcess = new List<BitmapSource>();
 
+            InitializePeriodicTableElementsExistance();
+            this.periodicTableControl.InitializePeriodicTableElements(elements);
+
+            InitializeCollectThread();
+            InitializeProcessThread();
+        }
+        #endregion
+
+        #region Initialize collect and process threads
+        protected void InitializeCollectThread()
+        {
             collectFacesTimer = new DispatcherTimer();
             collectFacesTimer.Tick += new EventHandler(CollectFacesFromCapture);
             collectFacesTimer.Interval = TimeSpan.FromSeconds(ControllerSettings.Default.interactionTableFaceCaptureSecondInterval);
             collectFacesTimer.Start();
+        }
 
+        protected void InitializeProcessThread()
+        {
             processFacesTimer = new DispatcherTimer();
             processFacesTimer.Tick += new EventHandler(ProcessFacesFromCapture);
             processFacesTimer.Interval = TimeSpan.FromSeconds(ControllerSettings.Default.interactionTableFaceProcessSecondInterval);
             processFacesTimer.Start();
         }
+        #endregion
 
         public void ProcessFacesFromCapture(object sender, EventArgs e)
         {
