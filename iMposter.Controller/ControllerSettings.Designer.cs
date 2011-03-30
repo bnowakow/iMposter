@@ -106,5 +106,17 @@ namespace iMposter.Controller {
                 this["interactionTableFaceProcessSecondInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int interactionTableFaceStorageMaximalNumber {
+            get {
+                return ((int)(this["interactionTableFaceStorageMaximalNumber"]));
+            }
+            set {
+                this["interactionTableFaceStorageMaximalNumber"] = value;
+            }
+        }
     }
 }

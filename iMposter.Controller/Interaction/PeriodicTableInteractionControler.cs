@@ -67,7 +67,24 @@ namespace iMposter.Controller.Interaction
         public void CollectFacesFromCapture(object sender, EventArgs e)
         {
             var faces = faceDetector.DetectFaces();
-            facesToProcess.AddRange(faces);
+            if (facesToProcess.Count() + faces.Count() < ControllerSettings.Default.interactionTableFaceStorageMaximalNumber)
+            {
+                facesToProcess.AddRange(faces);
+            }
+            else
+            {
+                foreach (var face in faces)
+                {
+                    if (facesToProcess.Count() < ControllerSettings.Default.interactionTableFaceStorageMaximalNumber)
+                    {
+                        facesToProcess.Add(face);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
         }
 
         protected void ElementFadeOutTask(Object targetElement)
