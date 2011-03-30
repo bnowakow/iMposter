@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using System.Drawing;
 using iMposter.Model.PeriodicTable;
 using System.Windows.Media.Animation;
+using iMposter.Model.Task;
 
 
 namespace iMposter.Controller.Interaction
@@ -17,8 +18,11 @@ namespace iMposter.Controller.Interaction
         protected IPeriodicTableControl periodicTableControl;
         protected IFaceDetector faceDetector;
         protected DispatcherTimer collectFacesTimer;
+        protected DispatcherTimer processFacesTimer;
 
-        protected List<Element> elements;
+        // TODO thread synchronization
+        protected List<BitmapSource> facesToProcess;
+        protected IList<Element> elements;
 
         protected int columnNumber = 18;
         protected int rowNumber = 7;
@@ -31,62 +35,75 @@ namespace iMposter.Controller.Interaction
 
             this.periodicTableControl.InitializePeriodicTableElements(elements);
 
+            this.facesToProcess = new List<BitmapSource>();
+
             collectFacesTimer = new DispatcherTimer();
             collectFacesTimer.Tick += new EventHandler(CollectFacesFromCapture);
-            collectFacesTimer.Interval = TimeSpan.FromMilliseconds(5000);
+            collectFacesTimer.Interval = TimeSpan.FromSeconds(ControllerSettings.Default.interactionTableFaceCaptureSecondInterval);
             collectFacesTimer.Start();
+
+            processFacesTimer = new DispatcherTimer();
+            processFacesTimer.Tick += new EventHandler(ProcessFacesFromCapture);
+            processFacesTimer.Interval = TimeSpan.FromSeconds(ControllerSettings.Default.interactionTableFaceProcessSecondInterval);
+            processFacesTimer.Start();
         }
 
-        protected void CollectFacesFromCapture(object sender, EventArgs e)
+        public void ProcessFacesFromCapture(object sender, EventArgs e)
+        {
+            BitmapSource face = facesToProcess.FirstOrDefault();
+            Element randomElement = GetRandomNotOverriddenElementElement();
+            if (face != null && randomElement != null)
+            {
+                facesToProcess.Remove(face);
+
+                randomElement.NewImageSource = face;
+                randomElement.IsOverridden = true;
+
+                TaskChain animationTaskChain = new TaskChain(randomElement);
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeOutTask, 1));
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementOverrideByNewTask, periodicTableControl.GetFadeTimeMiliseconds()));
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeInTask, periodicTableControl.GetFadeTimeMiliseconds()));
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeOutTask, ControllerSettings.Default.interactionTableFaceRenewalAnnimationMilisecondsDuration));
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementRevertTask, periodicTableControl.GetFadeTimeMiliseconds()));
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeInTask, periodicTableControl.GetFadeTimeMiliseconds()));
+                animationTaskChain.Execute();
+            }
+        }
+
+        public void CollectFacesFromCapture(object sender, EventArgs e)
         {
             var faces = faceDetector.DetectFaces();
-            int timeOffset = 0;
-            foreach (var face in faces)
-            {
-                Element randomElement = GetRandomNotOverriddenElementElement();
-                if (randomElement != null)
-                {
-                    // TODO animate transition - http://blogs.windowsclient.net/swt62/archive/2009/12/10/fade-out-status-bar-in-wpf.aspx
-                    randomElement.NewImageSource = face;
-                    randomElement.IsOverridden = true;
-
-                    DispatcherTimer elementTimer = new DispatcherTimer();
-                    elementTimer.Interval = TimeSpan.FromMilliseconds(++timeOffset * 1000);
-                    elementTimer.Tag = randomElement;
-                    elementTimer.Tick += new EventHandler(ElementOverrideByNewCallback);
-                    elementTimer.Start();
-                }
-            }
+            facesToProcess.AddRange(faces);
         }
 
-        protected void ElementOverrideByNewCallback(object sender, EventArgs e)
+        protected void ElementFadeOutTask(Object targetElement)
         {
-            (sender as DispatcherTimer).Stop();
-
-            Element element = (Element)(sender as DispatcherTimer).Tag;
-            if (element.NewImageSource != null)
-            {
-                element.FadeOutElementImage();
-                element.SetNewImage();
-                element.NewImageSource = null;
-
-                DispatcherTimer elementTimer = new DispatcherTimer();
-                elementTimer.Interval = TimeSpan.FromMilliseconds(5000);
-                elementTimer.Tag = element;
-                elementTimer.Tick += new EventHandler(ElementOverrideByDefaultCallback);
-                elementTimer.Start();
-            }
+            Element element = targetElement as Element;
+            element.FadeOutElementImage();
         }
 
-        protected void ElementOverrideByDefaultCallback(object sender, EventArgs e)
+        protected void ElementFadeInTask(Object targetElement)
         {
-            Element element = (Element)(sender as DispatcherTimer).Tag;
+            Element element = targetElement as Element;
+            element.FadeInElementImage();
+        }
+
+        protected void ElementOverrideByNewTask(Object targetElement)
+        {
+            Element element = targetElement as Element;
+            element.SetNewImage();
+        }
+
+        protected void ElementRevertTask(Object targetElement)
+        {
+            Element element = targetElement as Element;
             element.RevertDefaultImage();
+            element.IsOverridden = true;
         }
 
         protected Element GetRandomNotOverriddenElementElement()
         {
-            // elements which are not currently animated
+            // elements which are not currently animated or are scheduled to be animated
             var notOverriddenElements = from e in elements
                                         where e.IsOverridden == false
                                         select e;

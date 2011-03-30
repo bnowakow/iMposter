@@ -12,5 +12,6 @@ namespace iMposter.Controller.Interaction
     {
         void InitializePeriodicTableElements(IList<Element> elements);
         void FadeElementImage(Element element, double from, double to);
+        int GetFadeTimeMiliseconds();
     }
 }

@@ -31,10 +31,10 @@
                 <Grid x:Name="wallLayout">
                     <!-- Content omg -->
                     <StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                        <!--StackPanel Orientation="Horizontal">
                             <local:CameraPreview Height="200" Width="200"/>
                             <local:FaceDetectPreview Height="200" Width="200"/>
-                        </StackPanel>
+                        </StackPanel-->
                         <local:PeriodicTableControl x:Name="periodicTableControl" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="1024" Height="768" BorderBrush="Aquamarine" BorderThickness="3"/>
                     </StackPanel>
                     <!-- /Content omg -->

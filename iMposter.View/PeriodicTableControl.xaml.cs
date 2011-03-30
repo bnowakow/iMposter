@@ -27,6 +27,7 @@ namespace iMposter.View
     /// </summary>
     public partial class PeriodicTableControl : UserControl, IPeriodicTableControl
     {
+        protected int fadeTimeSeconds = ViewSettings.Default.fadeTimeSeconds;
         protected IList<Element> elements;
         protected int elementWidth = 165;
 
@@ -93,12 +94,17 @@ namespace iMposter.View
             {
                 From = from,
                 To = to,
-                Duration = new Duration(TimeSpan.FromSeconds(10)),
+                Duration = new Duration(TimeSpan.FromSeconds(fadeTimeSeconds)),
             };
             Storyboard.SetTargetProperty(fadeOutAnimation, new PropertyPath("(Opacity)"));
             Storyboard.SetTarget(fadeOutAnimation, element.Image);
             fade.Children.Add(fadeOutAnimation);
             fade.Begin();
+        }
+
+        public int GetFadeTimeMiliseconds()
+        {
+            return fadeTimeSeconds * 1000;
         }
     }
 }

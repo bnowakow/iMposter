@@ -7,5 +7,7 @@ namespace iMposter.Controller.Interaction
 {
     public interface IPeriodicTableInteractionControler
     {
+        void CollectFacesFromCapture(object sender, EventArgs e);
+        void ProcessFacesFromCapture(object sender, EventArgs e);
     }
 }

@@ -70,5 +70,41 @@ namespace iMposter.Controller {
                 this["haarMinFaceImageDivider"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        public int interactionTableFaceRenewalAnnimationMilisecondsDuration {
+            get {
+                return ((int)(this["interactionTableFaceRenewalAnnimationMilisecondsDuration"]));
+            }
+            set {
+                this["interactionTableFaceRenewalAnnimationMilisecondsDuration"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int interactionTableFaceCaptureSecondInterval {
+            get {
+                return ((int)(this["interactionTableFaceCaptureSecondInterval"]));
+            }
+            set {
+                this["interactionTableFaceCaptureSecondInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int interactionTableFaceProcessSecondInterval {
+            get {
+                return ((int)(this["interactionTableFaceProcessSecondInterval"]));
+            }
+            set {
+                this["interactionTableFaceProcessSecondInterval"] = value;
+            }
+        }
     }
 }
