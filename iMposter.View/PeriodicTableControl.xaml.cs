@@ -53,6 +53,12 @@ namespace iMposter.View
             camera.Position = new Point3D(10.0 - (e.GetPosition(this).X / this.ActualWidth * 10.0), e.GetPosition(this).Y / this.ActualHeight * 10.0, camera.Position.Z);
         }
 
+        private void sampleCameraTransitionButton_Click(object sender, RoutedEventArgs e)
+        {
+            Vector3DAnimation lookAnimation = new Vector3DAnimation(new Vector3D(-0.4, -0.7, -1), new Vector3D(-0.8, -0.7, -1), new Duration(TimeSpan.FromSeconds(20)));
+            camera.BeginAnimation(PerspectiveCamera.LookDirectionProperty, lookAnimation);
+        }
+
         public void InitializePeriodicTableElements(IList<Element> elements)
         {
             this.elements = elements;

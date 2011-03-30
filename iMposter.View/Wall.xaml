@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:iMposter.View"
         mc:Ignorable="d" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="Wall" WindowState="Maximized" WindowStyle="SingleBorderWindow"  d:DesignHeight="288">
+        Title="Wall" WindowState="Maximized" WindowStyle="None"  d:DesignHeight="288">
     <Window.Resources>
 
     </Window.Resources>
@@ -30,12 +30,12 @@
                 </Border.Background>
                 <Grid x:Name="wallLayout">
                     <!-- Content omg -->
-                    <StackPanel>
+                    <StackPanel Panel.ZIndex="1000">
                         <!--StackPanel Orientation="Horizontal">
                             <local:CameraPreview Height="200" Width="200"/>
                             <local:FaceDetectPreview Height="200" Width="200"/>
                         </StackPanel-->
-                        <local:PeriodicTableControl x:Name="periodicTableControl" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="1024" Height="768" BorderBrush="Aquamarine" BorderThickness="3"/>
+                        <local:PeriodicTableControl x:Name="periodicTableControl" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="1024" Height="768" BorderBrush="Transparent" BorderThickness="3"/>
                     </StackPanel>
                     <!-- /Content omg -->
                     <Ellipse x:Name="lightFloor" Width="1258" Height="206" HorizontalAlignment="Center" Margin="0,0,0,-93" VerticalAlignment="Bottom" Opacity="0.3" IsHitTestVisible="False">
