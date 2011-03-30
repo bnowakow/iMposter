@@ -25,7 +25,7 @@ namespace iMposter.View {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
         public int fadeTimeSeconds {
             get {
                 return ((int)(this["fadeTimeSeconds"]));

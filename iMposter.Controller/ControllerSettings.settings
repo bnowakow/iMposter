@@ -21,7 +21,7 @@
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="interactionTableFaceProcessSecondInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="interactionTableFaceStorageMaximalNumber" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
