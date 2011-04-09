@@ -1,0 +1,967 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional-dtd">
+<!-- saved from url=(0117)http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head id="ctl00_ctl00"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="keywords" content="C#, ASP.NET, Messenger, Windows, Sidebar gadgets, Word, Office, Silverlight, Windows Phone 7">
+<meta name="description" content="Τεχνολογική φοιτητική κοινότητα, events, σεμινάρια, εκδηλώσεις!">
+<meta name="GENERATOR" content="CommunityServer 2007.1 (Build: 20917.1142)">
+<link rel="pingback" href="http://www.studentguru.gr/blogs/vangos/pingback.aspx">
+<link rel="shortcut icon" type="image/ico" href="http://www.studentguru.gr/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="Vangos Pterneas blog (RSS 2.0)" href="http://www.studentguru.gr/blogs/vangos/rss.aspx">
+<link rel="alternate" type="application/atom+xml" title="Vangos Pterneas blog (Atom 1.0)" href="http://www.studentguru.gr/blogs/vangos/atom.aspx">
+<link rel="alternate" type="application/rss+xml" title="Vangos Pterneas blog - All Comments (RSS 2.0)" href="http://www.studentguru.gr/blogs/vangos/rsscomments.aspx">
+<link rel="alternate" type="application/rss+xml" title="How-to: Successfully install Kinect on Windows (OpenNI and NITE) - Comments for this post (RSS 2.0)" href="http://www.studentguru.gr/blogs/vangos/rsscomments.aspx?PostID=121803">
+
+	
+	<link rel="stylesheet" href="./Kinect installation guide_files/style.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="./Kinect installation guide_files/print.css" type="text/css" media="print">
+	
+	<link rel="stylesheet" href="./Kinect installation guide_files/DynamicStyle.aspx" type="text/css" media="screen">
+<script type="text/javascript" async="" src="./Kinect installation guide_files/ga.js"></script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-16495721-1']);
+  _gaq.push(['_setDomainName', '.studentguru.gr']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+var riaStats_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+
+var riaStats_siteID = "47a2914816ea412b7d08f9b05813b947bea04264";
+
+if(riaStats_protocol == "http://" && document.cookie.indexOf('riastats_lock') == -1)
+
+document.write(unescape("%3Cscript src='" + riaStats_protocol + "riastats.com/browserPluginStat.js' type='text/javascript'%3E%3C/script%3E"));
+
+</script><script src="./Kinect installation guide_files/browserPluginStat.js" type="text/javascript"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.studentguru.gr/blogs/vangos/rsd.ashx">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" title="WLWManifest" href="http://www.studentguru.gr/blogs/vangos/wlwmanifest.ashx">
+<link id="ctl00_ctl05" rel="stylesheet" href="./Kinect installation guide_files/SyntaxHighlighter.css" type="text/css" media="screen"><link rel="StyleSheet" type="text/css" href="./Kinect installation guide_files/WebResource.axd"><title>
+	How-to: Successfully install Kinect on Windows (OpenNI and NITE) - Vangos Pterneas blog
+</title><script charset="UTF-8" src="./Kinect installation guide_files/pl.js"></script><style type="text/css">.a2a_menu,.a2a_menu *{float:none;margin:0;padding:0;height:auto;width:auto}.a2a_menu table{border-collapse:collapse;border-spacing:0;width:auto}.a2a_menu table,.a2a_menu tbody,.a2a_menu td,.a2a_menu tr{border:0;margin:0;padding:0;background-color:#FFF}.a2a_menu td{vertical-align:top}.a2a_menu,.a2a_menu_inside{-webkit-border-radius:16px;-moz-border-radius:16px}.a2a_menu{display:none;z-index:9999999;position:absolute;direction:ltr;min-width:200px;background:#EEE;background:rgba(238,238,238,.6);font:12px Arial,Helvetica,sans-serif;color:#000;line-height:12px;border:1px solid transparent;_border:1px solid #EEE;padding:7px;vertical-align:baseline;overflow:hidden}.a2a_menu_inside{background-color:#FFF;border:1px solid #CCC;padding:8px}.a2a_menu a span,.a2a_tabs .a2a_tab_selected span{color:#00F}.a2a_menu a:hover span,.a2a_tabs div span,.a2a_tabs a span{color:#000}.a2a_menu a,#a2a_hist_list a,.a2a_tabs div{color:#00F;text-decoration:none;font:12px Arial,Helvetica,sans-serif;line-height:12px;height:auto;width:auto;clear:none;outline:none;-moz-outline:none;-webkit-border-radius:8px;-moz-border-radius:8px}.a2a_menu a:visited,#a2a_hist_list a:visited{color:#00F;clear:right}.a2a_menu a:hover,.a2a_menu a:active,.a2a_menu a.a2a_i:focus,.a2a_tabs div:hover{color:#000;border:1px solid #CCC;background-color:#EEE;text-decoration:none}.a2a_menu span,.a2a_img{background:url(http://static.addtoany.com/menu/icons_19.png) no-repeat;border:0;display:block;line-height:16px}.a2a_menu span.a2a_i_find{height:16px;left:5px;position:absolute;top:2px;width:16px}#a2a_menu_container{display:inline-block}#a2a_menu_container{_display:inline}.a2a_menu_title_container{margin-bottom:2px;padding:6px}.a2a_menu_find_container{position:relative;text-align:left;margin:4px 1px;padding:1px 24px 1px 0;border:1px solid #CCC;-webkit-border-radius:8px;-moz-border-radius:8px}.a2a_menu input,.a2a_menu input[type="text"]{display:block;background-image:none;box-shadow:none;line-height:100%;margin:0;overflow:hidden;padding:0;-moz-box-shadow:none;-webkit-box-shadow:none;-webkit-appearance:none}.a2a_menu_title_container input.a2a_menu_title{color:#000;background-color:#FFF;border:0;margin:0;padding:0;width:100%}.a2a_menu_find_container input.a2a_menu_find{position:relative;left:24px;color:#000;font-size:12px;padding:2px 0;outline:0;border:0;background-color:transparent;_background-color:#FFF;width:250px}table.a2a_cols_container{width:100%}.a2a_cols{width:50%}.a2a_clear{clear:both} .a2a_default_style a{float:left;line-height:16px;padding:0 2px}.a2a_default_style .a2a_img{display:block;height:16px;line-height:16px;overflow:hidden;width:16px}.a2a_default_style .a2a_img,.a2a_default_style .a2a_dd{float:left}.a2a_default_style .a2a_img_text{margin-right:4px}.a2a_default_style .a2a_divider{border-left:1px solid #000;display:inline;float:left;height:16px;line-height:16px;margin:0 5px}.a2a_kit a{cursor:pointer}.a2a_hr{margin:0 12px 12px;padding:1px;background:none;background-color:#EEE}.a2a_nowrap{white-space:nowrap}.a2a_note{margin:0 auto;padding:9px;font-size:11px;text-align:center}.a2a_note .a2a_note_note{margin:0 0 9px;color:#000}.a2a_wide a{display:block;margin-top:3px;border:1px solid #EEE;padding:3px;text-align:center}.a2a_tabs{float:left;margin:0 0 3px}.a2a_tabs a,.a2a_tabs div{margin:1px;background-color:#EEE;border:1px solid #EEE;font-size:11px;padding:6px 12px 2px;white-space:nowrap}.a2a_tabs a span,.a2a_tabs div span{margin-bottom:4px;padding-left:20px}.a2a_tabs a,.a2a_tabs a:visited,.a2a_tabs a:hover,.a2a_tabs div,.a2a_tabs div:hover{cursor:pointer;border-bottom:1px solid #EEE;color:#000;-webkit-border-bottom-left-radius:0;-moz-border-radius-bottomleft:0;-webkit-border-bottom-right-radius:0;-moz-border-radius-bottomright:0}a.a2a_tab_selected,a.a2a_tab_selected:visited,a.a2a_tab_selected:hover,a.a2a_tab_selected:active,a.a2a_tab_selected:focus,div.a2a_tab_selected,div.a2a_tab_selected:hover{color:#00F;background-color:#FFF;border:1px solid #CCC;border-bottom:1px solid #FFF}a.a2a_i{display:block;padding:4px 6px;border:1px solid #FFF;text-align:left;white-space:nowrap}a.a2a_i span{padding-left:20px}a.a2a_sss{font-weight:700}a.a2a_ind{display:inline;margin:0;padding:0}a.a2a_emailer{display:inline-block;border:1px solid #EEE;margin:0 9px;text-align:center}a.a2a_email_client{padding-left:6px}a.a2a_email_client span{display:inline-block;height:16px;line-height:16px;margin:0 2px;padding-left:0;width:16px}a.a2a_menu_show_more_less{margin:4px 0 8px;padding:0}a.a2a_menu_show_more_less span{display:inline-block;height:14px;margin:0 auto;vertical-align:baseline;width:16px}a.a2a_menu_powered_by,a.a2a_menu_powered_by:visited{background-color:#EEE;font-size:9px;color:#999}iframe.a2a_shim{border:0;position:absolute;z-index:999999}.a2a_dd img{border:0}.a2a_i_a2a{background-position:0 0!important}.a2a_i_agregator{background-position:0 -17px!important}.a2a_i_aiderss{background-position:0 -34px!important}.a2a_i_aim{background-position:0 -51px!important}.a2a_i_allvoices{background-position:0 -68px!important}.a2a_i_amazon{background-position:0 -85px!important}.a2a_i_aol{background-position:0 -102px!important}.a2a_i_apple_mail{background-position:0 -119px!important}.a2a_i_arto{background-position:0 -136px!important}.a2a_i_ask{background-position:0 -153px!important}.a2a_i_avantgo{background-position:0 -170px!important}.a2a_i_backflip{background-position:0 -187px!important}.a2a_i_bebo{background-position:0 -204px!important}.a2a_i_bibsonomy{background-position:0 -221px!important}.a2a_i_bitty{background-position:0 -238px!important}.a2a_i_blinklist{background-position:0 -255px!important}.a2a_i_blogger{background-position:0 -272px!important}.a2a_i_bloglines{background-position:0 -289px!important}.a2a_i_blogmarks{background-position:0 -306px!important}.a2a_i_blogrovr{background-position:0 -323px!important}.a2a_i_bookmark{background-position:0 -340px!important}.a2a_i_bookmarks_fr{background-position:0 -357px!important}.a2a_i_box{background-position:0 -374px!important}.a2a_i_buddymarks{background-position:0 -391px!important}.a2a_i_buzmob{background-position:0 -408px!important}.a2a_i_buzz{background-position:0 -425px!important}.a2a_i_bzzster{background-position:0 -442px!important}.a2a_i_care2{background-position:0 -459px!important}.a2a_i_chrome{background-position:0 -476px!important}.a2a_i_citeulike{background-position:0 -493px!important}.a2a_i_clear{background-position:0 -510px!important}.a2a_i_connotea{background-position:0 -527px!important}.a2a_i_current{background-position:0 -544px!important}.a2a_i_dailyme{background-position:0 -561px!important}.a2a_i_dailyrotation{background-position:0 -578px!important}.a2a_i_darr{background-position:0 -595px!important}.a2a_i_darr_wt{background-position:0 -612px!important}.a2a_i_default{background-position:0 -629px!important}.a2a_i_delicious{background-position:0 -646px!important}.a2a_i_designfloat{background-position:0 -663px!important}.a2a_i_digg{background-position:0 -680px!important}.a2a_i_diglog{background-position:0 -697px!important}.a2a_i_diigo{background-position:0 -714px!important}.a2a_i_dzone{background-position:0 -731px!important}.a2a_i_email{background-position:0 -748px!important}.a2a_i_eskobo{background-position:0 -765px!important}.a2a_i_evernote{background-position:0 -782px!important}.a2a_i_excitemix{background-position:0 -799px!important}.a2a_i_expression{background-position:0 -816px!important}.a2a_i_facebook{background-position:0 -833px!important}.a2a_i_fark{background-position:0 -850px!important}.a2a_i_faves{background-position:0 -867px!important}.a2a_i_feed{background-position:0 -884px!important}.a2a_i_feedblitz{background-position:0 -901px!important}.a2a_i_feedbucket{background-position:0 -918px!important}.a2a_i_feedlounge{background-position:0 -935px!important}.a2a_i_feedm8{background-position:0 -952px!important}.a2a_i_feedmailer{background-position:0 -969px!important}.a2a_i_feedreader_net{background-position:0 -986px!important}.a2a_i_feedshow{background-position:0 -1003px!important}.a2a_i_find{background-position:0 -1020px!important}.a2a_i_fireant{background-position:0 -1037px!important}.a2a_i_firefox{background-position:0 -1054px!important}.a2a_i_flurry{background-position:0 -1071px!important}.a2a_i_folkd{background-position:0 -1088px!important}.a2a_i_foxiewire{background-position:0 -1105px!important}.a2a_i_friendfeed{background-position:0 -1122px!important}.a2a_i_friendster{background-position:0 -1139px!important}.a2a_i_funp{background-position:0 -1156px!important}.a2a_i_furl{background-position:0 -1173px!important}.a2a_i_fwicki{background-position:0 -1189px!important}.a2a_i_gabbr{background-position:0 -1206px!important}.a2a_i_global_grind{background-position:0 -1223px!important}.a2a_i_gmail{background-position:0 -1240px!important}.a2a_i_google{background-position:0 -1257px!important}.a2a_i_google_buzz{background-position:0 -1274px!important}.a2a_i_healthranker{background-position:0 -1291px!important}.a2a_i_hellotxt{background-position:0 -1308px!important}.a2a_i_hemidemi{background-position:0 -1325px!important}.a2a_i_hi5{background-position:0 -1342px!important}.a2a_i_hubdog{background-position:0 -1359px!important}.a2a_i_hugg{background-position:0 -1376px!important}.a2a_i_hyves{background-position:0 -1393px!important}.a2a_i_identica{background-position:0 -1410px!important}.a2a_i_im{background-position:0 -1427px!important}.a2a_i_imera{background-position:0 -1444px!important}.a2a_i_instapaper{background-position:0 -1461px!important}.a2a_i_iterasi{background-position:0 -1478px!important}.a2a_i_itunes{background-position:0 -1495px!important}.a2a_i_jamespot{background-position:0 -1512px!important}.a2a_i_jots{background-position:0 -1529px!important}.a2a_i_jumptags{background-position:0 -1546px!important}.a2a_i_khabbr{background-position:0 -1563px!important}.a2a_i_kledy{background-position:0 -1580px!important}.a2a_i_klipfolio{background-position:0 -1597px!important}.a2a_i_linkagogo{background-position:0 -1614px!important}.a2a_i_linkatopia{background-position:0 -1631px!important}.a2a_i_linkedin{background-position:0 -1648px!important}.a2a_i_live{background-position:0 -1665px!important}.a2a_i_livejournal{background-position:0 -1682px!important}.a2a_i_ma_gnolia{background-position:0 -1699px!important}.a2a_i_maple{background-position:0 -1716px!important}.a2a_i_meneame{background-position:0 -1733px!important}.a2a_i_mindbodygreen{background-position:0 -1750px!important}.a2a_i_miro{background-position:0 -1767px!important}.a2a_i_mister-wong{background-position:0 -1784px!important}.a2a_i_mixx{background-position:0 -1801px!important}.a2a_i_mobile{background-position:0 -1818px!important}.a2a_i_mozillaca{background-position:0 -1835px!important}.a2a_i_msdn{background-position:0 -1852px!important}.a2a_i_multiply{background-position:0 -1869px!important}.a2a_i_my_msn{background-position:0 -1886px!important}.a2a_i_mylinkvault{background-position:0 -1903px!important}.a2a_i_myspace{background-position:0 -1920px!important}.a2a_i_netimechannel{background-position:0 -1937px!important}.a2a_i_netlog{background-position:0 -1954px!important}.a2a_i_netomat{background-position:0 -1971px!important}.a2a_i_netvibes{background-position:0 -1988px!important}.a2a_i_netvouz{background-position:0 -2005px!important}.a2a_i_newgie{background-position:0 -2022px!important}.a2a_i_newsalloy{background-position:0 -2039px!important}.a2a_i_newscabby{background-position:0 -2056px!important}.a2a_i_newsgator{background-position:0 -2073px!important}.a2a_i_newshutch{background-position:0 -2090px!important}.a2a_i_newsisfree{background-position:0 -2107px!important}.a2a_i_newstrust{background-position:0 -2124px!important}.a2a_i_newsvine{background-position:0 -2141px!important}.a2a_i_nowpublic{background-position:0 -2158px!important}.a2a_i_odeo{background-position:0 -2175px!important}.a2a_i_oneview{background-position:0 -2192px!important}.a2a_i_openbm{background-position:0 -2209px!important}.a2a_i_orkut{background-position:0 -2226px!important}.a2a_i_outlook{background-position:0 -2243px!important}.a2a_i_pageflakes{background-position:0 -2260px!important}.a2a_i_pdf{background-position:0 -2277px!important}.a2a_i_phonefavs{background-position:0 -2294px!important}.a2a_i_ping{background-position:0 -2311px!important}.a2a_i_plaxo{background-position:0 -2328px!important}.a2a_i_plurk{background-position:0 -2345px!important}.a2a_i_plusmo{background-position:0 -2362px!important}.a2a_i_podnova{background-position:0 -2379px!important}.a2a_i_posterous{background-position:0 -2396px!important}.a2a_i_print{background-position:0 -2413px!important}.a2a_i_printfriendly{background-position:0 -2430px!important}.a2a_i_propeller{background-position:0 -2447px!important}.a2a_i_protopage{background-position:0 -2464px!important}.a2a_i_pusha{background-position:0 -2481px!important}.a2a_i_rapidfeeds{background-position:0 -2498px!important}.a2a_i_rasasa{background-position:0 -2515px!important}.a2a_i_reader{background-position:0 -2532px!important}.a2a_i_reddit{background-position:0 -2549px!important}.a2a_i_rssfwd{background-position:0 -2566px!important}.a2a_i_segnalo{background-position:0 -2583px!important}.a2a_i_share{background-position:0 -2600px!important}.a2a_i_shoutwire{background-position:0 -2617px!important}.a2a_i_shyftr{background-position:0 -2634px!important}.a2a_i_simpy{background-position:0 -2651px!important}.a2a_i_sitejot{background-position:0 -2668px!important}.a2a_i_skimbit{background-position:0 -2685px!important}.a2a_i_slashdot{background-position:0 -2702px!important}.a2a_i_smaknews{background-position:0 -2719px!important}.a2a_i_sodahead{background-position:0 -2736px!important}.a2a_i_sofomo{background-position:0 -2753px!important}.a2a_i_spaces{background-position:0 -2770px!important}.a2a_i_sphere{background-position:0 -2787px!important}.a2a_i_sphinn{background-position:0 -2803px!important}.a2a_i_spurl{background-position:0 -2820px!important}.a2a_i_squidoo{background-position:0 -2837px!important}.a2a_i_startaid{background-position:0 -2854px!important}.a2a_i_strands{background-position:0 -2871px!important}.a2a_i_stumbleupon{background-position:0 -2888px!important}.a2a_i_stumpedia{background-position:0 -2905px!important}.a2a_i_symbaloo{background-position:0 -2922px!important}.a2a_i_taggly{background-position:0 -2939px!important}.a2a_i_tagza{background-position:0 -2956px!important}.a2a_i_tailrank{background-position:0 -2973px!important}.a2a_i_technet{background-position:0 -2990px!important}.a2a_i_technorati{background-position:0 -3007px!important}.a2a_i_technotizie{background-position:0 -3024px!important}.a2a_i_thefreedictionary{background-position:0 -3041px!important}.a2a_i_thefreelibrary{background-position:0 -3058px!important}.a2a_i_thunderbird{background-position:0 -3075px!important}.a2a_i_tipd{background-position:0 -3092px!important}.a2a_i_toolbar_google{background-position:0 -3109px!important}.a2a_i_tumblr{background-position:0 -3126px!important}.a2a_i_twiddla{background-position:0 -3143px!important}.a2a_i_twine{background-position:0 -3160px!important}.a2a_i_twitter{background-position:0 -3177px!important}.a2a_i_txtvox{background-position:0 -3194px!important}.a2a_i_typepad{background-position:0 -3211px!important}.a2a_i_uarr{background-position:0 -3228px!important}.a2a_i_uarr_wt{background-position:0 -3245px!important}.a2a_i_unalog{background-position:0 -3262px!important}.a2a_i_viadeo{background-position:0 -3279px!important}.a2a_i_webnews{background-position:0 -3296px!important}.a2a_i_webwag{background-position:0 -3314px!important}.a2a_i_wikio{background-position:0 -3331px!important}.a2a_i_windows_mail{background-position:0 -3348px!important}.a2a_i_wink{background-position:0 -3365px!important}.a2a_i_winksite{background-position:0 -3382px!important}.a2a_i_wists{background-position:0 -3399px!important}.a2a_i_wordpress{background-position:0 -3416px!important}.a2a_i_xanga{background-position:0 -3433px!important}.a2a_i_xerpi{background-position:0 -3450px!important}.a2a_i_xianguo{background-position:0 -3467px!important}.a2a_i_yahoo{background-position:0 -3484px!important}.a2a_i_yample{background-position:0 -3501px!important}.a2a_i_yigg{background-position:0 -3518px!important}.a2a_i_yim{background-position:0 -3535px!important}.a2a_i_yoolink{background-position:0 -3552px!important}.a2a_i_youmob{background-position:0 -3569px!important}.a2a_i_yourminis{background-position:0 -3586px!important}.a2a_i_zaptxt{background-position:0 -3603px!important}.a2a_i_zhuaxia{background-position:0 -3620px!important}.a2a_i_zune{background-position:0 -3637px;  }</style><script type="text/javascript" charset="utf-8" src="./Kinect installation guide_files/saved_resource" id="JscriptId1"></script></head>
+<body><iframe id="a2apage_sm_ifr" height="1" width="1" style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; left: 0px; top: 0px; position: absolute; z-index: 100000; display: none; " transparency="true" allowtransparency="true" frameborder="0" src="./Kinect installation guide_files/sm2.htm"></iframe><div style="position: static; "><div id="a2apage_dropdown" class="a2a_menu" onmouseover="a2a.onMouseOver_stay()" onmouseout="a2a.onMouseOut_delay()"><div class="a2a_menu_inside"><table><tbody><tr><td><div id="a2apage_title_container" class="a2a_menu_title_container" style="display:none"><input id="a2apage_title" class="a2a_menu_title"></div><div class="a2apage_wide a2a_wide"><div class="a2a_tabs"><div id="a2apage_DEFAULT" class="a2a_tab_selected" style="margin-right:1px" onclick="return a2a.tabs(&#39;DEFAULT&#39;)"><span class="a2a_i_share">Podziel się / Zapisz</span></div></div><div class="a2a_tabs"><div title="Wyślij przez e-mail" id="a2apage_EMAIL" style="margin-right:1px" onclick="return a2a.tabs(&#39;EMAIL&#39;,true)"><span class="a2a_i_email">E-mail</span></div></div><div class="a2a_tabs"><div onclick="a2a.bmBrowser()" title="Dodaj do zakładek w przeglądarce" id="a2apage_BROWSER" style="margin-left:1px"><span class="a2a_i_bookmark">Ulubione</span></div></div></div><div class="a2a_clear"></div><div id="a2apage_find_container" class="a2a_menu_find_container"><input id="a2apage_find" class="a2a_menu_find" type="text" onclick="a2a.focus_find()" onkeyup="a2a.do_find()" autocomplete="off" onfocus="a2a[&#39;page&#39;].find_focused=true;a2a.onMouseOver_stay()" onblur="a2a.blur_find()" title="ZnajdĽ serwis, do którego chcesz dodać treść"><span id="a2apage_find_icon" class="a2a_i_find" onclick="a2a.focus_find()"></span></div><table id="a2apage_cols_container" class="a2a_cols_container"><tbody><tr><td class="a2a_cols"><div id="a2apage_col1"><a id="a2apage_grono" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span style="background-image: url(http://s1.grono.net/images/common/favicon.ico); ">Grono</span></a><a id="a2apage_wykop" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span style="background-image: url(http://s1.imgwykop.pl/img/icon.png); ">Wykop</span></a><a id="a2apage_facebook" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_facebook">Facebook</span></a><a id="a2apage_delicious" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_delicious">Delicious</span></a><a id="a2apage_google_bookmarks" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_google">Google Bookmarks</span></a><a id="a2apage_myspace" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_myspace">MySpace</span></a><a id="a2apage_live" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_live">Messenger</span></a><a id="a2apage_yahoo_bookmarks" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_yahoo">Yahoo Bookmarks</span></a><a id="a2apage_mister_wong" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_mister-wong">Mister-Wong</span></a><a id="a2apage_google_reader" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_reader">Google Reader</span></a><a id="a2apage_xing" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_default">XING</span></a><a id="a2apage_netvibes_share" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_netvibes">Netvibes Share</span></a><a id="a2apage_posterous" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_posterous">Posterous</span></a><a id="a2apage_business_exchange" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_default">Business Exchange</span></a><a id="a2apage_technet" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_technet">TechNet</span></a><a id="a2apage_arto" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_arto">Arto</span></a><a id="a2apage_smaknews" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_smaknews">SmakNews</span></a><a id="a2apage_aim" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_aim">AIM</span></a><a id="a2apage_identi_ca" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_identica">Identi.ca</span></a><a id="a2apage_blogger_post" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_blogger">Blogger Post</span></a><a id="a2apage_box_net" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_box">Box.net</span></a><a id="a2apage_netlog" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_netlog">Netlog</span></a><a id="a2apage_shoutwire" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_shoutwire">Shoutwire</span></a><a id="a2apage_jumptags" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_jumptags">Jumptags</span></a><a id="a2apage_funp" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_funp">FunP</span></a><a id="a2apage_phonefavs" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_phonefavs">PhoneFavs</span></a><a id="a2apage_netvouz" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_netvouz">Netvouz</span></a><a id="a2apage_diigo" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_diigo">Diigo</span></a><a id="a2apage_blogmarks" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_blogmarks">BlogMarks</span></a><a id="a2apage_startaid" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_startaid">StartAid</span></a><a id="a2apage_khabbr" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_khabbr">Khabbr</span></a><a id="a2apage_yoolink" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_yoolink">Yoolink</span></a><a id="a2apage_technotizie" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_technotizie">Technotizie</span></a><a id="a2apage_multiply" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_multiply">Multiply</span></a><a id="a2apage_plaxo_pulse" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_plaxo">Plaxo Pulse</span></a><a id="a2apage_squidoo" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_squidoo">Squidoo</span></a><a id="a2apage_blinklist" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_blinklist">Blinklist</span></a><a id="a2apage_yigg" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_yigg">YiGG</span></a><a id="a2apage_segnalo" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_segnalo">Segnalo</span></a><a id="a2apage_youmob" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_youmob">YouMob</span></a><a id="a2apage_fark" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_fark">Fark</span></a><a id="a2apage_jamespot" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_jamespot">Jamespot</span></a><a id="a2apage_twiddla" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_twiddla">Twiddla</span></a><a id="a2apage_mindbodygreen" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_mindbodygreen">MindBodyGreen</span></a><a id="a2apage_hugg" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_hugg">Hugg</span></a><a id="a2apage_nowpublic" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_nowpublic">NowPublic</span></a><a id="a2apage_livejournal" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_livejournal">LiveJournal</span></a><a id="a2apage_hellotxt" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_hellotxt">HelloTxt</span></a><a id="a2apage_yample" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_yample">Yample</span></a><a id="a2apage_linkatopia" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_linkatopia">Linkatopia</span></a><a id="a2apage_linkedin" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_linkedin">LinkedIn</span></a><a id="a2apage_ask_com_mystuff" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_ask">Ask.com MyStuff</span></a><a id="a2apage_maple" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_maple">Maple</span></a><a id="a2apage_connotea" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_connotea">Connotea</span></a><a id="a2apage_mylinkvault" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_mylinkvault">MyLinkVault</span></a><a id="a2apage_sphinn" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_sphinn">Sphinn</span></a><a id="a2apage_care2_news" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_care2">Care2 News</span></a><a id="a2apage_sphere" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_sphere">Sphere</span></a><a id="a2apage_gabbr" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_gabbr">Gabbr</span></a><a id="a2apage_tagza" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_tagza">Tagza</span></a><a id="a2apage_vodpod" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_default">VodPod</span></a><a id="a2apage_amazon_wish_list" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_amazon">Amazon Wish List</span></a><a id="a2apage_read_it_later" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_default">Read It Later</span></a><a id="a2apage_email" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_email">Email</span></a></div><div id="a2apage_2_col1" style="display:none"><a id="a2apage_yahoo_mail" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_yahoo">Yahoo Mail</span></a><a id="a2apage_aol_mail" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_aol">AOL Mail</span></a></div></td><td class="a2a_cols"><div id="a2apage_col2"><a id="a2apage_blip" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span style="background-image: url(http://static1.blip.pl/images/favicon.gif); ">Blip</span></a><a id="a2apage_twitter" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_twitter">Twitter</span></a><a id="a2apage_digg" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_digg">Digg</span></a><a id="a2apage_google_buzz" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_google_buzz">Google Buzz</span></a><a id="a2apage_reddit" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_reddit">Reddit</span></a><a id="a2apage_stumbleupon" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_stumbleupon">StumbleUpon</span></a><a id="a2apage_bebo" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_bebo">Bebo</span></a><a id="a2apage_wordpress" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_wordpress">WordPress</span></a><a id="a2apage_orkut" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_orkut">Orkut</span></a><a id="a2apage_evernote" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_evernote">Evernote</span></a><a id="a2apage_strands" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_strands">Strands</span></a><a id="a2apage_dailyme" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_dailyme">DailyMe</span></a><a id="a2apage_msdn" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_msdn">MSDN</span></a><a id="a2apage_expression" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_expression">Expression</span></a><a id="a2apage_tipd" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_tipd">Tipd</span></a><a id="a2apage_plurk" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_plurk">Plurk</span></a><a id="a2apage_yahoo_messenger" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_yim">Yahoo Messenger</span></a><a id="a2apage_mozillaca" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_mozillaca">Mozillaca</span></a><a id="a2apage_typepad_post" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_typepad">TypePad Post</span></a><a id="a2apage_mixx" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_mixx">Mixx</span></a><a id="a2apage_technorati_favorites" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_technorati">Technorati Favorites</span></a><a id="a2apage_citeulike" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_citeulike">CiteULike</span></a><a id="a2apage_hemidemi" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_hemidemi">Hemidemi</span></a><a id="a2apage_instapaper" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_instapaper">Instapaper</span></a><a id="a2apage_xerpi" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_xerpi">Xerpi</span></a><a id="a2apage_wink" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_wink">Wink</span></a><a id="a2apage_bibsonomy" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_bibsonomy">BibSonomy</span></a><a id="a2apage_tailrank" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_tailrank">Tailrank</span></a><a id="a2apage_kledy" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_kledy">Kledy</span></a><a id="a2apage_meneame" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_meneame">Meneame</span></a><a id="a2apage_bookmarks_fr" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_bookmarks_fr">Bookmarks.fr</span></a><a id="a2apage_newsvine" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_newsvine">NewsVine</span></a><a id="a2apage_friendfeed" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_friendfeed">FriendFeed</span></a><a id="a2apage_ping" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_ping">Ping</span></a><a id="a2apage_protopage_bookmarks" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_protopage">Protopage Bookmarks</span></a><a id="a2apage_faves" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_faves">Faves</span></a><a id="a2apage_webnews" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_webnews">Webnews</span></a><a id="a2apage_pusha" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_pusha">Pusha</span></a><a id="a2apage_slashdot" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_slashdot">Slashdot</span></a><a id="a2apage_allvoices" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_allvoices">Allvoices</span></a><a id="a2apage_imera_brazil" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_imera">Imera Brazil</span></a><a id="a2apage_linkagogo" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_linkagogo">LinkaGoGo</span></a><a id="a2apage_unalog" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_unalog">unalog</span></a><a id="a2apage_diglog" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_diglog">Diglog</span></a><a id="a2apage_tumblr" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_tumblr">Tumblr</span></a><a id="a2apage_current" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_current">Current</span></a><a id="a2apage_spurl" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_spurl">Spurl</span></a><a id="a2apage_oneview" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_oneview">Oneview</span></a><a id="a2apage_simpy" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_simpy">Simpy</span></a><a id="a2apage_buddymarks" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_buddymarks">BuddyMarks</span></a><a id="a2apage_viadeo" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_viadeo">Viadeo</span></a><a id="a2apage_wists" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_wists">Wists</span></a><a id="a2apage_backflip" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_backflip">Backflip</span></a><a id="a2apage_sitejot" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_sitejot">SiteJot</span></a><a id="a2apage_dzone" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_dzone">DZone</span></a><a id="a2apage_hyves" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_hyves">Hyves</span></a><a id="a2apage_bitty_browser" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_bitty">Bitty Browser</span></a><a id="a2apage_symbaloo_feeds" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_symbaloo">Symbaloo Feeds</span></a><a id="a2apage_folkd" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_folkd">Folkd</span></a><a id="a2apage_newstrust" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_newstrust">NewsTrust</span></a><a id="a2apage_printfriendly" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_printfriendly">PrintFriendly</span></a><a id="a2apage_tuenti" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_default">Tuenti</span></a><a id="a2apage_rediff" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank" style="display: none; "><span class="a2a_i_default">Rediff MyPage</span></a></div><div id="a2apage_2_col2" style="display:none"><a id="a2apage_google_gmail" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_gmail">Google Gmail</span></a><a id="a2apage_hotmail" rel="nofollow" class="a2a_i" href="http://www.studentguru.gr/" target="_blank"><span class="a2a_i_live">Hotmail</span></a></div></td></tr></tbody></table><div id="a2apage_note_BROWSER" class="a2a_note" style="display:none"></div><div id="a2apage_note_EMAIL" class="a2a_note" style="display:none"><div class="a2a_hr"></div><div class="a2a_note_note">Wyślij z dowolnego adresu e-mail lub programu pocztowego:</div><div class="a2a_nowrap"><a href="http://www.studentguru.gr/" id="a2apage_any_email" class="a2a_i a2a_emailer" target="_blank" servicename="Email (form)" safename="email_form" customserviceuri="http://www.addtoany.com/email?linkurl=A2A_LINKURL_ENC&amp;linkname=A2A_LINKNAME_ENC" onkeydown="a2a.linker(this)" onmousedown="a2a.linker(this)" onmouseup="a2a.a2a_track(&#39;testShare1&#39;, &#39;Email&#39;);if(a2a.c.track_pub)a2a.a2a_track(&#39;z_&#39;+a2a.c.track_pub+&#39;Share&#39;, &#39;Email&#39;)" style="margin-right:9px"><span class="a2a_i_email">Any email</span></a><a href="http://www.studentguru.gr/" class="a2a_i a2a_emailer a2a_email_client" id="a2apage_email_client" servicename="Email (mailto)" safename="email_mailto" customserviceuri="mailto:?subject=A2A_LINKNAME_ENC&amp;body=A2A_LINKURL_ENC" onkeydown="a2a.linker(this)" onmousedown="a2a.linker(this)" onmouseup="a2a.a2a_track(&#39;testShare1&#39;, &#39;Email&#39;);if(a2a.c.track_pub)a2a.a2a_track(&#39;z_&#39;+a2a.c.track_pub+&#39;Share&#39;, &#39;Email&#39;)" style="margin-left:9px"><span class="a2a_i_outlook">&nbsp;</span><span class="a2a_i_windows_mail">&nbsp;</span><span class="a2a_i_apple_mail">&nbsp;</span><span class="a2a_i_thunderbird">&nbsp;</span></a></div></div><div class="a2apage_wide a2a_wide"><a href="javascript:void(0)" id="a2apage_show_more_less" class="a2a_menu_show_more_less" onclick="return a2a.show_more_less(0)" onmouseover="img=this.firstChild;if(a2a.c.color_arrow_hover==&#39;fff&#39;){if(img.className.indexOf(&#39;_wt&#39;)==-1)img.className+=&#39;_wt&#39;}else img.className=img.className.replace(/_wt/,&#39;&#39;)" onmouseout="img=this.firstChild;if(a2a.c.color_arrow==&#39;fff&#39;){if(img.className.indexOf(&#39;_wt&#39;)==-1)img.className+=&#39;_wt&#39;}else img.className=img.className.replace(/_wt/,&#39;&#39;)" title="Pokaż wszystko"><span class="a2a_i_darr"></span></a></div><div class="a2apage_wide a2a_wide"><a href="http://www.addtoany.com/" id="a2apage_powered_by" class="a2a_menu_powered_by" target="_blank" title="Share &amp; Subscribe buttons" onmouseover="if(!window.opera)this.innerHTML=this.orig;this.style.textAlign=&#39;center&#39;">Powered by AddToAny</a></div></td></tr></tbody></table></div></div></div>
+    <form name="aspnetForm" method="post" action="./Kinect installation guide_files/Kinect installation guide.htm" onsubmit="javascript:return WebForm_OnSubmit();" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJMjQ4Mzk2OTAwZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUuY3RsMDAkTWFpbiRjdGwwOSRjdGwwMiRjdGwwMiRjdGwwMiRjaGtSZW1lbWJlclo6GA/m0jfXe1v4qA5nGFy+y6OJ">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="./Kinect installation guide_files/WebResource(1).axd" type="text/javascript"></script>
+
+
+<script src="./Kinect installation guide_files/WebResource(2).axd" type="text/javascript"></script>
+<script src="./Kinect installation guide_files/WebResource(3).axd" type="text/javascript"></script>
+<script src="./Kinect installation guide_files/WebResource(4).axd" type="text/javascript"></script>
+<script src="./Kinect installation guide_files/WebResource(5).axd" type="text/javascript"></script>
+<script src="./Kinect installation guide_files/WebResource(6).axd" type="text/javascript"></script>
+<script src="./Kinect installation guide_files/WebResource(7).axd" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+    
+    <div id="container">
+        <div id="header">
+            <h2><a href="http://www.studentguru.gr/blogs/vangos/default.aspx">Vangos Pterneas blog</a></h2>
+            
+        </div>
+        <div id="wrapper">
+            <div id="content">
+                
+    <div class="entryview">
+       <h1 class="entryviewheading">How-to: Successfully install Kinect on Windows (OpenNI and NITE)</h1>
+
+       <p>Playing Kinect games is a really great experience. Programming for Kinect is even greater! Browsing the web, you can find many cool "hacks" (<a href="http://codelaboratories.com/kb/nui">CLNUI</a>, <a href="http://openkinect.org/wiki/Main_Page">OpenKinect</a>) which allow Kinect be used by a PC rather than an XBOX. Via these hacks, we gain access to Kinect's cameras (color and depth), LED, accelerometer and motor. Obtaining both the raw and the depth image, it is easier to build Machine Vision applications. But the main problem remains: Kinect magic is its software and the device simply cannot give us all those body-tracking algorithms by itself.</p><p>Fortunately, PrimeSense, the company behind Kinect, released OpenNI framework and NITE middleware. This means that we can now have access to features such as real-time skeleton tracking, gesture recognition, wave detection and much more!</p><p>OpenNI and NITE installation can be painful if not done properly. Let's do it step by step:</p><h3>Step 0</h3><p>Uninstall any previews drivers, such as CLNUI. <span style="font-style:italic;">Look at the end of this post if you want to see how you can have multiple drivers installed.</span></p><h3>Step 1</h3><ul><li>Download <a href="https://github.com/avin2/SensorKinect">Kinect Drivers</a> and unzip.</li><li>Open the unzipped folder and navigate to Platform\Win32\Driver.</li><li>Run <b>dpinst-x86.exe</b> (if you have a 32-bit processor) or <b>dpinst-amd64.exe</b> (if you have a 64-bit processor).</li></ul><p>Drivers are now installed in your PC.</p><h3>Step 2</h3><p>Download and install the latest stable or unstable <a href="http://www.openni.org/downloadfiles/2-openni-binaries">OpenNI Binaries</a> from OpenNI website.</p><h3>Step 3</h3><p>Download and install the latest stable or unstable <a href="http://www.openni.org/downloadfiles/12-openni-compliant-middleware-binaries">OpenNI Compliant Middleware Binaries</a>&nbsp;(NITE) from OpenNI website.</p><p>During installation, provide the following (free) PrimeSense key: <b>0KOIk2JeIBYClPWVnMoRKn5cdY4=</b></p><h3>Step 4</h3><p>Download and install the latest stable or unstable <a href="http://www.openni.org/downloadfiles/30-openni-compliant-hardware-binaries">OpenNI Compliant Hardware Binaries</a> from OpenNI website.</p><p style="font-style:italic;">Both stable and unstable releases have worked for me. If you have trouble installing the unstable releases, just try the stable ones.</p><h3>Step 5</h3><ul><li>Plug in your Kinect device and connect its USB port with your PC.</li><li>Wait until the driver software is found and applied.</li><li>Navigate to the <b>Device Manager</b> (Control Panel). You should see something like the following:</li></ul><p>&nbsp;</p><img alt="Kinect in the Device Manager window" src="./Kinect installation guide_files/kinect-openni-device-manager.gif"><h3>Step 6</h3><ul><li>Download the <a href="http://www.studentguru.gr/blogs/vangos/how-to-successfully-install-kinect-windows-openni-nite/KinectXMLs.zip">KinectXMLs file</a> and unzip. The extracted folders contain totally four XML files which are going to replace the ones OpenNI installed (the XMLs I provide simply contain the license key and the correct Kinect camera resolution).</li><li>Navigate to <b>KinectXMLs\OpenNI</b> folder and copy the SampleConfig.xml file. Navigate to <b>C:\Program Files\OpenNI\Data</b> (if you have a 32-bit processor) or <b>C:\Program Files (x86)\OpenNI\Data</b> (if you have a 64-bit processor) and replace SampleConfig.xml with the one you copied.</li><li>Navigate to <b>KinectXMLs\NITE</b> folder and copy the Sample-Scene.xml, Sample-Tracking.xml and Sample-User.xml files. Navigate to <b>C:\Program Files\Prime Sense\NITE\Data</b> (if you have a 32-bit processor) or <b>C:\Program Files (x86)\Prime Sense\NITE\Data</b> (if you have a 64-bit processor) and replace Sample-Scene.xml, Sample-Tracking.xml and Sample-User.xml with the ones you copied.</li></ul><h3>Step 7</h3><p>Navigate to <b>C:\Program Files\OpenNI\Samples\Bin\Release</b> (or C:\Program Files (x86)\OpenNI\Samples\Bin\Release) and try out the existing demo applications. Try the demos found in <b>C:\Program Files\Prime Sense\NITE\Samples\Bin\Release</b> (or C:\Program Files (x86)\Prime Sense\NITE\Samples\Bin\Release), too. If they work properly, then you are done! Congratulations!</p><p>If they do not work, make sure that you have replaced the XML files I mentioned in step 5 with the ones I provided you. If the demos still do not work, try installing the stable version of OpenNI, middleware and hardware binaries. Personally, I have&nbsp;successfully&nbsp;installed OpenNI and NITE (both stable and unstable releases) in a 32-bit desktop and a 64-bit laptop following the methodology I described.</p><h3>Step 8</h3><p>You have successfully installed Kinect in your Windows PC! Read the documentation and familiarize yourself with the OpenNI and NITE API. You'll find the proper assemblies in:</p><ul><li><b>C:\Program Files\OpenNI\Bin</b> (or C:\Program Files (x86)\OpenNI\Bin) and</li><li><b>C:\Program Files\Prime Sense\NITE\Bin</b> (or C:\Program Files (x86)\Prime Sense\NITE\Bin)</li></ul><p>OpenNI is the primary assembly you'll need when developing Natural User Interfaces applications.</p><p>C# tutorials on using the managed OpenNI.net libraries coming soon! Stay tuned in this blog ;-).</p><img alt="User tracker Kinect application" src="./Kinect installation guide_files/kinect-user-tracker.jpg"><h3>Update 2/2/2010: Troubleshooting</h3><p>If you have followed the above guide and still have trouble viewing the demos, then try out the following:</p><ul><li>Omit step 1.</li><li>Follow steps 2, 3 and 4.</li><li>Download <a href="https://github.com/avin2/SensorKinect">Kinect Drivers</a>, unzip and navigate to Bin folder. Run SensorKinect-Win32-5.0.0.exe.</li><li>Follow steps 5, 6, 7 and 8.</li><li>Done!</li></ul><h3>Installing multiple drivers</h3><p>Thanks to my friend <a href="http://venus.cs.aueb.gr/~erevodifwntas">George Karakatsiotis</a> (@<a href="http://twitter.com/erevodifwntas">erevodifwntas</a>), you can now have various Kinect drivers installed concurrently. Here's how to achieve this:</p><ul><li>Open Device Manager.</li><li>Right click Kinect Camera under PrimeSensor.</li><li>Select "Update driver software"</li><li>Select "Browse my computer for driver software" and "Let me pick from a list of device drivers on my computer".</li><li>Select the driver of your preference (eg <a href="http://codelaboratories.com/kb/nui">CLNUI</a>).</li><li>You are done!</li></ul><a rel="tag" style="display:none;" href="http://www.codeproject.com/script/Articles/BlogFeedList.aspx?amid=5144225">CodeProject</a><div class="shareit-div"><a class="a2a_dd" href="http://www.addtoany.com/share_save#url=http%3A%2F%2Fwww.studentguru.gr%2Fblogs%2Fvangos%2Farchive%2F2011%2F01%2F20%2Fhow-to-successfully-install-kinect-windows-openni-nite.aspx&title=How-to%3A%20Successfully%20install%20Kinect%20on%20Windows%20(OpenNI%20and%20NITE)&description=%CE%A4%CE%B5%CF%87%CE%BD%CE%BF%CE%BB%CE%BF%CE%B3%CE%B9%CE%BA%CE%AE%20%CF%86%CE%BF%CE%B9%CF%84%CE%B7%CF%84%CE%B9%CE%BA%CE%AE%20%CE%BA%CE%BF%CE%B9%CE%BD%CF%8C%CF%84%CE%B7%CF%84%CE%B1%2C%20events%2C%20%CF%83%CE%B5%CE%BC%CE%B9%CE%BD%CE%AC%CF%81%CE%B9%CE%B1%2C%20%CE%B5%CE%BA%CE%B4%CE%B7%CE%BB%CF%8E%CF%83%CE%B5%CE%B9%CF%82!">
+    <img src="./Kinect installation guide_files/share_save_171_16.png" width="171" height="16" border="0" alt="Share/Bookmark">
+</a>
+<script type="text/javascript">a2a_linkname="How-to: Successfully install Kinect on Windows (OpenNI and NITE)";a2a_linkurl="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx";</script>
+<script type="text/javascript" src="./Kinect installation guide_files/page.js"></script></div>
+       
+
+        <div class="entryviewfooter">
+            	
+            <span class="em">Published</span>
+            20 Ιανουαρίου 2011 12:10 πμ
+			by
+			<a href="http://www.studentguru.gr/members/Vangos.aspx">Vangos</a>
+			
+                                    
+            <div class="em"><span id="ctl00_Main_ctl08_ctl01">Filed under: <a href="http://www.studentguru.gr/blogs/vangos/archive/tags/kinect/default.aspx" rel="tag">kinect</a>, <a href="http://www.studentguru.gr/blogs/vangos/archive/tags/openni/default.aspx" rel="tag">openni</a>, <a href="http://www.studentguru.gr/blogs/vangos/archive/tags/nite/default.aspx" rel="tag">nite</a>, <a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Windows/default.aspx" rel="tag">Windows</a></span><input type="hidden" name="ctl00$Main$ctl08$ctl01" id="ctl00_Main_ctl08_ctl01_State" value="value:Filed%20under%3A%20%3Ca%20href%3D%22%2Fblogs%2Fvangos%2Farchive%2Ftags%2Fkinect%2Fdefault.aspx%22%20rel%3D%22tag%22%3Ekinect%3C%2Fa%3E%2C%20%3Ca%20href%3D%22%2Fblogs%2Fvangos%2Farchive%2Ftags%2Fopenni%2Fdefault.aspx%22%20rel%3D%22tag%22%3Eopenni%3C%2Fa%3E%2C%20%3Ca%20href%3D%22%2Fblogs%2Fvangos%2Farchive%2Ftags%2Fnite%2Fdefault.aspx%22%20rel%3D%22tag%22%3Enite%3C%2Fa%3E%2C%20%3Ca%20href%3D%22%2Fblogs%2Fvangos%2Farchive%2Ftags%2FWindows%2Fdefault.aspx%22%20rel%3D%22tag%22%3EWindows%3C%2Fa%3E"></div>
+        </div>    
+    </div>
+    
+    
+            
+                    <h4 class="contentsubheading">Comments</h4>
+                    <dl class="comments">
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#122981">#</a>
+			            <a title="TrackBack" rel="nofollow" href="http://topsy.com/www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx?utm_source=pingback&utm_campaign=L2">Twitter Trackbacks for                 How-to: Successfully install Kinect on Windows (OpenNI and NITE) - Vangos Pterneas blog         [studentguru.gr]        on Topsy.com</a>
+                        said on 
+		                20 Ιανουαρίου, 2011 12:59 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Pingback from &nbsp;Twitter Trackbacks for &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; How-to: Successfully install Kinect on Windows (OpenNI and NITE) - Vangos Pterneas blog &nbsp; &nbsp; &nbsp; &nbsp; [studentguru.gr] &nbsp; &nbsp; &nbsp; &nbsp;on Topsy.com</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123149">#</a>
+			            Zdenek Kalal
+                        said on 
+		                21 Ιανουαρίου, 2011 12:29 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Hi, thank you for the tutorial. I followed it step by step, however, I am not able tu run the sampes. In NiViewer.exe, I get error: A timeout has occured when waiting for new data!</p>
+<p>I was able to compile NiVewer using VS2010, I am running on Windows 7. Any ideas how to fix it?</p>
+<p>Best regards,</p>
+<p>Zdenek</p>
+<p>zdenek.kalal@epfl.ch</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123170">#</a>
+			            <a title="TrackBack" rel="nofollow" href="http://virtualhow2.com/world-of-warcraft/300-world-of-warcraft">300 World of Warcraft | Cashmaker 5000</a>
+                        said on 
+		                21 Ιανουαρίου, 2011 03:48 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Pingback from &nbsp;300 World of Warcraft | Cashmaker 5000</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123171">#</a>
+			            <a title="Vangos" rel="nofollow" href="http://studentguru.gr/blogs/vangos">Vangos</a>
+                        said on 
+		                21 Ιανουαρίου, 2011 03:53 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Hi Zdenek,</p>
+<p>I was getting the same error when I had not properly configured the three XML files, so make sure that you use the ones I provide. If the error remains:</p>
+<p>- Try to omit step 1 or</p>
+<p>- Install the stable release only.</p>
+<p>Did you manage to run the recompiled project and got the same error?</p>
+<p>Regards,</p>
+<p>Vangos</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123186">#</a>
+			            Chachi
+                        said on 
+		                21 Ιανουαρίου, 2011 04:59 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Honestly, that is an absurd number of steps to go through to install these drivers. &nbsp;I'm surprised no one has created a unified installer yet. &nbsp; Maybe it is best to wait for the official Microsoft drivers, which aren't too far away.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="owner">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123235">#</a>
+			            <a title="Vangos" href="http://www.studentguru.gr/blogs/vangos">Vangos</a>
+                        said on 
+		                21 Ιανουαρίου, 2011 10:22 μμ
+                    </dt>		
+		            <dd class="owner">
+		                <p>@Chachi</p>
+<p>Yeah, the official drivers release would be ideal. But, currently, that's the best way we have to use Kinect's great capabilities.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123577">#</a>
+			            pat
+                        said on 
+		                24 Ιανουαρίου, 2011 02:08 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Hey thx for the tut! But i cant get no picture! There is just a black screen... I tried it 3 times!</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123579">#</a>
+			            <a title="Vangos" rel="nofollow" href="http://studentguru.gr/blogs/vangos">Vangos</a>
+                        said on 
+		                24 Ιανουαρίου, 2011 02:12 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Hi pat,</p>
+<p>Which demo did you launch? Were any error messages displayed?</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123605">#</a>
+			            Mitrous
+                        said on 
+		                24 Ιανουαρίου, 2011 04:39 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Thanks here too, great tutorial.</p>
+<p>I got the same problem as pat, every program I use start up like it shoud be. But I cant see myself or anything. No errors too. With the C:\Program Files\Prime Sense\NITE\Samples\Bin\Release\Sample-StickFigure.exe. I just see a scene with nothing in it. The IR-Beam is working correctly too.... I am working with WinXP.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123655">#</a>
+			            Tom
+                        said on 
+		                24 Ιανουαρίου, 2011 10:47 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Hey Pat and Mitrous,</p>
+<p>I had the same problem with the blank screen. &nbsp;I tried an experiment that worked for me: &nbsp;I ran the SensorKinect installer again. &nbsp;Maybe there is a fight between the PrimeSense (non-Kinect) driver package and the Kinect-specific version.</p>
+<p>(Also, Vangos, I wasn't able to successfully run the current complied SensorKinect binary installer on my system, though I did have success using an older version that I found archived on someon's blog) (and also I think I now know how to just install the drivers directly).</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="owner">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123673">#</a>
+			            <a title="Vangos" href="http://www.studentguru.gr/blogs/vangos">Vangos</a>
+                        said on 
+		                25 Ιανουαρίου, 2011 02:23 πμ
+                    </dt>		
+		            <dd class="owner">
+		                <p>Thank you everyone for your feedback. I really appreciate it.</p>
+<p>@Tom, thanks for commenting. Here are SensorKinect releases: <a rel="nofollow" target="_new" href="https://github.com/avin2/SensorKinect/commits/unstable">github.com/.../unstable</a>. The latest one worked for me in both 32 and 64-bit computers.</p>
+<p>Here is another solution you may try if the tutorial does not work for you:</p>
+<p>- Omit step 1.</p>
+<p>- Install OpenNI.</p>
+<p>- Navigate to C:\Program Files\OpenNI\Driver and install dpinst-x86 or dpinst-amd4.exe.</p>
+<p>- Install NIITE and replace the XML files.</p>
+<p>Also, make sure that you install stable or unstable releases (eg, I would not recommend installing OpenNI unstable and NITE stable, although it might work for someone).</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123693">#</a>
+			            Tom
+                        said on 
+		                25 Ιανουαρίου, 2011 07:03 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Vangos,</p>
+<p>I don't know if what you say above will work (which apparently indicates not installing modded "SensorKinect" drivers) but I will tell you what just worked for me on my laptop (which had also had the blank screen issue):</p>
+<p>Eradicate all traces of all PrimeSense and OpenNI drivers</p>
+<p>Install OpenNI</p>
+<p>Install Nite</p>
+<p>install SensorKinect drivers </p>
+<p>replace XML files</p>
+<p>bingo</p>
+<p>In other words, I followed your original steps, except I did the SensorKinect hardware layer installation (your original step 1) last, and I left out your step 4 (or rather replaced it with step 1).</p>
+<p>The SensorKinect drivers are modded versions of the OpenNI hardware drivers. &nbsp;Makes sense that you wouldn't want to be intalling them over top of each other.</p>
+<p>Cheers.</p>
+<p>-Tom</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123712">#</a>
+			            Todilo
+                        said on 
+		                25 Ιανουαρίου, 2011 09:57 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>I tried all the steps, with the latest unstable builds for all and I have a x64 processor. The Device Manager looks the same, but I get an error whent rying to load the openNI samples:</p>
+<p>Error: One or more of the following nodes could not be enumerated:</p>
+<p>Device: PrimeSense/Sensorv2/5.0.0.25: The device is not connected!</p>
+<p>Ideas?</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123750">#</a>
+			            <a title="Erevodifwntas" rel="nofollow" href="http://venus.cs.aueb.gr/~erevodifwntas">Erevodifwntas</a>
+                        said on 
+		                25 Ιανουαρίου, 2011 02:06 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Try to run SensorKinect-Win32-5.0.0.exe (in the bin folder) of the SensorKinect driver (rather than run dpinst-x86.exe). This is how I solved the</p>
+<p>"Error: One or more of the following nodes could not be enumerated:</p>
+<p> Device: PrimeSense/Sensorv2/5.0.0.25: The device is not connected!" </p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123763">#</a>
+			            Todilo
+                        said on 
+		                25 Ιανουαρίου, 2011 02:39 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Thanks Erevodifwntas. I accidently did this step by following the guide:</p>
+<p><a rel="nofollow" target="_new" href="https://github.com/avin2/SensorKinect/blob/unstable/README">github.com/.../README</a> &nbsp;How do I get started using the functionality? I downloaded openNI unity sample, now I need to know what kind of information I can get? Like how do I detect poses and such. Could someone point me in the right direction? &nbsp;Should I be looking at avin2 for the functionality I get use, or OpenNI?</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123988">#</a>
+			            <a title="TrackBack" rel="nofollow" href="http://babaandthepigman.wordpress.com/2011/01/26/openni-kinect-getting-set-up-on-windows/">OpenNI + Kinect (getting set up on Windows) « Baba's space</a>
+                        said on 
+		                26 Ιανουαρίου, 2011 07:18 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Pingback from &nbsp;OpenNI + Kinect (getting set up on Windows) &amp;laquo; Baba&amp;#039;s space</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#123992">#</a>
+			            <a title="Mark Dunne" rel="nofollow" href="http://markdunne.me/">Mark Dunne</a>
+                        said on 
+		                26 Ιανουαρίου, 2011 07:45 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Excellent blog post, really helped me out. I was having difficultly installing OpenNI with unstable builds, now I know that the order of installation is very important. Thanks.</p>
+<p>How are you C# tutorials coming along, I can't wait to read them, will you do anything on head tracking? I want to track user's head positions and redraw a 3D scene from their perspectives.</p>
+<p>Thanks,</p>
+<p>Mark.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="owner">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124040">#</a>
+			            <a title="Vangos" href="http://www.studentguru.gr/blogs/vangos">Vangos</a>
+                        said on 
+		                27 Ιανουαρίου, 2011 12:38 πμ
+                    </dt>		
+		            <dd class="owner">
+		                <p>Thanks for your comment, Mark.</p>
+<p>I am planning to publish some posts about Kinect and WPF (getting raw and depth image, body tracking, painting using gestures, etc). Head tracking sounds interesting.</p>
+<p>I had some head tracking demos using OpenCV, so porting them to use Kinect might be a quite nice idea.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124064">#</a>
+			            <a title="Mark Dunne" rel="nofollow" href="http://markdunne.me/">Mark Dunne</a>
+                        said on 
+		                27 Ιανουαρίου, 2011 02:51 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Great, it all sounds like good stuff. I'm looking forward to it.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124297">#</a>
+			            Mikhail
+                        said on 
+		                28 Ιανουαρίου, 2011 02:32 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Vangos,</p>
+<p>could you please tell me, when are you going to post C# tutorials? I'm waiting with inpatience)</p>
+<p>Thanks,</p>
+<p>Mikhail.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124307">#</a>
+			            <a title="Vangos" rel="nofollow" href="http://studentguru.gr/blogs/vangos">Vangos</a>
+                        said on 
+		                28 Ιανουαρίου, 2011 03:41 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Hi Mikhail,</p>
+<p>Hope I'll have the first one published today ;-)</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="owner">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124327">#</a>
+			            <a title="Vangos" href="http://www.studentguru.gr/blogs/vangos">Vangos</a>
+                        said on 
+		                28 Ιανουαρίου, 2011 09:59 μμ
+                    </dt>		
+		            <dd class="owner">
+		                <p>Here is the first blog post about accessing the raw and depth image using WPF:</p>
+<p><a rel="nofollow" target="_new" href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/28/kinect-and-wpf-getting-the-raw-and-depth-image-using-openni.aspx">www.studentguru.gr/.../kinect-and-wpf-getting-the-raw-and-depth-image-using-openni.aspx</a></p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124394">#</a>
+			            <a title="TrackBack" rel="nofollow" href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/28/kinect-and-wpf-getting-the-raw-and-depth-image-using-openni.aspx">Kinect and WPF: Getting the raw and depth image using OpenNI - Vangos Pterneas blog</a>
+                        said on 
+		                29 Ιανουαρίου, 2011 10:49 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Pingback from &nbsp;Kinect and WPF: Getting the raw and depth image using OpenNI - Vangos Pterneas blog</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124579">#</a>
+			            <a title="TrackBack" rel="nofollow" href="http://www.nalli.net/2011/01/kinect-and-wpf-getting-the-raw-and-depth-image-using-openni/">Kinect and WPF: Getting the raw and depth image using OpenNI | www.nalli.net</a>
+                        said on 
+		                31 Ιανουαρίου, 2011 08:27 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Pingback from &nbsp;Kinect and WPF: Getting the raw and depth image using OpenNI | www.nalli.net</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124604">#</a>
+			            <a title="TrackBack" rel="nofollow" href="http://www.nalli.net/2011/02/kinect-and-wpf-getting-the-raw-and-depth-image-using-openni-2/">Kinect and WPF: Getting the raw and depth image using OpenNI | www.nalli.net</a>
+                        said on 
+		                01 Φεβρουαρίου, 2011 09:24 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Pingback from &nbsp;Kinect and WPF: Getting the raw and depth image using OpenNI | www.nalli.net</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124605">#</a>
+			            chenxi
+                        said on 
+		                01 Φεβρουαρίου, 2011 09:32 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Thank you very much. I have successfully install the kinect on my windows. But when I want to built and run the examples in sample file. The error" &nbsp;unable to start program'c:Program Files\OpenNI\Samples\NiViewer\Debug\NiViewer.exe". Can you tell me how to solve this problem. Thank you very much.</p>
+<p>My mail is lizixi@hotmail.com.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124607">#</a>
+			            chenxi
+                        said on 
+		                01 Φεβρουαρίου, 2011 10:29 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>sorry! The following problem is occurred when I use the visual c++ 2010 to build and run the samples in C:\Program Files\OpenNI\Samples. The samples in C:\Program Files\OpenNI\Samples\Bin\Release can be successfully runned.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124620">#</a>
+			            steve
+                        said on 
+		                01 Φεβρουαρίου, 2011 05:58 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Thanks for the effort, this helped me as well (I found avin2's branch here I think). I want to note some things though, after my recent experience with Kinect/OpenNI (Tom said it already):</p>
+<p>In the original post, Step 1 should not be done. Step 4 should not be done, if the goal is to use the Kinect device specifically, and not other PrimeSense devices. </p>
+<p>Outline should be this, (also outlined in avin2's readme files):</p>
+<p>--disconnect Kinect--</p>
+<p>1) Install "OpenNI Binaries" (www.openni.org)</p>
+<p>2) Install "OpenNI Compliant Hardware Binaries" / drivers. </p>
+<p>Now, here is the main deal: you can install these from (www.openni.org), but they seem to be for general PrimeSense's devices. For Kinect in particular, install the "Kinect Mod", that is, avin2's moddification of PrimeSense's drivers for Kinect </p>
+<p>(<a rel="nofollow" target="_new" href="https://github.com/avin2/SensorKinect/tree/master">github.com/.../master</a> for the master/stable(?) release).</p>
+<p>(This is installed after OpenNI binaries, so that it can register it's modules with the OpenNI.dll, found in OpenNI\Bin).</p>
+<p>--connect Kinect : it should pop up "found new hardware" messages (else go Device Manager-&gt;Action-&gt;Scan for hardware changes). Chose not to connect to the Internet, and let it install automatically - or you can go for manual selection, and you should see a 'PrimeSensor' option. In the end, 2 devices should be installed, 'Kinect Camera' &amp; 'Kinect Motor' (under 'PrimeSensor' in Device Manager). 1 more device ('NUI Audio') is unable to be installed (this is normal, it's not supported).</p>
+<p>3 - optional) Install "OpenNI Compliant Middleware Binaries" (NITE) (www.openni.org).</p>
+<p>This is for extra functionality provided through software (like hands tracking, scene analysis, etc.). It's optional, install it after testing the previous setup if you want it. </p>
+<p>NOTE: ALL of these have stable('master' in avin2's case)/unstable branches. Do not mix stable components with unstable ones (step 1 in the original guide links to avin2's unstable branch, that could be a problem for some)</p>
+<p>4) About the .xml files: those in OpenNI\Data are fine the way they are. Only if you install NITE (my 3rd step), and want to try it's samples, you will need to change two of the three .xmls under "Prime Sense\NITE\Data", and only to change resolution from QVGA(320x240) to VGA(640x480).</p>
+<p>Finally, if someone already installed and has trouble (esp. the "timeout has occured when waiting for new data!" error), instead of unistalling and doing it all over you might get off with doing just this:</p>
+<p>-unistall "OpenNI Compliant Hardware Binaries" from PrimeSense (it shows something like "PrimeSensor 5.0.0 for Windows" in Add/Remove Programs - or you might run the uninstaller under "Prime Sense\Sensor")</p>
+<p>-install the modified "OpenNI Compliant Hardware Binaries" from avin2 (step 2 above). (it shows as "PrimeSensor 5.0.0 for Windows (Kinect Mod)" in my Add/Remove Programs)</p>
+<p>P.S. I have two questions:</p>
+<p>-is there a plan for official microsoft "OpenNI Compliant Hardware Binaries" (drivers) for Kinect, to supersede this Kinect Mod from avin2?</p>
+<p>-who's 'avin2'? :)</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124627">#</a>
+			            <a title="TrackBack" rel="nofollow" href="http://timzaman.wordpress.com/2011/02/01/kinect-on-windows-7-with-matlab/">Kinect on Windows 7 with Matlab «  Tim Zaman</a>
+                        said on 
+		                02 Φεβρουαρίου, 2011 12:50 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Pingback from &nbsp;Kinect on Windows 7 with Matlab &amp;laquo; &nbsp;Tim Zaman</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="owner">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124629">#</a>
+			            <a title="Vangos" href="http://www.studentguru.gr/blogs/vangos">Vangos</a>
+                        said on 
+		                02 Φεβρουαρίου, 2011 02:11 πμ
+                    </dt>		
+		            <dd class="owner">
+		                <p>@chenxi:</p>
+<p>You'd better copy the code from the samples in a new project. This should solve your problem.</p>
+<p>@steve:</p>
+<p>You are right, I am going to update the blog post. As about your questions:</p>
+<p>- Microsoft announced that an official Kinect SDK will be available in the near future (no release date announced): <a rel="nofollow" target="_new" href="http://www.winrumors.com/microsoft-preparing-official-kinect-drivers-and-sdk-for-windows/#ixzz1BIjh3teA">www.winrumors.com/microsoft-preparing-official-kinect-drivers-and-sdk-for-windows</a>.</p>
+<p>- All I know is his github profile (<a rel="nofollow" target="_new" href="https://github.com/avin2">https://github.com/avin2</a>).</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#124661">#</a>
+			            steve
+                        said on 
+		                02 Φεβρουαρίου, 2011 07:45 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Good, official support should make all this much more straightforward, for Windows at least. Now, if they also release OpenNI compliant hardware binaries... that would be nice.</p>
+<p>Also: keep up the good work!</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#125137">#</a>
+			            afro
+                        said on 
+		                10 Φεβρουαρίου, 2011 11:01 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Actually the SensorKinect is the SAME driver as the OpenNI hardware binaries, just avin added some other tuff to it (such like samle XMLs). So you need only install SensorKinect OR hardware binaries, THEN OpenNI and NITE.</p>
+<p>But best is to follow this: </p>
+<p><a rel="nofollow" target="_new" href="http://asimmittal.net/blog/?p=121">asimmittal.net/blog</a></p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#125307">#</a>
+			            <a title="TrackBack" rel="nofollow" href="http://www.studentguru.gr/blogs/vangos/archive/2011/02/12/kinect-and-wpf-painting-with-kinect-using-openni.aspx">Vangos Pterneas blog</a>
+                        said on 
+		                12 Φεβρουαρίου, 2011 03:58 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>It&amp;#39;s time for the second blog post considering Kinect and WPF. In the previous one, I saw you how</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#125384">#</a>
+			            Rob
+                        said on 
+		                15 Φεβρουαρίου, 2011 08:26 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Great post man, really helped me</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#126144">#</a>
+			            nico
+                        said on 
+		                03 Μαρτίου, 2011 12:59 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Absolutely helpful! Thanks for your effort, and thanks to afro that point me to the right solution found at asimmittal.net/blog.</p>
+<p>Anyway, to run samples for OpenNI, some fixes in the xml files are needed, and NITE samples work for me only if I copy the XnVNITE dll (that is located in \PrimeSense\NITE\bin) within the NITE samples folder. </p>
+<p>In addition, I suggest to launch the samples from the command prompt: clicking directly the exe file from a window won't always run.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="owner">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#126334">#</a>
+			            <a title="Vangos" href="http://www.studentguru.gr/blogs/vangos">Vangos</a>
+                        said on 
+		                09 Μαρτίου, 2011 06:46 μμ
+                    </dt>		
+		            <dd class="owner">
+		                <p>nico, thanks a lot for your helpful comment.</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#126744">#</a>
+			            <a title="TrackBack" rel="nofollow" href="http://www.studentguru.gr/blogs/vangos/archive/2011/03/15/kinect-and-wpf-complete-body-tracking.aspx">Vangos Pterneas blog</a>
+                        said on 
+		                15 Μαρτίου, 2011 06:15 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>It&amp;#39;s time for a really interesting and useful Kinect tutorial. We&amp;#39;ll see how to achieve full</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#127052">#</a>
+			            Grace
+                        said on 
+		                22 Μαρτίου, 2011 06:19 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>I followed your tips on installing the Kinect drivers and OpenNI. I was able run some of the demo programs(NiViewer and NiSimpleviewer.exe) but some didnt run like NiUserTracker.exe which returned an error "Find user generator failed: Can't create any node of the requested type!."</p>
+<p>I actually skipped on step 1 and step 4. </p>
+<p>Right now, I will still try to install NITE. Hopefully it will work too.</p>
+<p>Anyway, I installed OpenNI and PrimeSense on a Windows 7 64 bit Lenove G450. </p>
+<p>Hopefully, there will be more helpful tutorials like this one. :) Thanks!</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#127053">#</a>
+			            Grace
+                        said on 
+		                22 Μαρτίου, 2011 06:22 πμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>My mistake, it was actually step 3 and not step 4 that I skipped. :)</p>
+
+                    
+                        
+                    </dd>
+                
+                    <dt class="comment">
+			            <a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx#128477">#</a>
+			            <a title="TrackBack" rel="nofollow" href="http://www.timzaman.nl/?p=504&amp;lang=en">[Kinect] use with Matlab</a>
+                        said on 
+		                06 Απριλίου, 2011 07:35 μμ
+                    </dt>		
+		            <dd class="comment">
+		                <p>Pingback from &nbsp;[Kinect] use with Matlab</p>
+
+                    
+                        
+                    </dd>
+                
+                    </dl>
+                
+            
+            
+            
+                        
+                    <h4 class="contentsubheading">
+                        Leave a Comment
+                    </h4>
+                    <dl class="commentform">
+                        <dt><label for="ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbTitle">Title</label> <em>(required)</em><span id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl02" style="color:Red;visibility:hidden;">*</span></dt>
+                        <dd><input name="ctl00$Main$ctl09$ctl02$ctl02$ctl02$tbTitle" type="text" value="re: How-to: Successfully install Kinect on Windows (OpenNI and NITE)" id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbTitle" class="textline"></dd>
+
+                        <dt id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_NameTitle"><label for="ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbName">Name</label> <em>(required)</em><span id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl10" style="color:Red;visibility:hidden;">*</span></dt>
+                        <dd id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_NameDesc"><input name="ctl00$Main$ctl09$ctl02$ctl02$ctl02$tbName" type="text" id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbName" class="textline"></dd>
+
+                        <dt><label for="ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbUrl">Your URL</label> <em>(optional</em>)</dt>
+                        <dd><input name="ctl00$Main$ctl09$ctl02$ctl02$ctl02$tbUrl" type="text" id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbUrl" class="textline"></dd>
+
+                        <dt><label for="ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbComment">Comments</label> <em>(required)</em><span id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl07" style="color:Red;visibility:hidden;">*</span></dt>
+                        <dd><textarea name="ctl00$Main$ctl09$ctl02$ctl02$ctl02$tbComment" rows="5" cols="25" id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbComment" class="textmultiline"></textarea></dd>
+
+                        <dt><input id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_chkRemember" type="checkbox" name="ctl00$Main$ctl09$ctl02$ctl02$ctl02$chkRemember"><label for="ctl00_Main_ctl09_ctl02_ctl02_ctl02_chkRemember">Remember Me?</label></dt>
+           
+                        <dt><a id="ctl00_Main_ctl09_ctl02_ctl02_ctl02_btnSubmit" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("ctl00$Main$ctl09$ctl02$ctl02$ctl02$btnSubmit", "", true, "CreateCommentForm", "", false, true))">Submit</a></dt>
+                    </dl>
+                    
+        
+
+            </div>
+        </div>
+        <div id="subcontent-a">
+            
+                <div id="SearchSideBar">
+                                <h4 class="sideheader notop">Search</h4>                   
+                                <input name="ctl00$SideBar$ctl00$ctl00$SearchBox" type="text" id="ctl00_SideBar_ctl00_ctl00_SearchBox" class="searchbox" button="SearchButton" onclick="if(this.defaultValue==this.value) this.value=&#39;&#39;;" onblur="if(this.value==&#39;&#39;) this.value=this.defaultValue;">
+                                <a id="ctl00_SideBar_ctl00_ctl00_SearchButton" class="searchbutton" href="javascript:__doPostBack('ctl00$SideBar$ctl00$ctl00$SearchButton','')">Go</a>
+                        </div>
+                <div id="TasksSideBar">
+                    
+                    
+                </div>
+                <div id="BlogLinksSideBar">
+                    <h4 class="sideheader">This Blog</h4>
+                    <ul class="sidelist">
+                        <li><a href="http://www.studentguru.gr/blogs/vangos/default.aspx">Home</a></li>
+                        
+                        
+                        
+                    </ul>
+                </div>
+                
+                
+                
+                <div id="TagSideBar">
+                            <h4 class="sideheader">Tags</h4>
+                        <ul class="tagcloud">
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Accelerators/default.aspx" rel="tag">Accelerators</a></li>
+<li class="tag1"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Applications/default.aspx" rel="tag">Applications</a></li>
+<li class="tag1"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/ASP.NET/default.aspx" rel="tag">ASP.NET</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Bing/default.aspx" rel="tag">Bing</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/business+card/default.aspx" rel="tag">business card</a></li>
+<li class="tag1"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/C_2300_/default.aspx" rel="tag">C#</a></li>
+<li class="tag2"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Camera/default.aspx" rel="tag">Camera</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Choosers/default.aspx" rel="tag">Choosers</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/design/default.aspx" rel="tag">design</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/development/default.aspx" rel="tag">development</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Development+tools/default.aspx" rel="tag">Development tools</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/eBay/default.aspx" rel="tag">eBay</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Eclipse/default.aspx" rel="tag">Eclipse</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/emulator/default.aspx" rel="tag">emulator</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/face+detection/default.aspx" rel="tag">face detection</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Google/default.aspx" rel="tag">Google</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/HTML+5/default.aspx" rel="tag">HTML 5</a></li>
+<li class="tag2"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Internet+Explorer/default.aspx" rel="tag">Internet Explorer</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/iPhone/default.aspx" rel="tag">iPhone</a></li>
+<li class="tag2"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/kinect/default.aspx" rel="tag">kinect</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Launchers/default.aspx" rel="tag">Launchers</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Metro+UI/default.aspx" rel="tag">Metro UI</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Microphone/default.aspx" rel="tag">Microphone</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/motion+detection/default.aspx" rel="tag">motion detection</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/nite/default.aspx" rel="tag">nite</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Nui.Vision/default.aspx" rel="tag">Nui.Vision</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Office/default.aspx" rel="tag">Office</a></li>
+<li class="tag2"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/openni/default.aspx" rel="tag">openni</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Photoshop/default.aspx" rel="tag">Photoshop</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/PowerPoint/default.aspx" rel="tag">PowerPoint</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/presentations/default.aspx" rel="tag">presentations</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Printer/default.aspx" rel="tag">Printer</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/PSD/default.aspx" rel="tag">PSD</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/resources/default.aspx" rel="tag">resources</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/REST/default.aspx" rel="tag">REST</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/RTF/default.aspx" rel="tag">RTF</a></li>
+<li class="tag1"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Sidebar+Gadgets/default.aspx" rel="tag">Sidebar Gadgets</a></li>
+<li class="tag1"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Silverlight/default.aspx" rel="tag">Silverlight</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/templates/default.aspx" rel="tag">templates</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Text-to-speech/default.aspx" rel="tag">Text-to-speech</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/themes/default.aspx" rel="tag">themes</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Torrents/default.aspx" rel="tag">Torrents</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/translator/default.aspx" rel="tag">translator</a></li>
+<li class="tag1"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Tutorials/default.aspx" rel="tag">Tutorials</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/TXT/default.aspx" rel="tag">TXT</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Voice+Recognition/default.aspx" rel="tag">Voice Recognition</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/web+services/default.aspx" rel="tag">web services</a></li>
+<li class="tag2"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Windows/default.aspx" rel="tag">Windows</a></li>
+<li class="tag2"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Windows+Live+Messenger/default.aspx" rel="tag">Windows Live Messenger</a></li>
+<li class="tag1"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Windows+Phone+7/default.aspx" rel="tag">Windows Phone 7</a></li>
+<li class="tag6"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/Word/default.aspx" rel="tag">Word</a></li>
+<li class="tag2"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/WPF/default.aspx" rel="tag">WPF</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/XML/default.aspx" rel="tag">XML</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/XNA/default.aspx" rel="tag">XNA</a></li>
+<li class="tag1"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/_9503C603B103C103BC03BF03B303AD03C203_/default.aspx" rel="tag">Εφαρμογές</a></li>
+<li class="tag3"><a href="http://www.studentguru.gr/blogs/vangos/archive/tags/_A003B103C103BF03C503C303B903AC03C303B503B903C203_/default.aspx" rel="tag">Παρουσιάσεις</a></li>
+</ul>
+
+                        </div>
+                
+                <div id="NavSideBar"><h4 class="sideheader">Navigation</h4>
+<ul class="sidelist">
+<li><a href="http://www.studentguru.gr/">Home</a></li><li><a href="http://www.studentguru.gr/blogs/">Blogs</a></li><li><a href="http://www.studentguru.gr/forums/">Forums</a></li><li><a href="http://www.studentguru.gr/learn/default.aspx">Videos</a></li><li><a href="http://www.studentguru.gr/ita/default.aspx">Δωρεάν e-Learning</a></li><li><a href="http://www.studentguru.gr/photos/">Photos</a></li><li><a href="http://www.studentguru.gr/files/">Downloads</a></li>
+</ul></div>
+                
+                <div id="ArchiveSideBar"><h4 class="sideheader">Archives</h4>
+<ul class="sidelist">
+<li><a href="http://www.studentguru.gr/blogs/vangos/archive/2011/04.aspx">Απρίλιος 2011 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2011/03.aspx">Μάρτιος 2011 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2011/02.aspx">Φεβρουάριος 2011 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2011/01.aspx">Ιανουάριος 2011 (3)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2010/12.aspx">Δεκέμβριος 2010 (5)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2010/11.aspx">Νοέμβριος 2010 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2010/10.aspx">Οκτώβριος 2010 (2)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2010/09.aspx">Σεπτέμβριος 2010 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2010/07.aspx">Ιούλιος 2010 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2010/04.aspx">Απρίλιος 2010 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2010/03.aspx">Μάρτιος 2010 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2010/02.aspx">Φεβρουάριος 2010 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2009/12.aspx">Δεκέμβριος 2009 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2009/11.aspx">Νοέμβριος 2009 (2)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2009/09.aspx">Σεπτέμβριος 2009 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2009/07.aspx">Ιούλιος 2009 (2)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2009/06.aspx">Ιούνιος 2009 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2009/04.aspx">Απρίλιος 2009 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2009/03.aspx">Μάρτιος 2009 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2009/02.aspx">Φεβρουάριος 2009 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2009/01.aspx">Ιανουάριος 2009 (2)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2008/12.aspx">Δεκέμβριος 2008 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2008/11.aspx">Νοέμβριος 2008 (1)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2008/10.aspx">Οκτώβριος 2008 (2)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2008/09.aspx">Σεπτέμβριος 2008 (3)</a></li><li><a href="http://www.studentguru.gr/blogs/vangos/archive/2008/08.aspx">Αύγουστος 2008 (1)</a></li>
+</ul></div>
+                
+                <div class="LinkSideBar"></div>
+                <div id="SubscriptionsSideBar">
+                    <div id="Subscriptions">
+                        <h4 class="sideheader">Syndication</h4>
+                        <ul class="sidelist">
+                            <li class="rss"><a href="http://www.studentguru.gr/blogs/vangos/rss.aspx">RSS</a></li>
+                            <li><a href="http://www.studentguru.gr/blogs/vangos/atom.aspx">Atom</a></li>
+                            <li id="RssComments"><a href="http://www.studentguru.gr/blogs/vangos/rsscomments.aspx">Comments RSS</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            
+            <div id="contentfooter">
+                &nbsp;</div>
+        </div>
+        <div id="footer">
+            
+                <div class="Copyright">StudentGuru 2010</div>
+                
+                
+				            <a href="http://communityserver.org/r.ashx?j" target="_blank"><img id="ctl00_BodyFooterRegion_ctl02_ctl03_ctl00" src="./Kinect installation guide_files/PoweredByCS_commercial.gif" alt="Powered by Community Server (Commercial Edition), by Telligent Systems " style="border-width:0px;"></a>
+						
+            
+        </div>
+    </div>
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl02"), document.getElementById("ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl10"), document.getElementById("ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl07"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl02 = document.all ? document.all["ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl02"] : document.getElementById("ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl02");
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl02.controltovalidate = "ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbTitle";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl02.errormessage = "*";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl02.validationGroup = "CreateCommentForm";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl02.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl02.initialvalue = "";
+var ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl10 = document.all ? document.all["ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl10"] : document.getElementById("ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl10");
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl10.controltovalidate = "ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbName";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl10.errormessage = "*";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl10.validationGroup = "CreateCommentForm";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl10.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl10.initialvalue = "";
+var ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl07 = document.all ? document.all["ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl07"] : document.getElementById("ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl07");
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl07.controltovalidate = "ctl00_Main_ctl09_ctl02_ctl02_ctl02_tbComment";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl07.errormessage = "*";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl07.validationGroup = "CreateCommentForm";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl07.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_Main_ctl09_ctl02_ctl02_ctl02_ctl07.initialvalue = "";
+//]]>
+</script>
+
+
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+rdf:about="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx"
+dc:identifier="http://www.studentguru.gr/blogs/vangos/archive/2011/01/20/how-to-successfully-install-kinect-windows-openni-nite.aspx"
+dc:title="How-to: Successfully install Kinect on Windows (OpenNI and NITE)"
+trackback:ping="http://www.studentguru.gr/blogs/vangos/trackback.ashx?PostID=121803" />
+</rdf:RDF>
+-->
+<script type="text/javascript">
+// <![CDATA[
+Telligent_Modal.Configure('/utility/loading.htm',['Modal'],['ModalTitle'],['ModalClose'],['ModalContent'],['ModalFooter'],['ModalResize'],['ModalMask'],100);
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_Main_ctl08_ctl01 = new Telligent_InlineEditorPanel('ctl00_Main_ctl08_ctl01','ctl00_Main_ctl08_ctl01','ctl00_Main_ctl08_ctl01_State','ctl00_Main_ctl08_ctl00',false,null,null,null);
+// ]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+</form>
+    <script src="./Kinect installation guide_files/shCore.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushCpp.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushCSharp.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushCss.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushJava.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushJScript.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushPhp.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushPython.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushRuby.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushSql.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushVb.js" type="text/javascript"></script>
+    <script src="./Kinect installation guide_files/shBrushXml.js" type="text/javascript"></script>
+    <script language="javascript">
+        dp.SyntaxHighlighter.HighlightAll('code');
+    </script>
+
+
+</body></html>
