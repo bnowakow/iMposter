@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Nui.Vision;
 using System.Windows.Media;
+using System.Windows.Forms;
 
 namespace iMposter.Model.Sensor
 {
@@ -30,27 +31,18 @@ namespace iMposter.Model.Sensor
         }
 
         private BodyTracker() {
-            // TODO catch exception
-            Tracker = new NuiUserTracker(@ModelSettings.Default.sensorTrackerConfig);
-            Tracker.UserUpdated += new NuiUserTracker.UserUpdatedHandler(tracker_UserUpdated);
-        }
-
-        private void tracker_UserUpdated(object sender, NuiUserEventArgs e)
-        {
-            foreach (var user in e.Users)
+            try
             {
-                var omg = user.LeftElbow;
-                float leftElbowX = user.LeftElbow.X;
-                float leftElbowY = user.LeftElbow.Y;
-
-                float leftHandX = user.LeftHand.X;
-                float leftHandY = user.LeftHand.Y;
-
-                float rightElbowX = user.RightElbow.X;
-                float rightElbowY = user.RightElbow.Y;
-
-                float rightHandX = user.RightHand.X;
-                float rightHandY = user.RightHand.Y;
+                Tracker = new NuiUserTracker(@ModelSettings.Default.sensorTrackerConfig);
+            }
+            catch (Exception e)
+            {
+                if (e.Message == "Configuration file not found.")
+                {
+                    // There is no Kinect in the system
+                    MessageBox.Show("There is no sensor in the system, using fakeKinect instead");
+                    // TODO use fakeKinect instead
+                }
             }
         }
     }
