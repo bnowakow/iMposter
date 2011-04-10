@@ -21,7 +21,7 @@ namespace iMposter.View.Video
 
         public override void InitializeCamera()
         {
-            bodyTracker = new BodyTracker();
+            bodyTracker = BodyTracker.Instance;
         }
 
         public override void UpdateCamera()

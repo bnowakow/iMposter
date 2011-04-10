@@ -43,7 +43,7 @@ namespace iMposter.Controller.Interaction
             InitializeCollectThread();
             InitializeProcessThread();
 
-            bodyTracker = new BodyTracker();
+            bodyTracker = BodyTracker.Instance;
         }
         #endregion
 
