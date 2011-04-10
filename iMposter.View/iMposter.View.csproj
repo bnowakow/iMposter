@@ -81,6 +81,7 @@
     <Compile Include="Sample\House.xaml.cs">
       <DependentUpon>House.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Video\KinectJointDetectCameraPreview.cs" />
     <Compile Include="Video\FaceDetectCameraPreview.cs" />
     <Compile Include="Video\KinectDepthCameraPreview.cs" />
     <Compile Include="Video\FaceCameraPreview.cs" />

@@ -8,6 +8,9 @@
     <StackPanel>
         <Label x:Name="previewLabel" Foreground="White"/>
         <Button x:Name="startPreviewButton" Content="Start preview" Click="startPreviewButton_Click" />
-        <Image x:Name="previewImage" />
+        <Grid>
+            <Image x:Name="previewImage" />
+            <Canvas Name="canvasRoot" />
+        </Grid>
     </StackPanel>
 </UserControl>

@@ -39,6 +39,7 @@ namespace iMposter.Model.Sensor
         {
             foreach (var user in e.Users)
             {
+                var omg = user.LeftElbow;
                 float leftElbowX = user.LeftElbow.X;
                 float leftElbowY = user.LeftElbow.Y;
 

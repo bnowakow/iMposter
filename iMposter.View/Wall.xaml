@@ -85,6 +85,7 @@
             <local.Video:FaceCameraPreview  Width="200" />
             <local.Video:FaceDetectCameraPreview  Width="200" />
             <local.Video:KinectCameraPreview Width="200" />
+            <local.Video:KinectJointDetectCameraPreview Width="200" />
             <local.Video:KinectDepthCameraPreview Width="200" />
         </StackPanel>
     </Grid>
