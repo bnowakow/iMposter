@@ -24,7 +24,7 @@ namespace iMposter.View.Video
 
         public override void InitializeCamera()
         {
-            cameraImage = CameraImageSingleton.Instance.CameraImageInstance;
+            cameraImage = CameraImage.Instance;
             faceDetector = new FaceDetector();
         }
 

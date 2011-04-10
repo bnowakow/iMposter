@@ -24,7 +24,7 @@ namespace iMposter.Controller.Face
 
         public FaceDetector()
         {
-            cameraImage = CameraImageSingleton.Instance.CameraImageInstance;
+            cameraImage = CameraImage.Instance;
             haarCascade = new HaarCascade(@ControllerSettings.Default.haarCascadeFile);
         }
 

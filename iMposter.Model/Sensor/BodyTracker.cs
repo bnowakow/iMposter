@@ -7,13 +7,38 @@ using System.Windows.Media;
 
 namespace iMposter.Model.Sensor
 {
+    public sealed class BodyTrackerSingleton
+    {
+        static readonly BodyTrackerSingleton instance = new BodyTrackerSingleton();
+
+        public BodyTracker BodyTrackerInstance { get; set; }
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static BodyTrackerSingleton()
+        {
+        }
+
+        BodyTrackerSingleton()
+        {
+            BodyTrackerInstance = new BodyTracker();
+        }
+
+        public static BodyTrackerSingleton Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+    }
+
     public class BodyTracker
     {
         public NuiUserTracker Tracker { get; set; }
 
         public BodyTracker() {
             // TODO catch exception
-            string text = System.IO.File.ReadAllText(@ModelSettings.Default.sensorTrackerConfig);
             Tracker = new NuiUserTracker(@ModelSettings.Default.sensorTrackerConfig);
             Tracker.UserUpdated += new NuiUserTracker.UserUpdatedHandler(tracker_UserUpdated);
         }

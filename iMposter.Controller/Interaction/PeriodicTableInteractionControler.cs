@@ -43,7 +43,7 @@ namespace iMposter.Controller.Interaction
             InitializeCollectThread();
             InitializeProcessThread();
 
-            //bodyTracker = new BodyTracker();
+            bodyTracker = new BodyTracker();
         }
         #endregion
 
@@ -114,7 +114,6 @@ namespace iMposter.Controller.Interaction
         {
             Element element = targetElement as Element;
             element.RevertDefaultImage();
-            element.IsOverridden = true;
         }
 
         protected Element GetRandomNotOverriddenElementElement()

@@ -69,12 +69,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CameraPreview.xaml.cs">
-      <DependentUpon>CameraPreview.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FaceDetectPreview.xaml.cs">
-      <DependentUpon>FaceDetectPreview.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PeriodicTableControl.xaml.cs">
       <DependentUpon>PeriodicTableControl.xaml</DependentUpon>
     </Compile>
@@ -102,18 +96,10 @@
     <Compile Include="Wall.xaml.cs">
       <DependentUpon>Wall.xaml</DependentUpon>
     </Compile>
-    <Page Include="CameraPreview.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="FaceDetectPreview.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="PeriodicTableControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

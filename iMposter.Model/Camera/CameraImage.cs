@@ -15,40 +15,33 @@ using AForge.Controls;
 
 namespace iMposter.Model.Camera
 {
-    public sealed class CameraImageSingleton
+    public sealed class CameraImage : ICameraImage
     {
-        static readonly CameraImageSingleton instance = new CameraImageSingleton();
+        static CameraImage instance = null;
+        static readonly object padlock = new object();
 
-        public CameraImage CameraImageInstance { get; set; }
+        private Capture openCVCapture;
+        private VideoCaptureDevice aForgeCapture;
+        private Bitmap aForgeLastFrame;
+        private bool useFakeCamera = ModelSettings.Default.useFakeCamera;
 
-        // Explicit static constructor to tell C# compiler
-        // not to mark type as beforefieldinit
-        static CameraImageSingleton()
-        {
-        }
-
-        CameraImageSingleton()
-        {
-            CameraImageInstance = new CameraImage();
-        }
-
-        public static CameraImageSingleton Instance
+        public static CameraImage Instance
         {
             get
             {
-                return instance;
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new CameraImage();
+                    }
+                    return instance;
+                }
+
             }
         }
-    }
 
-    public class CameraImage : ICameraImage
-    {
-        protected Capture openCVCapture;
-        protected VideoCaptureDevice aForgeCapture;
-        protected Bitmap aForgeLastFrame;
-        protected bool useFakeCamera = ModelSettings.Default.useFakeCamera;
-
-        public CameraImage()
+        private CameraImage()
         {
             try
             {
@@ -73,12 +66,12 @@ namespace iMposter.Model.Camera
             }
         }
 
-        void videoSource_NewFrame(object sender, ref Bitmap image)
+        private void videoSource_NewFrame(object sender, ref Bitmap image)
         {
             aForgeLastFrame = image.Clone() as Bitmap;
         }
 
-        void aForgeCapture_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        private void aForgeCapture_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             aForgeLastFrame = eventArgs.Frame.Clone() as Bitmap;
         }
