@@ -18,7 +18,7 @@
       <Value Profile="(Default)">10000</Value>
     </Setting>
     <Setting Name="interactionTableFaceCaptureSecondInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">20</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="interactionTableFaceProcessSecondInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>

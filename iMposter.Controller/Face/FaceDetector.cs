@@ -24,28 +24,44 @@ namespace iMposter.Controller.Face
 
         public FaceDetector()
         {
-            cameraImage = new CameraImage();
+            cameraImage = CameraImageSingleton.Instance.CameraImageInstance;
             haarCascade = new HaarCascade(@ControllerSettings.Default.haarCascadeFile);
         }
 
         public List<BitmapSource> DetectFaces()
         {
+            List<BitmapSource> faceBitmaps = new List<BitmapSource>();
+            // supach tmp
+            //return faceBitmaps;
             Image<Bgr, byte> image = cameraImage.GetNextImage();
+            if (image != null)
+            {
+                // TODO detect faces that lays on each other
+                // TODO hash faces - SURF feature detector in CSharp - http://www.emgu.com/wiki/index.php/SURF_feature_detector_in_CSharp
+                // TODO detect face sharpeness to enlarge face region
+                foreach (var face in DetectFaces(image))
+                {
+                    CroppedBitmap faceBitmap = new CroppedBitmap(image.ToBitmapSource(), face.rect.ToInt32Rect());
+                    faceBitmaps.Add(faceBitmap);
+                }
+            }
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            return faceBitmaps;
+        }
+
+        public MCvAvgComp[] DetectFaces(Image<Bgr, byte> image)
+        {
             Image<Gray, byte> grayImage = image.Convert<Gray, byte>();
             System.Drawing.Size faceMinSize = new System.Drawing.Size(image.Width / haarMinFaceImageDivider, image.Height / haarMinFaceImageDivider);
             var faces = grayImage.DetectHaarCascade(haarCascade, haarScaleFactor, haarMinNeighbours, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, faceMinSize)[0];
-            // TODO detect faces that lays on each other
-            // TODO hash faces - SURF feature detector in CSharp - http://www.emgu.com/wiki/index.php/SURF_feature_detector_in_CSharp
-            // TODO detect face sharpeness to enlarge face region
-            List<BitmapSource> faceBitmaps = new List<BitmapSource>();
-            foreach (var face in faces)
-            {
-                //image.Draw(face.rect, new Bgr(0, double.MaxValue, 0), 3);
-                CroppedBitmap faceBitmap = new CroppedBitmap(image.ToBitmapSource(), face.rect.ToInt32Rect());
-                faceBitmaps.Add(faceBitmap);
-            }
 
-            return faceBitmaps;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            return faces;
         }
     }
 }

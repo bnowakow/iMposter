@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using iMposter.Controller.Interaction;
+using iMposter.Model.Sensor;
 
 namespace iMposter.View
 {

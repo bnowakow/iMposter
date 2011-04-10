@@ -46,5 +46,17 @@ namespace iMposter.Model {
                 this["useFakeCamera"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Sensor\\TrackerConfig.xml")]
+        public string sensorTrackerConfig {
+            get {
+                return ((string)(this["sensorTrackerConfig"]));
+            }
+            set {
+                this["sensorTrackerConfig"] = value;
+            }
+        }
     }
 }

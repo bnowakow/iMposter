@@ -9,6 +9,7 @@ using System.Drawing;
 using iMposter.Model.PeriodicTable;
 using System.Windows.Media.Animation;
 using iMposter.Model.Task;
+using iMposter.Model.Sensor;
 
 
 namespace iMposter.Controller.Interaction
@@ -27,6 +28,8 @@ namespace iMposter.Controller.Interaction
         protected int columnNumber = 18;
         protected int rowNumber = 7;
 
+        protected BodyTracker bodyTracker;
+
         #region Constructor
         public PeriodicTableInteractionControler(IPeriodicTableControl periodicTableControl)
         {
@@ -39,6 +42,8 @@ namespace iMposter.Controller.Interaction
 
             InitializeCollectThread();
             InitializeProcessThread();
+
+            //bodyTracker = new BodyTracker();
         }
         #endregion
 

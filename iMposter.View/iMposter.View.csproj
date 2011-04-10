@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\Emgu\Emgu.Util.dll</HintPath>
     </Reference>
+    <Reference Include="Nui.Vision, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\Kinect\Nui.Vision.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -83,6 +87,13 @@
     <Compile Include="Sample\House.xaml.cs">
       <DependentUpon>House.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Video\FaceDetectCameraPreview.cs" />
+    <Compile Include="Video\KinectDepthCameraPreview.cs" />
+    <Compile Include="Video\FaceCameraPreview.cs" />
+    <Compile Include="Video\KinectCameraPreview.cs" />
+    <Compile Include="Video\VideoPreview.xaml.cs">
+      <DependentUpon>VideoPreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -116,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sample\House.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Video\VideoPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -30,7 +30,7 @@ namespace iMposter.View.Sample
             //System.Windows.Forms.Application.Idle
             //System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.ContextIdle, null);
 
-            ci = new CameraImage();            
+            //ci = new CameraImage();            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

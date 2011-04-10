@@ -8,38 +8,90 @@ using System.Runtime.InteropServices;
 using System.Windows.Media.Imaging;
 using System.Windows;
 using System.IO;
+using AForge.Video;
+using AForge.Video.DirectShow;
+using System.Drawing;
+using AForge.Controls;
 
 namespace iMposter.Model.Camera
 {
+    public sealed class CameraImageSingleton
+    {
+        static readonly CameraImageSingleton instance = new CameraImageSingleton();
+
+        public CameraImage CameraImageInstance { get; set; }
+
+        // Explicit static constructor to tell C# compiler
+        // not to mark type as beforefieldinit
+        static CameraImageSingleton()
+        {
+        }
+
+        CameraImageSingleton()
+        {
+            CameraImageInstance = new CameraImage();
+        }
+
+        public static CameraImageSingleton Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+    }
+
     public class CameraImage : ICameraImage
     {
-        protected Capture capture;
+        protected Capture openCVCapture;
+        protected VideoCaptureDevice aForgeCapture;
+        protected Bitmap aForgeLastFrame;
         protected bool useFakeCamera = ModelSettings.Default.useFakeCamera;
 
         public CameraImage()
         {
             try
             {
-                capture = new Capture(ModelSettings.Default.cameraIndex);
+                //openCVCapture = new Capture(ModelSettings.Default.cameraIndex);
+                FilterInfoCollection aForgeVideoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                aForgeCapture = new VideoCaptureDevice(aForgeVideoDevices[ModelSettings.Default.cameraIndex].MonikerString);
+                aForgeCapture.DesiredFrameRate = 10;
+                //aForgeCapture.NewFrame += new NewFrameEventHandler(aForgeCapture_NewFrame);
+                VideoSourcePlayer videoSource = new VideoSourcePlayer();
+                videoSource.NewFrame += new VideoSourcePlayer.NewFrameHandler(videoSource_NewFrame);
+                videoSource.VideoSource = aForgeCapture;
+                videoSource.Start();
             }
             catch (Exception e)
             {
                 if (e.Message == "Error: Unable to create capture from camera" + ModelSettings.Default.cameraIndex)
                 {
                     // There is no camera in the system
+                    MessageBox.Show("There is no camera in the system, using fakeCamera instead");
                     useFakeCamera = true;
                 }
             }
-            // Initialize capture stream to not receive an empty frame
-            //System.Threading.Thread.Sleep(1000);
+        }
+
+        void videoSource_NewFrame(object sender, ref Bitmap image)
+        {
+            aForgeLastFrame = image.Clone() as Bitmap;
+        }
+
+        void aForgeCapture_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            aForgeLastFrame = eventArgs.Frame.Clone() as Bitmap;
         }
 
         public Image<Bgr, byte> GetNextImage()
         {
-            Image<Bgr, byte> image;
+            Image<Bgr, byte> image = null;
             if (!useFakeCamera)
             {
-                image = capture.QueryFrame();
+                //image = openCVCapture.QueryFrame();
+                if (aForgeLastFrame != null) {
+                    image = new Image<Bgr, byte>(aForgeLastFrame.Clone() as Bitmap);
+                }
             }
             else
             {
@@ -50,6 +102,10 @@ namespace iMposter.Model.Camera
                 int randomFileIndex = random.Next(0, fakeCameraCaptureFiles.Count());
                 image = new Image<Bgr, byte>(@"Camera\FakeCamera\" + fakeCameraCaptureFiles[randomFileIndex]);
             }
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
             return image;
         }
     }

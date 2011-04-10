@@ -35,6 +35,12 @@ namespace iMposter.Model.Task
                 dispatcherTimer.Tag = taskChainElement;
                 dispatcherTimer.Start();
             }
+            else
+            {
+                // tmp 
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
         }
 
         protected void ScheduleNextTaskExecution(object sender, EventArgs e)

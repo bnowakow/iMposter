@@ -85,7 +85,7 @@ namespace iMposter.Controller {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int interactionTableFaceCaptureSecondInterval {
             get {
                 return ((int)(this["interactionTableFaceCaptureSecondInterval"]));

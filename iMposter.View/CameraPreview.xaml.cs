@@ -40,7 +40,7 @@ namespace iMposter.View
 
         private void captureButton_Click(object sender, RoutedEventArgs e)
         {
-            ci = new CameraImage();
+            //ci = new CameraImage();
             dt = new DispatcherTimer();
             dt.Tick += new EventHandler(dt_Tick);
             dt.Interval = TimeSpan.FromMilliseconds(500);
