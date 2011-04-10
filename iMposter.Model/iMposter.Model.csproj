@@ -73,7 +73,8 @@
   <ItemGroup>
     <Compile Include="Camera\CameraImage.cs" />
     <Compile Include="Camera\ICameraImage.cs" />
-    <Compile Include="ImageConverter.cs" />
+    <Compile Include="ExtensionMethod\NuiUserBodyPartConverter.cs" />
+    <Compile Include="ExtensionMethod\ImageConverter.cs" />
     <Compile Include="ModelSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

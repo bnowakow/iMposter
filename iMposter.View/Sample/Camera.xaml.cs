@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using iMposter.Model.Camera;
-using iMposter.Model;
+using iMposter.Model.ExtensionMethod;
 
 namespace iMposter.View.Sample
 {

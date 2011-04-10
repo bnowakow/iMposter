@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows;
 using Nui.Vision;
+using iMposter.Model.ExtensionMethod;
 
 namespace iMposter.View.Video
 {
@@ -44,7 +45,7 @@ namespace iMposter.View.Video
                             Fill = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0)),
                             Width = 10,
                             Height = 10,
-                            Margin = new Thickness(point.X / 640.0 * previewImage.ActualWidth, point.Y / 480.0 * previewImage.ActualHeight, 0, 0)
+                            Margin = new Thickness(point.normalizedX() * previewImage.ActualWidth, point.normalizedY() * previewImage.ActualHeight, 0, 0)
                         };
 
                         canvasRoot.Children.Add(ellipse);

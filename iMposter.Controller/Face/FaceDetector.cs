@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using iMposter.Model.Camera;
-using iMposter.Model;
+using iMposter.Model.ExtensionMethod;
 
 using Emgu.CV;
 using Emgu.CV.Structure;

@@ -58,5 +58,29 @@ namespace iMposter.Model {
                 this["sensorTrackerConfig"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("640")]
+        public int sensorCameraResolutionWidth {
+            get {
+                return ((int)(this["sensorCameraResolutionWidth"]));
+            }
+            set {
+                this["sensorCameraResolutionWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("320")]
+        public int sensorCameraResolutionHeight {
+            get {
+                return ((int)(this["sensorCameraResolutionHeight"]));
+            }
+            set {
+                this["sensorCameraResolutionHeight"] = value;
+            }
+        }
     }
 }

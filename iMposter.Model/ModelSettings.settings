@@ -11,5 +11,11 @@
     <Setting Name="sensorTrackerConfig" Type="System.String" Scope="User">
       <Value Profile="(Default)">Sensor\TrackerConfig.xml</Value>
     </Setting>
+    <Setting Name="sensorCameraResolutionWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">640</Value>
+    </Setting>
+    <Setting Name="sensorCameraResolutionHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">320</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

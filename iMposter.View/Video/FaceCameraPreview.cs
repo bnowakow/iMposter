@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using iMposter.Model;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using iMposter.Model.ExtensionMethod;
 
 namespace iMposter.View.Video
 {

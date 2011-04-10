@@ -9,7 +9,7 @@ using System.Windows;
 using Emgu.CV.Structure;
 using System.Drawing;
 
-namespace iMposter.Model
+namespace iMposter.Model.ExtensionMethod
 {
     public static class ImageConverter
     {
