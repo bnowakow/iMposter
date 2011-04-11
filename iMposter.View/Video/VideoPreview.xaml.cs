@@ -44,6 +44,8 @@ namespace iMposter.View.Video
             Dispatcher.BeginInvoke((Action)delegate
             {
                 UpdateCamera();
+                canvasRoot.Width = previewImage.ActualWidth;
+                canvasRoot.Height = previewImage.ActualHeight;
             });
         }
 

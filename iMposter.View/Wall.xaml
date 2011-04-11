@@ -32,10 +32,6 @@
                 <Grid x:Name="wallLayout">
                     <!-- Content omg -->
                     <StackPanel Panel.ZIndex="1000">
-                        <!--StackPanel Orientation="Horizontal">
-                            <local:CameraPreview Height="200" Width="200"/>
-                            <local:FaceDetectPreview Height="200" Width="200"/>
-                        </StackPanel-->
                         <local:PeriodicTableControl x:Name="periodicTableControl" 
                                                     HorizontalAlignment="Center" 
                                                     VerticalAlignment="Top" 
@@ -82,11 +78,11 @@
             </Border>            
         </Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-            <local.Video:FaceCameraPreview  Width="200" />
-            <local.Video:FaceDetectCameraPreview  Width="200" />
-            <local.Video:KinectCameraPreview Width="200" />
-            <local.Video:KinectJointDetectCameraPreview Width="200" />
-            <local.Video:KinectDepthCameraPreview Width="200" />
+            <local.Video:FaceCameraPreview  Width="320" />
+            <local.Video:FaceDetectCameraPreview  Width="320" />
+            <!-- local.Video:KinectCameraPreview Width="320" /-->
+            <local.Video:KinectJointDetectCameraPreview />
+            <local.Video:KinectDepthCameraPreview Width="320" />
         </StackPanel>
     </Grid>
 </Window>

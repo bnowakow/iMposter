@@ -73,13 +73,25 @@ namespace iMposter.Model {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("320")]
+        [global::System.Configuration.DefaultSettingValueAttribute("480")]
         public int sensorCameraResolutionHeight {
             get {
                 return ((int)(this["sensorCameraResolutionHeight"]));
             }
             set {
                 this["sensorCameraResolutionHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2048")]
+        public int sensorCameraResolutionDepth {
+            get {
+                return ((int)(this["sensorCameraResolutionDepth"]));
+            }
+            set {
+                this["sensorCameraResolutionDepth"] = value;
             }
         }
     }

@@ -147,15 +147,14 @@ namespace iMposter.Controller.Interaction
         #region ProccessSensorThread
         void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
         {
-            // TODO check if thread synchronization is needed
             foreach (var user in e.Users)
             {
                 periodicTableControl.GetCamera().Dispatcher.BeginInvoke((Action)delegate
                 {
                     periodicTableControl.UpdateLookDirection(
                         new Vector3D(
-                        periodicTableControl.GetCamera().LookDirection.X - ((user.RightHand.normalizedX() - 0.5) / 200),
-                        periodicTableControl.GetCamera().LookDirection.Y + ((user.RightHand.normalizedY() - 0.5) / 500),
+                        periodicTableControl.GetCamera().LookDirection.X - ((user.RightHand.normalizedX() - 0.5) / 300),
+                        periodicTableControl.GetCamera().LookDirection.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
                         periodicTableControl.GetCamera().LookDirection.Z
                         )
                         );
