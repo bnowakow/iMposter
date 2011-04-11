@@ -154,8 +154,8 @@ namespace iMposter.Controller.Interaction
                 {
                     periodicTableControl.UpdateLookDirection(
                         new Vector3D(
-                        periodicTableControl.GetCamera().LookDirection.X * (user.RightHand.normalizedX() + 0.5),
-                        periodicTableControl.GetCamera().LookDirection.Y,
+                        periodicTableControl.GetCamera().LookDirection.X - ((user.RightHand.normalizedX() - 0.5) / 200),
+                        periodicTableControl.GetCamera().LookDirection.Y + ((user.RightHand.normalizedY() - 0.5) / 500),
                         periodicTableControl.GetCamera().LookDirection.Z
                         )
                         );
