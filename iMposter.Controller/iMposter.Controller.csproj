@@ -40,6 +40,10 @@
     <Reference Include="Emgu.Util">
       <HintPath>..\dll\Emgu\Emgu.Util.dll</HintPath>
     </Reference>
+    <Reference Include="Nui.Vision, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\Kinect\Nui.Vision.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />

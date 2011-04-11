@@ -10,13 +10,16 @@ using iMposter.Model.PeriodicTable;
 using System.Windows.Media.Animation;
 using iMposter.Model.Task;
 using iMposter.Model.Sensor;
+using Nui.Vision;
+using iMposter.Model.ExtensionMethod;
+using System.Windows.Media.Media3D;
 
 
 namespace iMposter.Controller.Interaction
 {
     public class PeriodicTableInteractionControler : IPeriodicTableInteractionControler
     {
-        protected IPeriodicTableControl periodicTableControl;
+        protected volatile IPeriodicTableControl periodicTableControl;
         protected IFaceDetector faceDetector;
         protected DispatcherTimer collectFacesTimer;
         protected DispatcherTimer processFacesTimer;
@@ -44,31 +47,11 @@ namespace iMposter.Controller.Interaction
             InitializeProcessThread();
 
             bodyTracker = BodyTracker.Instance;
+            bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserUpdated);
         }
         #endregion
 
-        public void ProcessFacesFromCapture(object sender, EventArgs e)
-        {
-            BitmapSource face = facesToProcess.FirstOrDefault();
-            Element randomElement = GetRandomNotOverriddenElementElement();
-            if (face != null && randomElement != null)
-            {
-                facesToProcess.Remove(face);
-
-                randomElement.NewImageSource = face;
-                randomElement.IsOverridden = true;
-
-                TaskChain animationTaskChain = new TaskChain(randomElement);
-                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeOutTask, 1));
-                animationTaskChain.TaskList.Add(new TaskChainElement(ElementOverrideByNewTask, periodicTableControl.GetFadeTimeMiliseconds()));
-                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeInTask, periodicTableControl.GetFadeTimeMiliseconds()));
-                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeOutTask, ControllerSettings.Default.interactionTableFaceRenewalAnnimationMilisecondsDuration));
-                animationTaskChain.TaskList.Add(new TaskChainElement(ElementRevertTask, periodicTableControl.GetFadeTimeMiliseconds()));
-                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeInTask, periodicTableControl.GetFadeTimeMiliseconds()));
-                animationTaskChain.Execute();
-            }
-        }
-
+        #region CollectFacesThread
         public void CollectFacesFromCapture(object sender, EventArgs e)
         {
             var faces = faceDetector.DetectFaces();
@@ -91,7 +74,32 @@ namespace iMposter.Controller.Interaction
                 }
             }
         }
+        #endregion
 
+        #region ProcessFacesThread
+        public void ProcessFacesFromCapture(object sender, EventArgs e)
+        {
+            BitmapSource face = facesToProcess.FirstOrDefault();
+            Element randomElement = GetRandomNotOverriddenElementElement();
+            if (face != null && randomElement != null)
+            {
+                facesToProcess.Remove(face);
+
+                randomElement.NewImageSource = face;
+                randomElement.IsOverridden = true;
+
+                TaskChain animationTaskChain = new TaskChain(randomElement);
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeOutTask, 1));
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementOverrideByNewTask, periodicTableControl.GetFadeTimeMiliseconds()));
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeInTask, periodicTableControl.GetFadeTimeMiliseconds()));
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeOutTask, ControllerSettings.Default.interactionTableFaceRenewalAnnimationMilisecondsDuration));
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementRevertTask, periodicTableControl.GetFadeTimeMiliseconds()));
+                animationTaskChain.TaskList.Add(new TaskChainElement(ElementFadeInTask, periodicTableControl.GetFadeTimeMiliseconds()));
+                animationTaskChain.Execute();
+            }
+        }
+
+        #region ElementAnimationTasks
         protected void ElementFadeOutTask(Object targetElement)
         {
             Element element = targetElement as Element;
@@ -115,6 +123,7 @@ namespace iMposter.Controller.Interaction
             Element element = targetElement as Element;
             element.RevertDefaultImage();
         }
+        #endregion
 
         protected Element GetRandomNotOverriddenElementElement()
         {
@@ -133,6 +142,27 @@ namespace iMposter.Controller.Interaction
                 return null;
             }
         }
+        #endregion
+
+        #region ProccessSensorThread
+        void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
+        {
+            // TODO check if thread synchronization is needed
+            foreach (var user in e.Users)
+            {
+                periodicTableControl.GetCamera().Dispatcher.BeginInvoke((Action)delegate
+                {
+                    periodicTableControl.UpdateLookDirection(
+                        new Vector3D(
+                        periodicTableControl.GetCamera().LookDirection.X * (user.RightHand.normalizedX() + 0.5),
+                        periodicTableControl.GetCamera().LookDirection.Y,
+                        periodicTableControl.GetCamera().LookDirection.Z
+                        )
+                        );
+                });
+            }
+        }
+        #endregion
 
         #region Initialize collect and process threads
         protected void InitializeCollectThread()
@@ -151,6 +181,7 @@ namespace iMposter.Controller.Interaction
             processFacesTimer.Start();
         }
         #endregion
+
         #region InitializePeriodicTableElementsExistance
         protected void InitializePeriodicTableElementsExistance()
         {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Controls;
 using iMposter.Model.PeriodicTable;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Media3D;
 
 namespace iMposter.Controller.Interaction
 {
@@ -13,5 +14,7 @@ namespace iMposter.Controller.Interaction
         void InitializePeriodicTableElements(IList<Element> elements);
         void FadeElementImage(Element element, double from, double to);
         int GetFadeTimeMiliseconds();
+        PerspectiveCamera GetCamera();
+        void UpdateLookDirection(Vector3D lookDirection);
     }
 }

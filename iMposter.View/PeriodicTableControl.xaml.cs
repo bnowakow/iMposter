@@ -36,7 +36,7 @@ namespace iMposter.View
             InitializeComponent();
 
             //this.MouseMove += new MouseEventHandler(PeriodicTableControl_MouseMove);
-            //this.MouseWheel += new MouseWheelEventHandler(PeriodicTableControl_MouseWheel);
+           //this.MouseWheel += new MouseWheelEventHandler(PeriodicTableControl_MouseWheel);
         }
 
         void PeriodicTableControl_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -111,6 +111,19 @@ namespace iMposter.View
         public int GetFadeTimeMiliseconds()
         {
             return fadeTimeSeconds * 1000;
+        }
+
+        public void UpdateLookDirection(Vector3D lookDirection)
+        {
+            //Dispatcher.BeginInvoke((Action)delegate
+            //{
+                camera.LookDirection = lookDirection;
+            //});
+        }
+
+        public PerspectiveCamera GetCamera()
+        {
+            return camera;
         }
     }
 }
