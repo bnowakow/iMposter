@@ -113,14 +113,6 @@ namespace iMposter.View
             return fadeTimeSeconds * 1000;
         }
 
-        public void UpdateLookDirection(Vector3D lookDirection)
-        {
-            //Dispatcher.BeginInvoke((Action)delegate
-            //{
-                camera.LookDirection = lookDirection;
-            //});
-        }
-
         public PerspectiveCamera GetCamera()
         {
             return camera;

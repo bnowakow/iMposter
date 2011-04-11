@@ -24,6 +24,9 @@ namespace iMposter.Model.ExtensionMethod
             return point.Y / ModelSettings.Default.sensorCameraResolutionHeight;
         }
 
-        // TODO get point.Z maximum value
+        public static double normalizedZ(this NuiUserBodyPart point)
+        {
+            return point.Z / ModelSettings.Default.sensorCameraResolutionDepth;
+        }
     }
 }

@@ -151,12 +151,24 @@ namespace iMposter.Controller.Interaction
             {
                 periodicTableControl.GetCamera().Dispatcher.BeginInvoke((Action)delegate
                 {
-                    periodicTableControl.UpdateLookDirection(
+                    periodicTableControl.GetCamera().LookDirection =
                         new Vector3D(
+                        //periodicTableControl.GetCamera().LookDirection.X,
                         periodicTableControl.GetCamera().LookDirection.X - ((user.RightHand.normalizedX() - 0.5) / 300),
+                        //periodicTableControl.GetCamera().LookDirection.Y,
                         periodicTableControl.GetCamera().LookDirection.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
                         periodicTableControl.GetCamera().LookDirection.Z
-                        )
+                        //periodicTableControl.GetCamera().LookDirection.Z + ((user.RightHand.normalizedZ() - 0.5) / 80)
+                        );
+
+                    periodicTableControl.GetCamera().Position =
+                        new Point3D(
+                        periodicTableControl.GetCamera().Position.X,
+                        //periodicTableControl.GetCamera().Position.X - ((user.RightHand.normalizedX() - 0.5) / 300),
+                        periodicTableControl.GetCamera().Position.Y,
+                        //periodicTableControl.GetCamera().Position.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
+                        //periodicTableControl.GetCamera().Position.Z
+                        periodicTableControl.GetCamera().Position.Z + ((user.RightHand.normalizedZ() - 0.5) / 2)
                         );
                 });
             }
