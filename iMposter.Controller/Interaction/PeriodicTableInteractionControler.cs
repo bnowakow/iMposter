@@ -13,6 +13,7 @@ using iMposter.Model.Sensor;
 using Nui.Vision;
 using iMposter.Model.ExtensionMethod;
 using System.Windows.Media.Media3D;
+using iMposter.Controller.Gesture;
 
 
 namespace iMposter.Controller.Interaction
@@ -32,6 +33,8 @@ namespace iMposter.Controller.Interaction
         protected int rowNumber = 7;
 
         protected BodyTracker bodyTracker;
+        protected GestureDetector gestureDetector;
+        protected int lastGestureCode;
 
         #region Constructor
         public PeriodicTableInteractionControler(IPeriodicTableControl periodicTableControl)
@@ -48,6 +51,9 @@ namespace iMposter.Controller.Interaction
 
             bodyTracker = BodyTracker.Instance;
             bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserUpdated);
+
+            gestureDetector = GestureDetector.Instance;
+            gestureDetector.GestureComplete += new MyEventHandler(gestureDetector_GestureComplete);
         }
         #endregion
 
@@ -145,31 +151,79 @@ namespace iMposter.Controller.Interaction
         #endregion
 
         #region ProccessSensorThread
+        void gestureDetector_GestureComplete(double[][] gesturePath)
+        {
+            int recognizedLabelIndex = gestureDetector.HiddenMarkovModelDetect(gesturePath);
+            if (recognizedLabelIndex == (int)GestureDetector.GestureCodes.NAVIGATION_GESTURE)
+            {
+                lastGestureCode = (int)GestureDetector.GestureCodes.NAVIGATION_GESTURE;
+            }
+            else
+            {
+                lastGestureCode = (int)GestureDetector.GestureCodes.ZOOM_GESTURE;
+            }
+        }
+
+        protected double prevHandDistance = 0.0;
+        protected double prevZoomDirection = 0.0;
+
         void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
         {
             foreach (var user in e.Users)
             {
                 periodicTableControl.GetCamera().Dispatcher.BeginInvoke((Action)delegate
                 {
-                    periodicTableControl.GetCamera().LookDirection =
-                        new Vector3D(
-                        //periodicTableControl.GetCamera().LookDirection.X,
-                        periodicTableControl.GetCamera().LookDirection.X - ((user.RightHand.normalizedX() - 0.5) / 300),
-                        //periodicTableControl.GetCamera().LookDirection.Y,
-                        periodicTableControl.GetCamera().LookDirection.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
-                        periodicTableControl.GetCamera().LookDirection.Z
-                        //periodicTableControl.GetCamera().LookDirection.Z + ((user.RightHand.normalizedZ() - 0.5) / 80)
-                        );
+                    if (lastGestureCode == (int)GestureDetector.GestureCodes.NAVIGATION_GESTURE)
+                    {
+                        periodicTableControl.GetCamera().LookDirection =
+                            new Vector3D(
+                            //periodicTableControl.GetCamera().LookDirection.X,
+                            periodicTableControl.GetCamera().LookDirection.X - ((user.RightHand.normalizedX() - 0.5) / 300),
+                            //periodicTableControl.GetCamera().LookDirection.Y,
+                            periodicTableControl.GetCamera().LookDirection.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
+                            periodicTableControl.GetCamera().LookDirection.Z
+                            //periodicTableControl.GetCamera().LookDirection.Z + ((user.RightHand.normalizedZ() - 0.5) / 80)
+                            );
 
-                    periodicTableControl.GetCamera().Position =
-                        new Point3D(
-                        periodicTableControl.GetCamera().Position.X,
-                        //periodicTableControl.GetCamera().Position.X - ((user.RightHand.normalizedX() - 0.5) / 300),
-                        periodicTableControl.GetCamera().Position.Y,
-                        //periodicTableControl.GetCamera().Position.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
-                        //periodicTableControl.GetCamera().Position.Z
-                        periodicTableControl.GetCamera().Position.Z + ((user.RightHand.normalizedZ() - 0.5) / 2)
-                        );
+                        prevHandDistance = 0.0;
+                        prevZoomDirection = 0.0;
+                    }
+
+                    if (lastGestureCode == (int)GestureDetector.GestureCodes.ZOOM_GESTURE)
+                    {
+                        double zoomDirection = 0.0;
+                        double curentHandDistance = Math.Abs(user.RightHand.normalizedX() - user.LeftHand.normalizedX());
+                        double moveDistance = Math.Abs(prevHandDistance - curentHandDistance);
+                        if (prevHandDistance != 0)
+                        {
+                            if (moveDistance > 0.02)
+                            {
+                                if (curentHandDistance < prevHandDistance)
+                                {
+                                    zoomDirection = 150;
+                                }
+                                else
+                                {
+                                    zoomDirection = -150;
+                                }
+                            }
+                            else
+                            {
+                                zoomDirection = prevZoomDirection;
+                            }
+                        }
+                        prevHandDistance = curentHandDistance;
+                        prevZoomDirection = zoomDirection;
+                        periodicTableControl.GetCamera().Position =
+                            new Point3D(
+                            periodicTableControl.GetCamera().Position.X,
+                            //periodicTableControl.GetCamera().Position.X - ((user.RightHand.normalizedX() - 0.5) / 300),
+                            periodicTableControl.GetCamera().Position.Y,
+                            //periodicTableControl.GetCamera().Position.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
+                            //periodicTableControl.GetCamera().Position.Z
+                            periodicTableControl.GetCamera().Position.Z + (zoomDirection * moveDistance)
+                            );
+                    }
                 });
             }
         }

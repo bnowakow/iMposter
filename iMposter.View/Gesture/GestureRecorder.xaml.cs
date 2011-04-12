@@ -31,7 +31,7 @@ namespace iMposter.View.Gesture
         public GestureRecorder()
         {
             InitializeComponent();
-            gestureDetector = new GestureDetector();
+            gestureDetector = GestureDetector.Instance;
         }
 
         void GestureRecorder_GestureComplete_UpdateRecordedGesturesTextblock(double[][] gesturePath)

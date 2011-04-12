@@ -17,6 +17,9 @@ namespace iMposter.Controller.Gesture
 
     public class GestureDetector
     {
+        static GestureDetector instance = null;
+        static readonly object padlock = new object();
+
         public event MyEventHandler GestureComplete;
 
         protected bool recording;
@@ -24,7 +27,7 @@ namespace iMposter.Controller.Gesture
         protected IList<NuiUserBodyPart>[] subsequences;
         protected int recordedSequences;
         public String[] Labels { get { return new String[] { "Navigation gesture", "Zoom gesture" }; } }
-        protected enum gestureLabels { NAVIGATION_GESTURE, ZOOM_GESTURE };
+        public enum GestureCodes { NAVIGATION_GESTURE, ZOOM_GESTURE };
 
         protected int recordedSequenceSize = 20; // number of consecutive points of move in gesture
         protected int recordedSequenceSubsequencesSize = new NuiUser().gestureSingleSubsequence().Count; // number of body parts involved in single gesture
@@ -32,7 +35,22 @@ namespace iMposter.Controller.Gesture
         protected int recorderSequenceSubsequenceDimension = 1; //3; // X, Y, X
         protected bool centerStatistics = false;
 
-        public GestureDetector()
+        public static GestureDetector Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new GestureDetector();
+                    }
+                    return instance;
+                }
+            }
+        }
+
+        private GestureDetector()
         {
             BodyTracker bodyTracker = BodyTracker.Instance;
             bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserUpdated);
