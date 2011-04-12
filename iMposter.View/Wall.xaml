@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:iMposter.View"
         xmlns:local.Video="clr-namespace:iMposter.View.Video"
+        xmlns:local.Gesture="clr-namespace:iMposter.View.Gesture"
         mc:Ignorable="d" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Wall" WindowState="Maximized" WindowStyle="None"  d:DesignHeight="288">
     <Window.Resources>
@@ -75,14 +76,15 @@
                         </Rectangle.RenderTransform>
                     </Rectangle>
                 </Grid>
-            </Border>            
+            </Border>
         </Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-            <local.Video:FaceCameraPreview  Width="320" />
-            <local.Video:FaceDetectCameraPreview  Width="320" />
-            <!-- local.Video:KinectCameraPreview Width="320" /-->
+            <local.Video:FaceCameraPreview />
+            <!--local.Video:FaceDetectCameraPreview /-->
+            <!-- local.Video:KinectCameraPreview /-->
             <local.Video:KinectJointDetectCameraPreview />
-            <local.Video:KinectDepthCameraPreview Width="320" />
+            <local.Video:KinectDepthCameraPreview />
+            <local.Gesture:GestureRecorder />
         </StackPanel>
     </Grid>
 </Window>

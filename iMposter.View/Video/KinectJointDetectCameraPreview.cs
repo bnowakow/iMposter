@@ -38,7 +38,7 @@ namespace iMposter.View.Video
                 canvasRoot.Children.Clear();
                 foreach (var user in e.Users)
                 {
-                    NuiUserBodyPart[] points = new NuiUserBodyPart[] { user.LeftElbow, user.LeftHand, user.RightElbow, user.RightHand };
+                    NuiUserBodyPart[] points = new NuiUserBodyPart[] { user.LeftElbow, user.LeftHand, user.LeftHip, user.RightElbow, user.RightHand, user.RightHip };
                     foreach (var point in points)
                     {
                         if (point.X > tmpMaxDepthValues.X) tmpMaxDepthValues.X = point.X;

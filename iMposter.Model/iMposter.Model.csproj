@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Camera\CameraImage.cs" />
     <Compile Include="Camera\ICameraImage.cs" />
+    <Compile Include="ExtensionMethod\NuiUserConverter.cs" />
     <Compile Include="ExtensionMethod\NuiUserBodyPartConverter.cs" />
     <Compile Include="ExtensionMethod\ImageConverter.cs" />
     <Compile Include="ModelSettings.Designer.cs">

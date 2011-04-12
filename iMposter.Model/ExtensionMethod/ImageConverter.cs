@@ -49,6 +49,8 @@ namespace iMposter.Model.ExtensionMethod
                     System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
 
                 DeleteObject(imagePointer); //release the HBitmap
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
                 return bitmapSource;
             }
         }

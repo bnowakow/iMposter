@@ -34,6 +34,7 @@ namespace iMposter.Model.Sensor
             try
             {
                 Tracker = new NuiUserTracker(@ModelSettings.Default.sensorTrackerConfig);
+                NuiHandTracker omg = new NuiHandTracker(@ModelSettings.Default.sensorTrackerConfig);
             }
             catch (Exception e)
             {
