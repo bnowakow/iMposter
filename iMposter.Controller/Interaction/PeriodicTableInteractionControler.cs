@@ -162,7 +162,7 @@ namespace iMposter.Controller.Interaction
             lastGestureCodes.Add(gestureDetector.HiddenMarkovModelDetect(gesturePath));
         }
 
-       protected void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
+        protected void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
         {
             foreach (var user in e.Users)
             {
@@ -195,20 +195,25 @@ namespace iMposter.Controller.Interaction
                                                      select code;
                         if (lastZoomGestures.Count() == lastGestureCodes.Capacity)
                         {
-                            // TODO add rotation
-                            List<NuiUser> comparisonLastUserCoordinates = new List<NuiUser>(lastUserCoordinates.List);
-                            comparisonLastUserCoordinates.RemoveRange(0, 1);
-                            double prevDistance = Math.Abs(lastUserCoordinates.List.First().RightHand.normalizedX() - lastUserCoordinates.List.First().LeftHand.normalizedX());
-                            double distance = Math.Abs(comparisonLastUserCoordinates.First().RightHand.normalizedX() - comparisonLastUserCoordinates.First().LeftHand.normalizedX());
-                            bool ascending = prevDistance < distance ? true : false;
+                            // TODO add rotation ?
+                            double prevDistance = 0.0;
+                            double distance = 0.0;
+                            bool ascending = true;
                             bool monotone = true;
-                            foreach (var prevUserCoordinate in comparisonLastUserCoordinates)
+                            List<NuiUser> lastUserCoordinatesCopy = new List<NuiUser>(lastUserCoordinates.List);
+                            foreach (var prevUserCoordinate in lastUserCoordinatesCopy)
                             {
                                 distance = Math.Abs(prevUserCoordinate.RightHand.normalizedX() - prevUserCoordinate.LeftHand.normalizedX());
+                                if (lastUserCoordinatesCopy.IndexOf(prevUserCoordinate) == 0)
+                                {
+                                    prevDistance = Math.Abs(lastUserCoordinates.List.ElementAt(1).RightHand.normalizedX() - lastUserCoordinates.List.ElementAt(1).LeftHand.normalizedX());
+                                    ascending = prevDistance > distance ? true : false;
+                                } else {
                                 if ((ascending && prevDistance > distance) ||
                                     (!ascending && prevDistance < distance)) {
                                         monotone = false;
                                         break;
+                                }
                                 }
                                 prevDistance = distance;
                             }
