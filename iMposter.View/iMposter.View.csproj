@@ -69,6 +69,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Gesture\GestureDetectorControl.xaml.cs">
+      <DependentUpon>GestureDetectorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Gesture\GestureRecorder.xaml.cs">
       <DependentUpon>GestureRecorder.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Gesture\GestureDetectorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Gesture\GestureRecorder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

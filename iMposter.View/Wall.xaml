@@ -84,6 +84,7 @@
             <!-- local.Video:KinectCameraPreview /-->
             <local.Video:KinectJointDetectCameraPreview />
             <local.Video:KinectDepthCameraPreview />
+            <local.Gesture:GestureDetectorControl />
             <local.Gesture:GestureRecorder />
         </StackPanel>
     </Grid>

@@ -53,7 +53,7 @@ namespace iMposter.Controller.Interaction
             bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserUpdated);
 
             gestureDetector = GestureDetector.Instance;
-            gestureDetector.GestureComplete += new MyEventHandler(gestureDetector_GestureComplete);
+            gestureDetector.GestureCaptureComplete += new GestureCaptureCompleteDelegate(gestureDetector_GestureComplete);
         }
         #endregion
 
@@ -154,26 +154,26 @@ namespace iMposter.Controller.Interaction
         void gestureDetector_GestureComplete(double[][] gesturePath)
         {
             int recognizedLabelIndex = gestureDetector.HiddenMarkovModelDetect(gesturePath);
-            if (recognizedLabelIndex == (int)GestureDetector.GestureCodes.NAVIGATION_GESTURE)
+            if (recognizedLabelIndex == (int)GestureDetector.GestureCodes.NAVIGATION)
             {
-                lastGestureCode = (int)GestureDetector.GestureCodes.NAVIGATION_GESTURE;
+                lastGestureCode = (int)GestureDetector.GestureCodes.NAVIGATION;
             }
             else
             {
-                lastGestureCode = (int)GestureDetector.GestureCodes.ZOOM_GESTURE;
+                lastGestureCode = (int)GestureDetector.GestureCodes.ZOOM;
             }
         }
 
         protected double prevHandDistance = 0.0;
         protected double prevZoomDirection = 0.0;
 
-        void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
+        protected void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
         {
             foreach (var user in e.Users)
             {
                 periodicTableControl.GetCamera().Dispatcher.BeginInvoke((Action)delegate
                 {
-                    if (lastGestureCode == (int)GestureDetector.GestureCodes.NAVIGATION_GESTURE)
+                    if (lastGestureCode == (int)GestureDetector.GestureCodes.NAVIGATION)
                     {
                         periodicTableControl.GetCamera().LookDirection =
                             new Vector3D(
@@ -184,12 +184,12 @@ namespace iMposter.Controller.Interaction
                             periodicTableControl.GetCamera().LookDirection.Z
                             //periodicTableControl.GetCamera().LookDirection.Z + ((user.RightHand.normalizedZ() - 0.5) / 80)
                             );
-
+                        
                         prevHandDistance = 0.0;
                         prevZoomDirection = 0.0;
                     }
 
-                    if (lastGestureCode == (int)GestureDetector.GestureCodes.ZOOM_GESTURE)
+                    if (lastGestureCode == (int)GestureDetector.GestureCodes.ZOOM)
                     {
                         double zoomDirection = 0.0;
                         double curentHandDistance = Math.Abs(user.RightHand.normalizedX() - user.LeftHand.normalizedX());

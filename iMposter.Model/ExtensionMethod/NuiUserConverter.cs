@@ -14,6 +14,7 @@ namespace iMposter.Model.ExtensionMethod
 {
     public static class NuiUserConverter
     {
+        /*
         public static IList<NuiUserBodyPart> gestureSingleSubsequence(this NuiUser user)
         {
             IList<NuiUserBodyPart> subsequence = new List<NuiUserBodyPart> { 
@@ -26,5 +27,6 @@ namespace iMposter.Model.ExtensionMethod
                 };
             return subsequence;
         }
+         */
     }
 }

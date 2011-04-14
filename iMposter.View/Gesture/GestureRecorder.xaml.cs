@@ -44,10 +44,13 @@ namespace iMposter.View.Gesture
                 foreach (var element in gesturePath)
                 {
                     parameterInitializationString += "new double[] {";
+                    // TODO fix RecorderSequenceSubsequenceDimension if needed in future
+                    /*
                     for (int i = 0; i < gestureDetector.RecorderSequenceSubsequenceDimension; i++)
                     {
                         parameterInitializationString += element[i].ToString().Replace(",", ".") + ", ";
                     }
+                     */ 
                     parameterInitializationString += "}, ";
                 }
                 parameterInitializationString += "},";
@@ -62,12 +65,12 @@ namespace iMposter.View.Gesture
         protected void recordButton_Click(object sender, RoutedEventArgs e)
         {
             recordedGestures = 0;
-            gestureDetector.GestureComplete += new MyEventHandler(GestureRecorder_GestureComplete_UpdateRecordedGesturesTextblock);
+            gestureDetector.GestureCaptureComplete += new GestureCaptureCompleteDelegate(GestureRecorder_GestureComplete_UpdateRecordedGesturesTextblock);
         }
 
         private void recognizeButton_Click(object sender, RoutedEventArgs e)
         {
-            gestureDetector.GestureComplete += new MyEventHandler(GestureRecorder_GestureComplete_UpdateRecognizedGesturesTextblock);
+            gestureDetector.GestureCaptureComplete += new GestureCaptureCompleteDelegate(GestureRecorder_GestureComplete_UpdateRecognizedGesturesTextblock);
         }
 
         void GestureRecorder_GestureComplete_UpdateRecognizedGesturesTextblock(double[][] gesturePath)

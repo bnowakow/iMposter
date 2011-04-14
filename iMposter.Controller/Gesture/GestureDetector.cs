@@ -10,30 +10,30 @@ using Accord.Statistics.Models.Markov;
 using Accord.Statistics.Distributions.Fitting;
 using Accord.Statistics.Models.Markov.Learning;
 using Accord.Statistics.Distributions.Multivariate;
+using Sharp3D.Math.Core;
 
 namespace iMposter.Controller.Gesture
 {
-    public delegate void MyEventHandler(double[][] gesturePath);
+    public delegate void GestureCaptureCompleteDelegate(double[][] gesturePath);
 
     public class GestureDetector
     {
         static GestureDetector instance = null;
         static readonly object padlock = new object();
 
-        public event MyEventHandler GestureComplete;
+        public event GestureCaptureCompleteDelegate GestureCaptureComplete;
 
-        protected bool recording;
+
+        public bool Capturing { get; set; }
         protected ContinuousSequenceClassifier classifier;
-        protected IList<NuiUserBodyPart>[] subsequences;
-        protected int recordedSequences;
-        public String[] Labels { get { return new String[] { "Navigation gesture", "Zoom gesture" }; } }
-        public enum GestureCodes { NAVIGATION_GESTURE, ZOOM_GESTURE };
+        protected IList<NuiUser> singleGestureElements;
 
-        protected int recordedSequenceSize = 20; // number of consecutive points of move in gesture
-        protected int recordedSequenceSubsequencesSize = new NuiUser().gestureSingleSubsequence().Count; // number of body parts involved in single gesture
-        public int RecorderSequenceSubsequenceDimension { get { return recorderSequenceSubsequenceDimension; } }
-        protected int recorderSequenceSubsequenceDimension = 1; //3; // X, Y, X
-        protected bool centerStatistics = false;
+        public String[] Labels { get { return new String[] { "Idle gesture", "Navigation gesture", "Zoom gesture" }; } }
+        public enum GestureCodes { IDLE, NAVIGATION, ZOOM };
+
+        protected int singleGestureLegth = 20; // number of consecutive points of move in gesture
+        protected int singleGestureElementDiemension = 4; // left and right hand angle
+        protected bool centerStatistics = false; // TODO protect from multiply applying center for the same training data
 
         public static GestureDetector Instance
         {
@@ -53,25 +53,21 @@ namespace iMposter.Controller.Gesture
         private GestureDetector()
         {
             BodyTracker bodyTracker = BodyTracker.Instance;
-            bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserUpdated);
+            bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserMoved);
 
-            InitializeSubsequences();
-            HiddenMarkovModelInitialization();
+            ClearSingleGesture();
+            HiddenMarkovModelLearn(new double[][][] { }, new int[] { });
+            //HiddenMarkovModelSampleInitialization();
 
-            recording = true;
+            //recording = true;
         }
 
-        protected void InitializeSubsequences()
+        protected void ClearSingleGesture()
         {
-            recordedSequences = 0;
-            subsequences = new List<NuiUserBodyPart>[recordedSequenceSubsequencesSize];
-            for (int i = 0; i < recordedSequenceSubsequencesSize; i++)
-            {
-                subsequences[i] = new List<NuiUserBodyPart>();
-            }
+            singleGestureElements = new List<NuiUser>();
         }
 
-        protected void HiddenMarkovModelInitialization()
+        protected void HiddenMarkovModelSampleInitialization()
         {
             #region GesturesLearningInitialization
             double[][][] recordedNavigationGestureSequences = new double[][][] {
@@ -196,7 +192,34 @@ new double[][] {new double[] {-28.6133604049683, }, new double[] {-27.3939561843
                };
             #endregion
 
-            NormalDistribution initial = new NormalDistribution(recorderSequenceSubsequenceDimension);
+            double[][][] inputs = new double[recordedNavigationGestureSequences.Count() + recordedZoomGestureSequences.Count()][][];
+            int[] outputs = new int[recordedNavigationGestureSequences.Count() + recordedZoomGestureSequences.Count()];
+            for (int i = 0; i < recordedNavigationGestureSequences.Count(); i++)
+            {
+                inputs[i] = recordedNavigationGestureSequences[i];
+                if (centerStatistics)
+                {
+                    Accord.Statistics.Tools.Center(inputs[i]);
+                }
+                outputs[i] = 0;
+            }
+            for (int i = 0; i < recordedZoomGestureSequences.Count(); i++)
+            {
+                int j = i + recordedNavigationGestureSequences.Count();
+                inputs[j] = recordedZoomGestureSequences[i];
+                if (centerStatistics)
+                {
+                    Accord.Statistics.Tools.Center(inputs[j]);
+                }
+                outputs[j] = 1;
+            }
+
+            HiddenMarkovModelLearn(inputs, outputs);
+        }
+
+        public void HiddenMarkovModelLearn(double[][][] inputs, int[] outputs)
+        {
+            NormalDistribution initial = new NormalDistribution(singleGestureElementDiemension);
 
             int states = 3;
             double tolerance = 0.1;
@@ -205,7 +228,7 @@ new double[][] {new double[] {-28.6133604049683, }, new double[] {-27.3939561843
 
             var teacher = new ContinuousSequenceClassifierLearning(
                 classifier,
-                i => new ContinuousBaumWelchLearning(classifier.Models[i])
+                j => new ContinuousBaumWelchLearning(classifier.Models[j])
                 {
                     Tolerance = tolerance,
                     Iterations = iterations,
@@ -213,30 +236,19 @@ new double[][] {new double[] {-28.6133604049683, }, new double[] {-27.3939561843
                 }
             );
             teacher.UpdateThreshold = false;
+            teacher.Run(inputs, outputs);
 
-            double[][][] sequences = new double[recordedNavigationGestureSequences.Count() + recordedZoomGestureSequences.Count()][][];
-            int[] outputs = new int[recordedNavigationGestureSequences.Count() + recordedZoomGestureSequences.Count()];
-            for (int i = 0; i < recordedNavigationGestureSequences.Count(); i++)
+            // check procedure
+            int i = 0;
+            int matches = 0;
+            foreach (var gesture in inputs)
             {
-                sequences[i] = recordedNavigationGestureSequences[i];
-                if (centerStatistics)
+                int checkedIndex = HiddenMarkovModelDetect(gesture);
+                if (outputs[i++] == checkedIndex)
                 {
-                    Accord.Statistics.Tools.Center(sequences[i]);
+                    matches++;
                 }
-                outputs[i] = 0;
             }
-            for (int i = 0; i < recordedZoomGestureSequences.Count(); i++)
-            {
-                int j = i + recordedNavigationGestureSequences.Count();
-                sequences[j] = recordedZoomGestureSequences[i];
-                if (centerStatistics)
-                {
-                    Accord.Statistics.Tools.Center(sequences[j]);
-                }
-                outputs[j] = 1;
-            }
-
-            teacher.Run(sequences, outputs);
         }
 
         public int HiddenMarkovModelDetect(double[][] gesturePath)
@@ -246,53 +258,57 @@ new double[][] {new double[] {-28.6133604049683, }, new double[] {-27.3939561843
                 Accord.Statistics.Tools.Center(gesturePath);
             }
             double[] responses;
-            int positiveTest1 = classifier.Compute(
+            int classifierResult = classifier.Compute(
                 gesturePath,
                 out responses);
-            return positiveTest1;
+            return classifierResult;
         }
 
-        public double[][] GetGestureRecorderSequence()
+        // TODO implement as extension method to NuiUser
+        protected double CalculateAngleBetweenBodyParts(NuiUserBodyPart beginA, NuiUserBodyPart endA, NuiUserBodyPart beginB, NuiUserBodyPart endB)
         {
-            if (recordedSequences == recordedSequenceSize)
+            Vector3D lefForearmVector = new Vector3D(
+                beginA.X - endA.X,
+                beginA.Y - endA.Y,
+                beginA.Z - endA.Z
+                );
+            Vector3D lefArmVector = new Vector3D(
+                beginB.X - endB.X,
+                beginB.Y - endB.Y,
+                beginB.Z - endB.Z
+                );
+            var cosAngle = Vector3D.DotProduct(lefForearmVector, lefArmVector) / (lefForearmVector.GetLength() * lefArmVector.GetLength());
+            var angle = Math.Acos(cosAngle);
+            return angle;
+        }
+
+        protected double[][] GetCapturedGestureSequence()
+        {
+            if (singleGestureElements.Count == singleGestureLegth)
             {
-                recording = false;
+                Capturing = false;
 
-                double[][] sequence = new double[recordedSequenceSize * recordedSequenceSubsequencesSize][];
+                double[][] sequence = new double[singleGestureElements.Count][];
 
-                sequence = new double[(recordedSequenceSize) * recordedSequenceSubsequencesSize / 4][];
-                int j = 0;
-                var leftHandEnum = subsequences[0].GetEnumerator();
-                var leftHipEnum = subsequences[1].GetEnumerator();
-                var rightHandEnum = subsequences[2].GetEnumerator();
-                var rightHipEnum = subsequences[3].GetEnumerator();
-                while (leftHandEnum.MoveNext() && leftHipEnum.MoveNext() && rightHandEnum.MoveNext() && rightHipEnum.MoveNext())
+                int i = 0;
+                foreach (var singleGestureElement in singleGestureElements)
                 {
-                    double leftDistance = (int)(255 * Math.Sqrt(Math.Pow(leftHandEnum.Current.normalizedX() - leftHipEnum.Current.normalizedX(), 2) + Math.Pow(leftHandEnum.Current.normalizedY() - leftHipEnum.Current.normalizedY(), 2) + Math.Pow(leftHandEnum.Current.normalizedZ() - leftHipEnum.Current.normalizedZ(), 2)));
-                    double rightDistance = (int)(255 * Math.Sqrt(Math.Pow(rightHandEnum.Current.normalizedX() - rightHipEnum.Current.normalizedX(), 2) + Math.Pow(rightHandEnum.Current.normalizedY() - rightHipEnum.Current.normalizedY(), 2) + Math.Pow(rightHandEnum.Current.normalizedZ() - rightHipEnum.Current.normalizedZ(), 2)));
-                    double hipDistance = (int)(255 * Math.Sqrt(Math.Pow(leftHipEnum.Current.normalizedX() - rightHipEnum.Current.normalizedX(), 2) + Math.Pow(leftHipEnum.Current.normalizedY() - rightHipEnum.Current.normalizedY(), 2) + Math.Pow(leftHipEnum.Current.normalizedZ() - rightHipEnum.Current.normalizedZ(), 2))); ;
-
-                    sequence[j++] = new double[] { 
-                        //leftDistance// / hipDistance//, rightDistance / hipDistance
-                        255 * (leftHandEnum.Current.normalizedY() - leftHipEnum.Current.normalizedY())
-                        //(120 * (leftHandEnum.Current.normalizedY() - leftHipEnum.Current.normalizedY())) + 120
-                    };
+                    var leftForearmArmAngle = CalculateAngleBetweenBodyParts(
+                        singleGestureElement.LeftElbow, singleGestureElement.LeftHand,
+                        singleGestureElement.LeftElbow, singleGestureElement.LeftShoulder);
+                    var rightForearmArmAngle = CalculateAngleBetweenBodyParts(
+                        singleGestureElement.RightElbow, singleGestureElement.RightHand,
+                        singleGestureElement.RightElbow, singleGestureElement.RightShoulder);
+                    var leftArmHipAngle = CalculateAngleBetweenBodyParts(
+                        singleGestureElement.LeftShoulder, singleGestureElement.LeftElbow,
+                        singleGestureElement.LeftShoulder, singleGestureElement.LeftHip);
+                    var rightArmHipAngle = CalculateAngleBetweenBodyParts(
+                        singleGestureElement.RightShoulder, singleGestureElement.RightElbow,
+                        singleGestureElement.RightShoulder, singleGestureElement.RightHip);
+                    sequence[i++] = new double[] { leftForearmArmAngle, rightForearmArmAngle, leftArmHipAngle, rightArmHipAngle };
                 }
 
-
-                /*
-                for (int i = 0, j = 0; i < recordedSequenceSubsequencesSize; i++)
-                {
-                    foreach (var element in subsequences[i])
-                    {
-                        sequence[j++] = new double[] { (int)(element.normalizedX() * 255), (int)(element.normalizedY() * 255), (int)(element.normalizedZ() * 255) };
-                    }
-                     
-                }
-                */
-
-                InitializeSubsequences();
-                recording = true;
+                ClearSingleGesture();
                 return sequence;
             }
             else
@@ -301,30 +317,34 @@ new double[][] {new double[] {-28.6133604049683, }, new double[] {-27.3939561843
             }
         }
 
-        protected void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
+        protected void Tracker_UserMoved(object sender, Nui.Vision.NuiUserEventArgs e)
         {
-            if (recording)
+            if (Capturing)
             {
-                if (recordedSequences == recordedSequenceSize)
+                if (singleGestureElements.Count == singleGestureLegth)
                 {
-                    if (GestureComplete != null)
+                    if (GestureCaptureComplete != null)
                     {
-                        GestureComplete(GetGestureRecorderSequence());
+                        GestureCaptureComplete(GetCapturedGestureSequence());
                     }
                 }
                 else
                 {
 
                     // TODO implement frameDrops to increase distance between points in gesture sequence
-                    recordedSequences++;
                     // TODO deal with multiple users
                     var user = e.Users.First();
-                    var subsequence = user.gestureSingleSubsequence();
-                    int i = 0;
-                    foreach (var subsequenceElement in subsequence)
+                    singleGestureElements.Add(new NuiUser()
                     {
-                        subsequences[i++].Add(subsequenceElement);
-                    }
+                        LeftElbow = user.LeftElbow,
+                        LeftShoulder = user.LeftShoulder,
+                        LeftHand = user.LeftHand,
+                        LeftHip = user.LeftHip,
+                        RightElbow = user.RightElbow,
+                        RightShoulder = user.RightShoulder,
+                        RightHand = user.RightHand,
+                        RightHip = user.RightHip,
+                    });
                 }
             }
         }
