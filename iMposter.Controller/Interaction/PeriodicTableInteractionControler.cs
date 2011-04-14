@@ -153,15 +153,9 @@ namespace iMposter.Controller.Interaction
         #region ProccessSensorThread
         void gestureDetector_GestureComplete(double[][] gesturePath)
         {
+            //double[][] gesturePath = new double[gesture.Length][];
+            //gesture.CopyTo(gesturePath, 0);
             int recognizedLabelIndex = gestureDetector.HiddenMarkovModelDetect(gesturePath);
-            if (recognizedLabelIndex == (int)GestureDetector.GestureCodes.NAVIGATION)
-            {
-                lastGestureCode = (int)GestureDetector.GestureCodes.NAVIGATION;
-            }
-            else
-            {
-                lastGestureCode = (int)GestureDetector.GestureCodes.ZOOM;
-            }
         }
 
         protected double prevHandDistance = 0.0;

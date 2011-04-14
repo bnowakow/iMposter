@@ -21,8 +21,6 @@ namespace iMposter.View.Gesture
     public partial class GestureDetectorControl : UserControl
     {
         protected GestureDetector gestureDetector;
-        protected IList<double[][]> inputs;
-        protected IList<int> outputs;
         protected double[][] capturedGesture;
 
         public GestureDetectorControl()
@@ -41,9 +39,6 @@ namespace iMposter.View.Gesture
                 i++;
             }
 
-            inputs = new List<double[][]>();
-            outputs = new List<int>();
-
             gestureDetector.GestureCaptureComplete += new GestureCaptureCompleteDelegate(gestureDetector_GestureCaptureComplete);
         }
 
@@ -55,17 +50,9 @@ namespace iMposter.View.Gesture
 
         protected void LearnCapturedGesture(int output)
         {
-            //var input = gestureDetector.GetCapturedGestureSequence();
-            var input = capturedGesture;
-            inputs.Add(input);
-            outputs.Add(output);
-            double[][][] inputsArray = new double[inputs.Count][][];
-            int i = 0;
-            foreach (var inputGesture in inputs)
-            {
-                inputsArray[i++] = inputGesture;
-            }
-            gestureDetector.HiddenMarkovModelLearn(inputsArray, outputs.ToArray());
+            gestureDetector.TrainingData.InputsList.Add(capturedGesture);
+            gestureDetector.TrainingData.OutputsList.Add(output);            
+            gestureDetector.HiddenMarkovModelLearn();
         }
 
         void gestureDetector_GestureCaptureComplete(double[][] gesturePath)
@@ -75,6 +62,7 @@ namespace iMposter.View.Gesture
                 gestureCaptureStatusTextbox.Text = "Gesture Capture Completed";
             });
             capturedGesture = gesturePath;
+            gestureDetectButton_Click(null, null);
         }
 
         private void gestureStartCaptureButton_Click(object sender, RoutedEventArgs e)
@@ -88,9 +76,7 @@ namespace iMposter.View.Gesture
 
         private void gestureDetectButton_Click(object sender, RoutedEventArgs e)
         {
-            //var gesture = gestureDetector.GetCapturedGestureSequence();
-            var gesture = capturedGesture;
-            int gestureDetectedIndex = gestureDetector.HiddenMarkovModelDetect(gesture);
+            int gestureDetectedIndex = gestureDetector.HiddenMarkovModelDetect(capturedGesture);
             String newStatus;
             if (gestureDetectedIndex != -1)
             {

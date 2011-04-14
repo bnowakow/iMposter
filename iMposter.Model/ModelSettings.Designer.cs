@@ -94,5 +94,17 @@ namespace iMposter.Model {
                 this["sensorCameraResolutionDepth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Gesture\\GestureDetectorTrainingData.xml")]
+        public string gestureDetectorTrainingDataFile {
+            get {
+                return ((string)(this["gestureDetectorTrainingDataFile"]));
+            }
+            set {
+                this["gestureDetectorTrainingDataFile"] = value;
+            }
+        }
     }
 }

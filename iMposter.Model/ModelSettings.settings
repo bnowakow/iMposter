@@ -20,5 +20,8 @@
     <Setting Name="sensorCameraResolutionDepth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2048</Value>
     </Setting>
+    <Setting Name="gestureDetectorTrainingDataFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Gesture\GestureDetectorTrainingData.xml</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
