@@ -41,8 +41,12 @@ namespace iMposter.Controller.Face
                 // TODO detect face sharpeness to enlarge face region
                 foreach (var face in DetectFaces(image))
                 {
-                    CroppedBitmap faceBitmap = new CroppedBitmap(image.ToBitmapSource(), face.rect.ToInt32Rect());
-                    faceBitmaps.Add(faceBitmap);
+                    var imageBitmapSource = image.ToBitmapSource();
+                    if (imageBitmapSource != null)
+                    {
+                        CroppedBitmap faceBitmap = new CroppedBitmap(imageBitmapSource, face.rect.ToInt32Rect());
+                        faceBitmaps.Add(faceBitmap);
+                    }
                 }
             }
 

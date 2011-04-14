@@ -32,7 +32,10 @@ namespace iMposter.View.Video
             if (image != null)
             {
                 BitmapSource bs = image.ToBitmapSource();
-                previewImage.Source = bs;
+                if (bs != null)
+                {
+                    previewImage.Source = bs;
+                }
             }
         }
     }

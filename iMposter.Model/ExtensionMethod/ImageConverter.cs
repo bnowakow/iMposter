@@ -40,9 +40,18 @@ namespace iMposter.Model.ExtensionMethod
         {
             using (System.Drawing.Bitmap source = image.Bitmap)
             {
-                IntPtr imagePointer = source.GetHbitmap(); //obtain the Hbitmap
-
-                BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                BitmapSource bitmapSource = null;
+                IntPtr imagePointer;
+                try
+                {
+                    imagePointer = source.GetHbitmap(); //obtain the Hbitmap
+                }
+                catch (Exception e)
+                {
+                    // OutOfMemoryException
+                    return null;
+                }
+                bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                     imagePointer,
                     IntPtr.Zero,
                     Int32Rect.Empty,

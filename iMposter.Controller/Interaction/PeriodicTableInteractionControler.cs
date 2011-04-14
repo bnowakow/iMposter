@@ -200,11 +200,11 @@ namespace iMposter.Controller.Interaction
                             {
                                 if (curentHandDistance < prevHandDistance)
                                 {
-                                    zoomDirection = 150;
+                                    zoomDirection = 100;
                                 }
                                 else
                                 {
-                                    zoomDirection = -150;
+                                    zoomDirection = -100;
                                 }
                             }
                             else

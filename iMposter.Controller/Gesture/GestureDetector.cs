@@ -198,8 +198,8 @@ new double[][] {new double[] {-28.6133604049683, }, new double[] {-27.3939561843
 
             NormalDistribution initial = new NormalDistribution(recorderSequenceSubsequenceDimension);
 
-            int states = 6;
-            double tolerance = 0.0001;
+            int states = 3;
+            double tolerance = 0.1;
             int iterations = 0;
             classifier = new ContinuousSequenceClassifier(Labels.Count(), new Forward(states), initial, Labels);
 

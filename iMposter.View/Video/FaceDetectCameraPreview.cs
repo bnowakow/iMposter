@@ -40,7 +40,10 @@ namespace iMposter.View.Video
                 }
             }
             BitmapSource bs = image.ToBitmapSource();
-            previewImage.Source = bs;
+            if (bs != null)
+            {
+                previewImage.Source = bs;
+            }
         }
     }
 }
