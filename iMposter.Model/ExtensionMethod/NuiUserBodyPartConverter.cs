@@ -28,5 +28,15 @@ namespace iMposter.Model.ExtensionMethod
         {
             return point.Z / ModelSettings.Default.sensorCameraResolutionDepth;
         }
+
+        public static NuiUserBodyPart Copy(this NuiUserBodyPart part)
+        {
+            return new NuiUserBodyPart()
+            {
+                X = part.X,
+                Y = part.Y,
+                Z = part.Z
+            };
+        }
     }
 }

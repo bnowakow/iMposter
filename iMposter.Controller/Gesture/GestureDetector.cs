@@ -203,21 +203,9 @@ namespace iMposter.Controller.Gesture
                 }
                 else
                 {
-
-                    // TODO implement frameDrops to increase distance between points in gesture sequence
                     // TODO deal with multiple users
                     var user = e.Users.First();
-                    singleGestureElements.Add(new NuiUser()
-                    {
-                        LeftElbow = user.LeftElbow,
-                        LeftShoulder = user.LeftShoulder,
-                        LeftHand = user.LeftHand,
-                        LeftHip = user.LeftHip,
-                        RightElbow = user.RightElbow,
-                        RightShoulder = user.RightShoulder,
-                        RightHand = user.RightHand,
-                        RightHip = user.RightHip,
-                    });
+                    singleGestureElements.Add(user.Copy());
                 }
             }
         }

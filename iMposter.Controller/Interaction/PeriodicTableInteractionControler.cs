@@ -36,6 +36,7 @@ namespace iMposter.Controller.Interaction
         protected BodyTracker bodyTracker;
         protected GestureDetector gestureDetector;
         protected BufferList<int> lastGestureCodes;
+        protected BufferList<NuiUser> lastUserCoordinates;
 
         #region Constructor
         public PeriodicTableInteractionControler(IPeriodicTableControl periodicTableControl)
@@ -43,7 +44,10 @@ namespace iMposter.Controller.Interaction
             this.periodicTableControl = periodicTableControl;
             this.faceDetector = new FaceDetector();
             this.facesToProcess = new List<BitmapSource>();
-            this.lastGestureCodes = new BufferList<int>(5);
+            // TODO change to settings and name it descriptively
+            int consecutiveGesturesRequired = 5;
+            this.lastGestureCodes = new BufferList<int>(consecutiveGesturesRequired);
+            this.lastUserCoordinates = new BufferList<NuiUser>(consecutiveGesturesRequired);
 
             InitializePeriodicTableElementsExistance();
             this.periodicTableControl.InitializePeriodicTableElements(elements);
@@ -158,14 +162,15 @@ namespace iMposter.Controller.Interaction
             lastGestureCodes.Add(gestureDetector.HiddenMarkovModelDetect(gesturePath));
         }
 
-        protected double prevHandDistance = 0.0;
-        protected double prevZoomDirection = 0.0;
-
-        protected void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
+       protected void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
         {
             foreach (var user in e.Users)
             {
-                if (lastGestureCodes.IsFilled)
+                if (lastUserCoordinates.List.Count() == 0 || !lastUserCoordinates.List.Last().Equals(user))
+                {
+                    lastUserCoordinates.Add(user.Copy());
+                }
+                if (lastGestureCodes.IsFilled && lastUserCoordinates.IsFilled)
                 {
                     periodicTableControl.GetCamera().Dispatcher.BeginInvoke((Action)delegate
                     {
@@ -177,15 +182,12 @@ namespace iMposter.Controller.Interaction
                             periodicTableControl.GetCamera().LookDirection =
                                 new Vector3D(
                                 //periodicTableControl.GetCamera().LookDirection.X,
-                                periodicTableControl.GetCamera().LookDirection.X - ((user.RightHand.normalizedX() - 0.5) / 300),
+                                periodicTableControl.GetCamera().LookDirection.X + ((user.RightHand.normalizedX() - 0.5) / 300),
                                 //periodicTableControl.GetCamera().LookDirection.Y,
-                                periodicTableControl.GetCamera().LookDirection.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
+                                periodicTableControl.GetCamera().LookDirection.Y - ((user.RightHand.normalizedY() - 0.5) / 300),
                                 periodicTableControl.GetCamera().LookDirection.Z
                                 //periodicTableControl.GetCamera().LookDirection.Z + ((user.RightHand.normalizedZ() - 0.5) / 80)
                                 );
-
-                            prevHandDistance = 0.0;
-                            prevZoomDirection = 0.0;
                         }
 
                         var lastZoomGestures = from code in lastGestureCodes.List
@@ -193,41 +195,41 @@ namespace iMposter.Controller.Interaction
                                                      select code;
                         if (lastZoomGestures.Count() == lastGestureCodes.Capacity)
                         {
-                            double zoomDirection = 0.0;
-                            double curentHandDistance = Math.Abs(user.RightHand.normalizedX() - user.LeftHand.normalizedX());
-                            double moveDistance = Math.Abs(prevHandDistance - curentHandDistance);
-                            if (prevHandDistance != 0)
+                            // TODO add rotation
+                            List<NuiUser> comparisonLastUserCoordinates = new List<NuiUser>(lastUserCoordinates.List);
+                            comparisonLastUserCoordinates.RemoveRange(0, 1);
+                            double prevDistance = Math.Abs(lastUserCoordinates.List.First().RightHand.normalizedX() - lastUserCoordinates.List.First().LeftHand.normalizedX());
+                            double distance = Math.Abs(comparisonLastUserCoordinates.First().RightHand.normalizedX() - comparisonLastUserCoordinates.First().LeftHand.normalizedX());
+                            bool ascending = prevDistance < distance ? true : false;
+                            bool monotone = true;
+                            foreach (var prevUserCoordinate in comparisonLastUserCoordinates)
                             {
-                                if (moveDistance > 0.02)
-                                {
-                                    if (curentHandDistance < prevHandDistance)
-                                    {
-                                        zoomDirection = 100;
-                                    }
-                                    else
-                                    {
-                                        zoomDirection = -100;
-                                    }
+                                distance = Math.Abs(prevUserCoordinate.RightHand.normalizedX() - prevUserCoordinate.LeftHand.normalizedX());
+                                if ((ascending && prevDistance > distance) ||
+                                    (!ascending && prevDistance < distance)) {
+                                        monotone = false;
+                                        break;
                                 }
-                                else
-                                {
-                                    zoomDirection = prevZoomDirection;
-                                }
+                                prevDistance = distance;
                             }
-                            prevHandDistance = curentHandDistance;
-                            prevZoomDirection = zoomDirection;
-                            periodicTableControl.GetCamera().Position =
-                                new Point3D(
-                                periodicTableControl.GetCamera().Position.X,
-                                //periodicTableControl.GetCamera().Position.X - ((user.RightHand.normalizedX() - 0.5) / 300),
-                                periodicTableControl.GetCamera().Position.Y,
-                                //periodicTableControl.GetCamera().Position.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
-                                //periodicTableControl.GetCamera().Position.Z
-                                periodicTableControl.GetCamera().Position.Z + (zoomDirection * moveDistance)
-                                );
+                            if (monotone)
+                            {
+                                double zoomDirection = (ascending == true) ? 1.0 : -1.0;
+                                periodicTableControl.GetCamera().Position =
+                                    new Point3D(
+                                    periodicTableControl.GetCamera().Position.X,
+                                    //periodicTableControl.GetCamera().Position.X - ((user.RightHand.normalizedX() - 0.5) / 300),
+                                    periodicTableControl.GetCamera().Position.Y,
+                                    //periodicTableControl.GetCamera().Position.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
+                                    //periodicTableControl.GetCamera().Position.Z
+                                    periodicTableControl.GetCamera().Position.Z - (zoomDirection * distance)
+                                    );
+                            }
                         }
                     });
                 }
+                // TODO deal with multiple users
+                return;
             }
         }
         #endregion
