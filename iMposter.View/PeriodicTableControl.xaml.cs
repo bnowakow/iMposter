@@ -113,6 +113,7 @@ namespace iMposter.View
             return fadeTimeSeconds * 1000;
         }
 
+        // TODO add methods for updating camera position with boundaries that cannot be exceeded
         public PerspectiveCamera GetCamera()
         {
             return camera;

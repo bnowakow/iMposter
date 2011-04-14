@@ -33,11 +33,13 @@ namespace iMposter.View.Gesture
             {
                 Button gestureButton = new Button();
                 gestureButton.Tag = i;
+                gestureButton.FontSize = 20;
                 gestureButton.Content = gestureLabel;
                 gestureButton.Click += new RoutedEventHandler(gestureButton_Click);
                 gestureNamesPlaceholder.Children.Add(gestureButton);
                 i++;
             }
+            SetToggleContinuesCapturingButtonName();
 
             gestureDetector.GestureCaptureComplete += new GestureCaptureCompleteDelegate(gestureDetector_GestureCaptureComplete);
         }
@@ -90,6 +92,18 @@ namespace iMposter.View.Gesture
             {
                 gestureDetectStatusTextbox.Text = newStatus;
             });
+        }
+
+        private void toggleContinuesCapturingButton_Click(object sender, RoutedEventArgs e)
+        {
+           
+            gestureDetector.ContinuesCapturing = !gestureDetector.ContinuesCapturing;
+            SetToggleContinuesCapturingButtonName();
+        }
+
+        protected void SetToggleContinuesCapturingButtonName()
+        {
+            toggleContinuesCapturingButton.Content = "Toggle ContinuesCapturing [" + gestureDetector.ContinuesCapturing + "]";
         }
 
     }

@@ -7,11 +7,14 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <StackPanel>
-            <Button Content="Start Gesture Capture" x:Name="gestureStartCaptureButton" Click="gestureStartCaptureButton_Click" />
-            <TextBox Text="Gesture Capture Status" x:Name="gestureCaptureStatusTextbox" />
+            <Button Content="Start Gesture Capture" x:Name="gestureStartCaptureButton" Click="gestureStartCaptureButton_Click" FontSize="24" />
+            <TextBox Text="Gesture Capture Status" x:Name="gestureCaptureStatusTextbox" FontSize="24" />
             <StackPanel Orientation="Horizontal" x:Name="gestureNamesPlaceholder"></StackPanel>
-            <Button Content="Gesture Detect" x:Name="gestureDetectButton" Click="gestureDetectButton_Click" />
-            <TextBox Text="Gesture Detect Status" x:Name="gestureDetectStatusTextbox" />
+            <Button Content="Gesture Detect" x:Name="gestureDetectButton" Click="gestureDetectButton_Click" FontSize="24" />
+            <TextBox Text="Gesture Detect Status" x:Name="gestureDetectStatusTextbox" FontSize="24" />
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="toggleContinuesCapturingButton" Click="toggleContinuesCapturingButton_Click" FontSize="20" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -29,13 +29,14 @@ namespace iMposter.Controller.Gesture
         public GestureDetectorTrainingData TrainingData { get; set; }
 
         public bool Capturing { get; set; }
+        public bool ContinuesCapturing { get; set; }
         protected ContinuousSequenceClassifier classifier;
         protected IList<NuiUser> singleGestureElements;
 
         public String[] Labels { get { return new String[] { "Idle gesture", "Navigation gesture", "Zoom gesture" }; } }
         public enum GestureCodes { IDLE, NAVIGATION, ZOOM };
 
-        protected int singleGestureLegth = 20; // number of consecutive points of move in gesture
+        protected int singleGestureLegth = 5; // number of consecutive points of move in gesture
         protected int singleGestureElementDiemension = 4; // left\right and hand\forearm angles
         protected bool centerStatistics = false;
 
@@ -62,6 +63,17 @@ namespace iMposter.Controller.Gesture
             ClearSingleGesture();
             TrainingData = GestureDetectorTrainingData.ReadFromXml();
             HiddenMarkovModelLearn();
+
+            bool learningMode = false;
+            if (learningMode)
+            {
+                singleGestureLegth = 20;
+            }
+            else
+            {
+                Capturing = true;
+                ContinuesCapturing = true;
+            }
         }
 
         protected void ClearSingleGesture()
@@ -159,13 +171,17 @@ namespace iMposter.Controller.Gesture
                         singleGestureElement.RightShoulder, singleGestureElement.RightHip);
                     sequence[i++] = new double[] { leftForearmArmAngle, rightForearmArmAngle, leftArmHipAngle, rightArmHipAngle };
                 }
-                
+
                 if (centerStatistics)
                 {
                     Accord.Statistics.Tools.Center(sequence);
                 }
 
                 ClearSingleGesture();
+                if (ContinuesCapturing)
+                {
+                    Capturing = true;
+                }
                 return sequence;
             }
             else
