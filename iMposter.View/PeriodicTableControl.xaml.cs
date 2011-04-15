@@ -118,5 +118,45 @@ namespace iMposter.View
         {
             return camera;
         }
+
+        public void SetCamerLookDirection(Vector3D lookDirection)
+        {
+            double minX = -1.0;
+            double maxX = 1.0;
+            if (lookDirection.X > maxX)
+            {
+                lookDirection.X = maxX;
+            }
+            if (lookDirection.X < minX)
+            {
+                lookDirection.X = minX;
+            }
+            double minY = -0.2;
+            double maxY = 0.2;
+            if (lookDirection.Y > maxY)
+            {
+                lookDirection.Y = maxY;
+            }
+            if (lookDirection.Y < minY)
+            {
+                lookDirection.Y = minY;
+            }
+            camera.LookDirection = lookDirection;
+        }
+
+        public void SetCameraPosition(Point3D position)
+        {
+            double minZ = 20.0;
+            double maxZ = 200.0;
+            if (position.Z > maxZ)
+            {
+                position.Z = maxZ;
+            }
+            if (position.Z < minZ)
+            {
+                position.Z = minZ;
+            }
+            camera.Position = position;
+        }
     }
 }

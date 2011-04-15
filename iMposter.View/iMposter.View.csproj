@@ -86,6 +86,9 @@
     <Compile Include="Video\KinectDepthCameraPreview.cs" />
     <Compile Include="Video\FaceCameraPreview.cs" />
     <Compile Include="Video\KinectCameraPreview.cs" />
+    <Compile Include="Video\KinectUserControl.xaml.cs">
+      <DependentUpon>KinectUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Video\VideoPreview.xaml.cs">
       <DependentUpon>VideoPreview.xaml</DependentUpon>
     </Compile>
@@ -114,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sample\House.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Video\KinectUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

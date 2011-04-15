@@ -174,25 +174,25 @@ namespace iMposter.Controller.Interaction
                 {
                     periodicTableControl.GetCamera().Dispatcher.BeginInvoke((Action)delegate
                     {
+                        List<NuiUser> lastUserCoordinatesCopy = new List<NuiUser>(lastUserCoordinates.List);
                         var lastNavigationGestures = from code in lastGestureCodes.List
-                                  where code == (int)GestureDetector.GestureCodes.NAVIGATION
-                                  select code;
+                                                     where code == (int)GestureDetector.GestureCodes.NAVIGATION
+                                                     select code;
                         if (lastNavigationGestures.Count() == lastGestureCodes.Capacity)
                         {
-                            periodicTableControl.GetCamera().LookDirection =
+                            //periodicTableControl.GetCamera().LookDirection =
+                            periodicTableControl.SetCamerLookDirection(
                                 new Vector3D(
-                                //periodicTableControl.GetCamera().LookDirection.X,
-                                periodicTableControl.GetCamera().LookDirection.X + ((user.RightHand.normalizedX() - 0.5) / 300),
-                                //periodicTableControl.GetCamera().LookDirection.Y,
-                                periodicTableControl.GetCamera().LookDirection.Y - ((user.RightHand.normalizedY() - 0.5) / 300),
-                                periodicTableControl.GetCamera().LookDirection.Z
-                                //periodicTableControl.GetCamera().LookDirection.Z + ((user.RightHand.normalizedZ() - 0.5) / 80)
+                                    periodicTableControl.GetCamera().LookDirection.X - 0.004 * (user.RightHand.normalizedX() - 0.5),
+                                    periodicTableControl.GetCamera().LookDirection.Y + 0.006 * (user.RightHand.normalizedY() - 0.1 - (0.5 * user.RightHip.normalizedY())),
+                                    periodicTableControl.GetCamera().LookDirection.Z
+                                )
                                 );
                         }
 
                         var lastZoomGestures = from code in lastGestureCodes.List
-                                                     where code == (int)GestureDetector.GestureCodes.ZOOM
-                                                     select code;
+                                               where code == (int)GestureDetector.GestureCodes.ZOOM
+                                               select code;
                         if (lastZoomGestures.Count() == lastGestureCodes.Capacity)
                         {
                             // TODO add rotation ?
@@ -200,34 +200,35 @@ namespace iMposter.Controller.Interaction
                             double distance = 0.0;
                             bool ascending = true;
                             bool monotone = true;
-                            List<NuiUser> lastUserCoordinatesCopy = new List<NuiUser>(lastUserCoordinates.List);
-                            foreach (var prevUserCoordinate in lastUserCoordinatesCopy)
+                            foreach (var userCoordinate in lastUserCoordinatesCopy)
                             {
-                                distance = Math.Abs(prevUserCoordinate.RightHand.normalizedX() - prevUserCoordinate.LeftHand.normalizedX());
-                                if (lastUserCoordinatesCopy.IndexOf(prevUserCoordinate) == 0)
+                                distance = Math.Abs(userCoordinate.RightHand.normalizedX() - userCoordinate.LeftHand.normalizedX());
+                                if (lastUserCoordinatesCopy.IndexOf(userCoordinate) == 0)
                                 {
                                     prevDistance = Math.Abs(lastUserCoordinates.List.ElementAt(1).RightHand.normalizedX() - lastUserCoordinates.List.ElementAt(1).LeftHand.normalizedX());
                                     ascending = prevDistance > distance ? true : false;
-                                } else {
-                                if ((ascending && prevDistance > distance) ||
-                                    (!ascending && prevDistance < distance)) {
+                                }
+                                else
+                                {
+                                    if ((ascending && prevDistance > distance) ||
+                                        (!ascending && prevDistance < distance))
+                                    {
                                         monotone = false;
                                         break;
-                                }
+                                    }
                                 }
                                 prevDistance = distance;
                             }
                             if (monotone)
                             {
-                                double zoomDirection = (ascending == true) ? 1.0 : -1.0;
-                                periodicTableControl.GetCamera().Position =
+                                double zoomDirection = ascending ? 1.5 : -1.5;
+                                //periodicTableControl.GetCamera().Position =
+                                periodicTableControl.SetCameraPosition(
                                     new Point3D(
-                                    periodicTableControl.GetCamera().Position.X,
-                                    //periodicTableControl.GetCamera().Position.X - ((user.RightHand.normalizedX() - 0.5) / 300),
-                                    periodicTableControl.GetCamera().Position.Y,
-                                    //periodicTableControl.GetCamera().Position.Y + ((user.RightHand.normalizedY() - 0.5) / 300),
-                                    //periodicTableControl.GetCamera().Position.Z
-                                    periodicTableControl.GetCamera().Position.Z - (zoomDirection * distance)
+                                        periodicTableControl.GetCamera().Position.X,
+                                        periodicTableControl.GetCamera().Position.Y,
+                                        periodicTableControl.GetCamera().Position.Z - (zoomDirection * distance)
+                                    )
                                     );
                             }
                         }

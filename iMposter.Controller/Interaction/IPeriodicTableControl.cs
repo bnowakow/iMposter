@@ -15,5 +15,7 @@ namespace iMposter.Controller.Interaction
         void FadeElementImage(Element element, double from, double to);
         int GetFadeTimeMiliseconds();
         PerspectiveCamera GetCamera();
+        void SetCamerLookDirection(Vector3D lookDirection);
+        void SetCameraPosition(Point3D position);
     }
 }

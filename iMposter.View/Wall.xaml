@@ -7,10 +7,6 @@
         xmlns:local.Gesture="clr-namespace:iMposter.View.Gesture"
         mc:Ignorable="d" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Wall" WindowState="Maximized" WindowStyle="None"  d:DesignHeight="288">
-    <Window.Resources>
-
-    </Window.Resources>
-
     <Grid x:Name="LayoutRoot" Background="#FF000000">
         <Grid x:Name="frame" Margin="5,5,5,5">
             <Grid.RowDefinitions>
@@ -36,10 +32,10 @@
                         <local:PeriodicTableControl x:Name="periodicTableControl" 
                                                     HorizontalAlignment="Center" 
                                                     VerticalAlignment="Top" 
-                                                    Height="768" 
                                                     BorderBrush="Transparent" 
                                                     BorderThickness="3" 
                                                     Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}" 
+                                                    Height="{Binding ElementName=LayoutRoot, Path=ActualHeight}"
                                                      />
                     </StackPanel>
                     <!-- /Content omg -->
@@ -78,13 +74,14 @@
                 </Grid>
             </Border>
         </Grid>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-            <local.Video:FaceCameraPreview />
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" >
+            <!--local.Video:FaceCameraPreview /-->
             <!--local.Video:FaceDetectCameraPreview /-->
             <!-- local.Video:KinectCameraPreview /-->
-            <local.Video:KinectJointDetectCameraPreview />
-            <local.Video:KinectDepthCameraPreview />
-            <local.Gesture:GestureDetectorControl />
+            <!--local.Video:KinectJointDetectCameraPreview /-->
+            <!--local.Video:KinectDepthCameraPreview /-->
+            <!--local.Gesture:GestureDetectorControl /-->
+            <local.Video:KinectUserControl />
         </StackPanel>
     </Grid>
 </Window>
