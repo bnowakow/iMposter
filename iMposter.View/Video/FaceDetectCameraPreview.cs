@@ -34,7 +34,7 @@ namespace iMposter.View.Video
             Image<Bgr, byte> image = cameraImage.GetNextImage();
             if (image != null)
             {
-                foreach (var face in faceDetector.DetectFaces(image))
+                foreach (var face in faceDetector.DetectFacesBitmaps(image))
                 {
                     image.Draw(face.rect, new Bgr(0, 0, double.MaxValue), 3);
                 }

@@ -11,6 +11,6 @@ namespace iMposter.Controller.Face
     public interface IFaceDetector
     {
         List<BitmapSource> DetectFaces();
-        MCvAvgComp[] DetectFaces(Image<Bgr, byte> image);
+        MCvAvgComp[] DetectFacesBitmaps(Image<Bgr, byte> image);
     }
 }

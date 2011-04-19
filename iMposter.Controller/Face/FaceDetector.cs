@@ -39,7 +39,7 @@ namespace iMposter.Controller.Face
                 // TODO detect faces that lays on each other
                 // TODO hash faces - SURF feature detector in CSharp - http://www.emgu.com/wiki/index.php/SURF_feature_detector_in_CSharp
                 // TODO detect face sharpeness to enlarge face region
-                foreach (var face in DetectFaces(image))
+                foreach (var face in DetectFacesBitmaps(image))
                 {
                     var imageBitmapSource = image.ToBitmapSource();
                     if (imageBitmapSource != null)
@@ -56,7 +56,7 @@ namespace iMposter.Controller.Face
             return faceBitmaps;
         }
 
-        public MCvAvgComp[] DetectFaces(Image<Bgr, byte> image)
+        public MCvAvgComp[] DetectFacesBitmaps(Image<Bgr, byte> image)
         {
             Image<Gray, byte> grayImage = image.Convert<Gray, byte>();
             System.Drawing.Size faceMinSize = new System.Drawing.Size(image.Width / haarMinFaceImageDivider, image.Height / haarMinFaceImageDivider);

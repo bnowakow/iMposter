@@ -9,5 +9,7 @@ namespace iMposter.Controller.Interaction
     {
         void CollectFacesFromCapture(object sender, EventArgs e);
         void ProcessFacesFromCapture(object sender, EventArgs e);
+        void ColleUserGesture(double[][] gesturePath);
+        void ProcessUserGesture(object sender, Nui.Vision.NuiUserEventArgs e);
     }
 }

@@ -81,6 +81,7 @@
     <Compile Include="Face\FaceDetector.cs" />
     <Compile Include="Face\IFaceDetector.cs" />
     <Compile Include="Gesture\GestureDetector.cs" />
+    <Compile Include="Gesture\IGestureDetector.cs" />
     <Compile Include="Interaction\IPeriodicTableControl.cs" />
     <Compile Include="Interaction\IPeriodicTableInteractionControler.cs" />
     <Compile Include="Interaction\PeriodicTableInteractionControler.cs" />
@@ -99,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="InterfacesClassDiagram.cd" />
     <None Include="ControllerSettings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>ControllerSettings.Designer.cs</LastGenOutput>

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace iMposter.Model.Sensor
 {
-    public sealed class BodyTracker
+    public sealed class BodyTracker : IBodyTracker
     {
         static BodyTracker instance = null;
         static readonly object padlock = new object();
@@ -34,7 +34,6 @@ namespace iMposter.Model.Sensor
             try
             {
                 Tracker = new NuiUserTracker(@ModelSettings.Default.sensorTrackerConfig);
-                NuiHandTracker omg = new NuiHandTracker(@ModelSettings.Default.sensorTrackerConfig);
             }
             catch (Exception e)
             {
@@ -45,6 +44,11 @@ namespace iMposter.Model.Sensor
                     // TODO use fakeKinect instead
                 }
             }
+        }
+
+        public void AddNewUserGestureHander(NuiUserTracker.UserUpdatedHandler handler)
+        {
+            Tracker.UserUpdated += handler;
         }
     }
 }

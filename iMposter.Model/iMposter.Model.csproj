@@ -89,11 +89,14 @@
     <Compile Include="PeriodicTable\Element.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sensor\BodyTracker.cs" />
+    <Compile Include="Sensor\IBodyTracker.cs" />
     <Compile Include="Task\TaskChain.cs" />
     <Compile Include="Task\TaskChainElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="ModelSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>ModelSettings.Designer.cs</LastGenOutput>

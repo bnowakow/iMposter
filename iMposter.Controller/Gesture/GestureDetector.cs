@@ -19,7 +19,7 @@ namespace iMposter.Controller.Gesture
 {
     public delegate void GestureCaptureCompleteDelegate(double[][] gesturePath);
 
-    public class GestureDetector
+    public class GestureDetector : IGestureDetector
     {
         static GestureDetector instance = null;
         static readonly object padlock = new object();

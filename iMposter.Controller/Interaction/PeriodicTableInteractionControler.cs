@@ -56,10 +56,10 @@ namespace iMposter.Controller.Interaction
             InitializeProcessThread();
 
             bodyTracker = BodyTracker.Instance;
-            bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserUpdated);
+            bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(ProcessUserGesture);
 
             gestureDetector = GestureDetector.Instance;
-            gestureDetector.GestureCaptureComplete += new GestureCaptureCompleteDelegate(gestureDetector_GestureComplete);
+            gestureDetector.GestureCaptureComplete += new GestureCaptureCompleteDelegate(ColleUserGesture);
         }
         #endregion
 
@@ -157,12 +157,12 @@ namespace iMposter.Controller.Interaction
         #endregion
 
         #region ProccessSensorThread
-        void gestureDetector_GestureComplete(double[][] gesturePath)
+        public void ColleUserGesture(double[][] gesturePath)
         {
             lastGestureCodes.Add(gestureDetector.HiddenMarkovModelDetect(gesturePath));
         }
 
-        protected void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
+        public void ProcessUserGesture(object sender, Nui.Vision.NuiUserEventArgs e)
         {
             foreach (var user in e.Users)
             {
@@ -178,6 +178,7 @@ namespace iMposter.Controller.Interaction
                         var lastNavigationGestures = from code in lastGestureCodes.List
                                                      where code == (int)GestureDetector.GestureCodes.NAVIGATION
                                                      select code;
+                        // TODO add thread synchronization for lastGestureCodes
                         if (lastNavigationGestures.Count() == lastGestureCodes.Capacity)
                         {
                             //periodicTableControl.GetCamera().LookDirection =
@@ -200,6 +201,7 @@ namespace iMposter.Controller.Interaction
                             double distance = 0.0;
                             bool ascending = true;
                             bool monotone = true;
+                            // TODO add thread synchronization for lastGestureCodes
                             foreach (var userCoordinate in lastUserCoordinatesCopy)
                             {
                                 distance = Math.Abs(userCoordinate.RightHand.normalizedX() - userCoordinate.LeftHand.normalizedX());
