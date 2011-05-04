@@ -6,13 +6,13 @@
       <Value Profile="(Default)">1.4</Value>
     </Setting>
     <Setting Name="haarMinNeighbours" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">4</Value>
     </Setting>
     <Setting Name="haarCascadeFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">Face\haarcascade_frontalface_alt2.xml</Value>
     </Setting>
     <Setting Name="haarMinFaceImageDivider" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">20</Value>
+      <Value Profile="(Default)">40</Value>
     </Setting>
     <Setting Name="interactionTableFaceRenewalAnnimationMilisecondsDuration" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10000</Value>

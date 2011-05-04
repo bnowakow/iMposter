@@ -45,17 +45,20 @@ namespace iMposter.Model.ExtensionMethod
                 try
                 {
                     imagePointer = source.GetHbitmap(); //obtain the Hbitmap
-                }
-                catch (Exception e)
-                {
-                    // OutOfMemoryException
-                    return null;
-                }
-                bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                    bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                     imagePointer,
                     IntPtr.Zero,
                     Int32Rect.Empty,
                     System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
+                }
+                catch (OutOfMemoryException e)
+                {
+                    return null;
+                }
+                catch (ExternalException e)
+                {
+                    return null;
+                }
 
                 DeleteObject(imagePointer); //release the HBitmap
                 GC.Collect();

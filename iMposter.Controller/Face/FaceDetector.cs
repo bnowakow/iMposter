@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Drawing;
 using Emgu.CV.CvEnum;
 using System.Windows;
+using Emgu.CV.Util;
 
 namespace iMposter.Controller.Face
 {
@@ -31,8 +32,6 @@ namespace iMposter.Controller.Face
         public List<BitmapSource> DetectFaces()
         {
             List<BitmapSource> faceBitmaps = new List<BitmapSource>();
-            // supach tmp
-            //return faceBitmaps;
             Image<Bgr, byte> image = cameraImage.GetNextImage();
             if (image != null)
             {
@@ -58,9 +57,19 @@ namespace iMposter.Controller.Face
 
         public MCvAvgComp[] DetectFacesBitmaps(Image<Bgr, byte> image)
         {
-            Image<Gray, byte> grayImage = image.Convert<Gray, byte>();
-            System.Drawing.Size faceMinSize = new System.Drawing.Size(image.Width / haarMinFaceImageDivider, image.Height / haarMinFaceImageDivider);
-            var faces = grayImage.DetectHaarCascade(haarCascade, haarScaleFactor, haarMinNeighbours, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, faceMinSize)[0];
+            MCvAvgComp[] faces = new MCvAvgComp[0];
+            try
+            {
+                Image<Gray, byte> grayImage = image.Convert<Gray, byte>();
+                System.Drawing.Size faceMinSize = new System.Drawing.Size(image.Width / haarMinFaceImageDivider, image.Height / haarMinFaceImageDivider);
+                faces = grayImage.DetectHaarCascade(haarCascade, haarScaleFactor, haarMinNeighbours, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, faceMinSize)[0];
+            }
+            catch (CvException e)
+            {
+            }
+            catch (OutOfMemoryException e)
+            {
+            }
 
             GC.Collect();
             GC.WaitForPendingFinalizers();

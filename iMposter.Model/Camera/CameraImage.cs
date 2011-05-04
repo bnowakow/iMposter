@@ -12,6 +12,7 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using System.Drawing;
 using AForge.Controls;
+using Emgu.CV.Util;
 
 namespace iMposter.Model.Camera
 {
@@ -93,7 +94,20 @@ namespace iMposter.Model.Camera
                 FileInfo[] fakeCameraCaptureFiles = fakeCameraCaptureDirectory.GetFiles("FakeCameraCapture_*.jpg");
                 Random random = new Random();
                 int randomFileIndex = random.Next(0, fakeCameraCaptureFiles.Count());
-                image = new Image<Bgr, byte>(@"Camera\FakeCamera\" + fakeCameraCaptureFiles[randomFileIndex]);
+                String filename = @"Camera\FakeCamera\" + fakeCameraCaptureFiles[randomFileIndex];
+                if (fakeCameraCaptureFiles.Count() > 0)
+                {
+                    try
+                    {
+                        image = new Image<Bgr, byte>(filename);
+                    }
+                    catch (OutOfMemoryException e)
+                    {
+                    }
+                    catch (CvException e)
+                    {
+                    }
+                }
             }
 
             GC.Collect();
