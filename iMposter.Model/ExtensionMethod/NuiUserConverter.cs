@@ -28,18 +28,17 @@ namespace iMposter.Model.ExtensionMethod
             };
         }
 
-        /*
-        // TODO optimize ;x
-        public static bool EqualsByValues(this NuiUser userA, NuiUser userB)
+        public static int GetZone(this NuiUser user)
         {
-            if (userA.LeftHand.X == userB.LeftHand.X &&
-                userA.LeftHand.Y == userB.LeftHand.Y &&
-                userA.LeftHand.Z == userB.LeftHand.Z)
+            if (user.LeftHip.normalizedZ() > 0.85)
             {
-                return true;
+                return 2;
             }
-            return false;   
+            if (user.LeftHip.normalizedZ() > 0.1)
+            {
+                return 1;
+            }
+            return 0;
         }
-         */
     }
 }

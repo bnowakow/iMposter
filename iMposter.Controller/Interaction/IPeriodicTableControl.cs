@@ -17,5 +17,7 @@ namespace iMposter.Controller.Interaction
         PerspectiveCamera GetCamera();
         void SetCamerLookDirection(Vector3D lookDirection);
         void SetCameraPosition(Point3D position);
+        double GetRotationAngle();
+        void SetCameraRotation(double angle);
     }
 }

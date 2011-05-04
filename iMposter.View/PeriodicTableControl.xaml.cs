@@ -113,7 +113,6 @@ namespace iMposter.View
             return fadeTimeSeconds * 1000;
         }
 
-        // TODO add methods for updating camera position with boundaries that cannot be exceeded
         public PerspectiveCamera GetCamera()
         {
             return camera;
@@ -157,6 +156,26 @@ namespace iMposter.View
                 position.Z = minZ;
             }
             camera.Position = position;
+        }
+
+        public double GetRotationAngle()
+        {
+            return cameraTransformRotation.Angle;
+        }
+
+        public void SetCameraRotation(double angle)
+        {
+            double minAngle = -35.0;
+            double maxAngle = 35.0;
+            if (angle > maxAngle)
+            {
+                angle = maxAngle;
+            }
+            if (angle < minAngle)
+            {
+                angle = minAngle;
+            }
+            cameraTransformRotation.Angle = angle;
         }
     }
 }
