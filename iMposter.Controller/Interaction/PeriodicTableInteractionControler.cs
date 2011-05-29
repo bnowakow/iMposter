@@ -56,10 +56,14 @@ namespace iMposter.Controller.Interaction
             InitializeProcessThread();
 
             bodyTracker = BodyTracker.Instance;
-            bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(ProcessUserGesture);
+            // Wskazanie metody, do której bedą przekazane dane dotyczące śledzenia użytkownika
+            bodyTracker.AddNewUserGestureHander(
+                new Nui.Vision.NuiUserTracker.UserUpdatedHandler(ProcessUserGesture));
 
             gestureDetector = GestureDetector.Instance;
-            gestureDetector.GestureCaptureComplete += new GestureCaptureCompleteDelegate(ColleUserGesture);
+            // Wskazanie metody, do której bedą przekazane dane dotyczące wykrywanych gestów
+            gestureDetector.GestureCaptureComplete += 
+                new GestureCaptureCompleteDelegate(ColleUserGesture);
         }
         #endregion
 

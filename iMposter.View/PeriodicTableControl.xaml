@@ -14,7 +14,8 @@
         
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <Label Content="Camera Position:" Foreground="White" Margin="50,0,0,0" />
-            <TextBox x:Name="cameraPositionText" Text="21.5,-10,100" Width="100" />
+            <!--TextBox x:Name="cameraPositionText" Text="21.5,-10,100" Width="100" /-->
+            <TextBox x:Name="cameraPositionText" Text="21.5,-10,70" Width="100" />
             <Label Content="Camera Look At:" Foreground="White" Margin="50,0,0,0" />
             <TextBox x:Name="cameraLookAtText" Text="0,0,-1" Width="100" />
         </StackPanel>
@@ -27,7 +28,8 @@
                     <PerspectiveCamera.Transform>
                         <RotateTransform3D>
                             <RotateTransform3D.Rotation>
-                                <AxisAngleRotation3D x:Name="cameraTransformRotation" Angle="0" />
+                                <!--AxisAngleRotation3D x:Name="cameraTransformRotation" Angle="0" /-->
+                                <AxisAngleRotation3D x:Name="cameraTransformRotation" Angle="20" />
                             </RotateTransform3D.Rotation>
                         </RotateTransform3D>
                     </PerspectiveCamera.Transform>

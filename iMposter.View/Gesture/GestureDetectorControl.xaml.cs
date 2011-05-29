@@ -52,8 +52,11 @@ namespace iMposter.View.Gesture
 
         protected void LearnCapturedGesture(int output)
         {
+            // nadanie gestowi modelu reprezentującego przebieg gestu
             gestureDetector.TrainingData.InputsList.Add(capturedGesture);
-            gestureDetector.TrainingData.OutputsList.Add(output);            
+            // nadanie gestowi etykiety przez nauczyciela
+            gestureDetector.TrainingData.OutputsList.Add(output);
+            // nauka klasyfikatora gestu
             gestureDetector.HiddenMarkovModelLearn();
         }
 

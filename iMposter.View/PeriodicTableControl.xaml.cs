@@ -79,7 +79,19 @@ namespace iMposter.View
 
                 Image image = new Image();
                 image.Width = elementWidth;
-                image.Source = new BitmapImage(new Uri(@"Img\Elements\01_01.jpg", UriKind.Relative));
+
+                DirectoryInfo elementImagesDirectory = new DirectoryInfo(@"Img\Elements\");
+                FileInfo[] elementImagesFiles = elementImagesDirectory.GetFiles("PG_*.jpg");
+                Random random = new Random();
+                int randomFileIndex = 0;
+                for (int i = 0; i < random.Next(); i++)
+                {
+                    randomFileIndex = random.Next(0, elementImagesFiles.Count());
+                }
+                String filename = @"Img\Elements\" + elementImagesFiles[randomFileIndex];
+                if (elementImagesFiles.Count() > 0)
+                    image.Source = new BitmapImage(new Uri(filename, UriKind.Relative));
+                
                 
                 Viewport2DVisual3D viewport = new Viewport2DVisual3D();
                 viewport.Transform = tranformGroup;

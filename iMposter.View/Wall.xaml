@@ -83,5 +83,8 @@
             <!--local.Gesture:GestureDetectorControl /-->
             <local.Video:KinectUserControl />
         </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Image Source="Img\Elements\PG-Logo.png" Width="280" Opacity="0.3" />
+        </StackPanel>
     </Grid>
 </Window>

@@ -33,22 +33,25 @@ namespace iMposter.Model.Sensor
         private BodyTracker() {
             try
             {
+                // Stworzenie obiektu śledzącego użytkownika
                 Tracker = new NuiUserTracker(@ModelSettings.Default.sensorTrackerConfig);
             }
             catch (Exception e)
             {
                 if (e.Message == "Configuration file not found.")
                 {
-                    // There is no Kinect in the system
-                    MessageBox.Show("There is no sensor in the system, using fakeKinect instead");
-                    // TODO use fakeKinect instead
+                    // System nie posiada podpiętego sensora odległości
+                    MessageBox.Show("There is no depth sensor in the system");
                 }
             }
         }
 
         public void AddNewUserGestureHander(NuiUserTracker.UserUpdatedHandler handler)
         {
-            Tracker.UserUpdated += handler;
+            if (Tracker != null)
+            {
+                Tracker.UserUpdated += handler;
+            }
         }
     }
 }

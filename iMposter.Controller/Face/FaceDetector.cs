@@ -26,6 +26,7 @@ namespace iMposter.Controller.Face
         public FaceDetector()
         {
             cameraImage = CameraImage.Instance;
+            // Inicjalizacja kaskady Haar'a
             haarCascade = new HaarCascade(@ControllerSettings.Default.haarCascadeFile);
         }
 
@@ -61,8 +62,10 @@ namespace iMposter.Controller.Face
             try
             {
                 Image<Gray, byte> grayImage = image.Convert<Gray, byte>();
-                System.Drawing.Size faceMinSize = new System.Drawing.Size(image.Width / haarMinFaceImageDivider, image.Height / haarMinFaceImageDivider);
-                faces = grayImage.DetectHaarCascade(haarCascade, haarScaleFactor, haarMinNeighbours, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, faceMinSize)[0];
+                System.Drawing.Size faceMinSize = 
+                    new System.Drawing.Size(image.Width / haarMinFaceImageDivider, image.Height / haarMinFaceImageDivider);
+                faces = grayImage.DetectHaarCascade(haarCascade, haarScaleFactor, haarMinNeighbours, 
+                    HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, faceMinSize)[0];
             }
             catch (CvException e)
             {

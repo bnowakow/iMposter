@@ -58,7 +58,8 @@ namespace iMposter.Controller.Gesture
         private GestureDetector()
         {
             BodyTracker bodyTracker = BodyTracker.Instance;
-            bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserMoved);
+            bodyTracker.AddNewUserGestureHander(
+                new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserMoved));
 
             ClearSingleGesture();
             TrainingData = GestureDetectorTrainingData.ReadFromXml();
@@ -122,6 +123,8 @@ namespace iMposter.Controller.Gesture
         public int HiddenMarkovModelDetect(double[][] gesturePath)
         {
             double[] responses;
+            // wyznaczenie prawdopodobieństw poszczególnych dla poszczególnych klasyfikatorów
+            // wybór gestu o największym prawdopodobieństwie
             int classifierResult = classifier.Compute(
                 gesturePath,
                 out responses);

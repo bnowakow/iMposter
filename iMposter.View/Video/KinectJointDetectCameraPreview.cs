@@ -27,7 +27,8 @@ namespace iMposter.View.Video
         public override void InitializeCamera()
         {
             bodyTracker = BodyTracker.Instance;
-            bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserUpdated);
+            bodyTracker.AddNewUserGestureHander(
+                new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserUpdated));
         }
 
         protected NuiUserBodyPart tmpMaxDepthValues = new NuiUserBodyPart { X = -1, Y = -1, Z = -1 };
@@ -60,7 +61,10 @@ namespace iMposter.View.Video
 
         public override void UpdateCamera()
         {
-            previewImage.Source = bodyTracker.Tracker.RawImage;
+            if (bodyTracker.Tracker != null)
+            {
+                previewImage.Source = bodyTracker.Tracker.RawImage;
+            }
         }
     }
 }

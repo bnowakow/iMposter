@@ -33,7 +33,8 @@ namespace iMposter.View.Video
             InitializeComponent();
             bodyTracker = BodyTracker.Instance;
             CompositionTarget.Rendering += new EventHandler(CompositionTarget_Rendering);
-            bodyTracker.Tracker.UserUpdated += new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserUpdated);
+            bodyTracker.AddNewUserGestureHander(
+                new Nui.Vision.NuiUserTracker.UserUpdatedHandler(Tracker_UserUpdated));
             worker = new BackgroundWorker();
             worker.DoWork += new DoWorkEventHandler(worker_DoWork);
         }
@@ -75,12 +76,15 @@ namespace iMposter.View.Video
         {
             Dispatcher.BeginInvoke((Action)delegate
             {
-                kinectImage.Source = bodyTracker.Tracker.DepthImage;
-                if (kinectImageCanvas.Width != kinectImage.ActualWidth || 
-                    kinectImageCanvas.Height != kinectImage.ActualHeight)
+                if (bodyTracker.Tracker != null)
                 {
-                    kinectImageCanvas.Width = kinectImage.ActualWidth;
-                    kinectImageCanvas.Height = kinectImage.ActualHeight;
+                    kinectImage.Source = bodyTracker.Tracker.DepthImage;
+                    if (kinectImageCanvas.Width != kinectImage.ActualWidth ||
+                        kinectImageCanvas.Height != kinectImage.ActualHeight)
+                    {
+                        kinectImageCanvas.Width = kinectImage.ActualWidth;
+                        kinectImageCanvas.Height = kinectImage.ActualHeight;
+                    }
                 }
             });
         }

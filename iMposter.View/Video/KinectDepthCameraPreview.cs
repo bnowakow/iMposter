@@ -26,7 +26,10 @@ namespace iMposter.View.Video
 
         public override void UpdateCamera()
         {
-            previewImage.Source = bodyTracker.Tracker.DepthImage;
+            if (bodyTracker.Tracker != null)
+            {
+                previewImage.Source = bodyTracker.Tracker.DepthImage;
+            }
         }
     }
 }

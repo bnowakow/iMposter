@@ -19,36 +19,6 @@
 				<Mirror on="true"/>
 			</Configuration>
 		</Node>	
-	
-		<!-- HighRes Image -->
-		<!--
-		<Node type="Image" name="Image1">
-			<Configuration>
-				<MapOutputMode xRes="1280" yRes="1024" FPS="15"/>
-				<Mirror on="true"/>
-			</Configuration>
-		</Node>
-		-->
-		
-		<!-- Normal IR -->
-		<!--
-		<Node type="IR" name="IR1">
-			<Configuration>
-				<MapOutputMode xRes="640" yRes="480" FPS="30"/>
-				<Mirror on="true"/>
-			</Configuration>
-		</Node>
-		-->
-		
-		<!-- HighRes IR -->
-		<!--
-		<Node type="IR" name="IR1">
-			<Configuration>
-				<MapOutputMode xRes="1280" yRes="1024" FPS="15"/>
-				<Mirror on="true"/>
-			</Configuration>
-		</Node>		
-		-->
 		
 		<Node type="Depth" name="Depth1">
 			<Configuration>
@@ -56,9 +26,6 @@
 				<Mirror on="true"/>
 			</Configuration>
 		</Node>
-		<!--
-		<Node type="Audio" name="Audio1">
-		</Node>
-		-->
+    
 	</ProductionNodes>
 </OpenNI>
