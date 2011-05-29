@@ -26,7 +26,6 @@ namespace iMposter.Controller.Interaction
         protected DispatcherTimer collectFacesTimer;
         protected DispatcherTimer processFacesTimer;
 
-        // TODO check if thread synchronization is needed
         protected List<BitmapSource> facesToProcess;
         protected IList<Element> elements;
 
@@ -176,8 +175,8 @@ namespace iMposter.Controller.Interaction
                 }
                 if (lastGestureCodes.IsFilled && lastUserCoordinates.IsFilled)
                 {
-                    periodicTableControl.GetCamera().Dispatcher.BeginInvoke((Action)delegate
-                    {
+                    //periodicTableControl.GetCamera().Dispatcher.BeginInvoke((Action)delegate
+                    //{
                         List<NuiUser> lastUserCoordinatesCopy = new List<NuiUser>(lastUserCoordinates.List);
                         var lastNavigationGestures = from code in lastGestureCodes.List
                                                      where code == (int)GestureDetector.GestureCodes.NAVIGATION
@@ -185,20 +184,7 @@ namespace iMposter.Controller.Interaction
                         // TODO add thread synchronization for lastGestureCodes
                         if (lastNavigationGestures.Count() == lastGestureCodes.Capacity)
                         {
-                            if (user.GetZone() == 1)
-                            {
-                                periodicTableControl.SetCamerLookDirection(
-                                    new Vector3D(
-                                        periodicTableControl.GetCamera().LookDirection.X - 0.004 * (user.RightHand.normalizedX() - 0.5),
-                                        periodicTableControl.GetCamera().LookDirection.Y + 0.006 * (user.RightHand.normalizedY() - 0.1 - (0.5 * user.RightHip.normalizedY())),
-                                        periodicTableControl.GetCamera().LookDirection.Z
-                                    )
-                                    );
-                            }
-                            if (user.GetZone() == 2)
-                            {
-                                periodicTableControl.SetCameraRotation(periodicTableControl.GetRotationAngle() - 0.5 * (user.RightHand.normalizedX() - 0.5));
-                            }
+                            periodicTableControl.OnNavigationGesture(user.Copy());
                         }
 
                         var lastZoomGestures = from code in lastGestureCodes.List
@@ -234,16 +220,10 @@ namespace iMposter.Controller.Interaction
                             if (monotone)
                             {
                                 double zoomDirection = ascending ? 1.5 : -1.5;
-                                periodicTableControl.SetCameraPosition(
-                                    new Point3D(
-                                        periodicTableControl.GetCamera().Position.X,
-                                        periodicTableControl.GetCamera().Position.Y,
-                                        periodicTableControl.GetCamera().Position.Z - (zoomDirection * distance)
-                                    )
-                                    );
+                                periodicTableControl.OnZoomGesture(distance, zoomDirection);
                             }
                         }
-                    });
+                    //});
                 }
                 // TODO deal with multiple users
                 return;

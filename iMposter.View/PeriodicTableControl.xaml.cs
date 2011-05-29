@@ -19,11 +19,12 @@ using System.IO;
 using iMposter.Controller.Interaction;
 using iMposter.Model.PeriodicTable;
 using System.Windows.Media.Animation;
+using iMposter.Model.ExtensionMethod;
 
 namespace iMposter.View
 {
     /// <summary>
-    /// Interaction logic for PeriodicTableControl.xaml
+    /// Interaction logic for xaml
     /// </summary>
     public partial class PeriodicTableControl : UserControl, IPeriodicTableControl
     {
@@ -36,7 +37,7 @@ namespace iMposter.View
             InitializeComponent();
 
             //this.MouseMove += new MouseEventHandler(PeriodicTableControl_MouseMove);
-           //this.MouseWheel += new MouseWheelEventHandler(PeriodicTableControl_MouseWheel);
+            //this.MouseWheel += new MouseWheelEventHandler(PeriodicTableControl_MouseWheel);
         }
 
         void PeriodicTableControl_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -91,8 +92,8 @@ namespace iMposter.View
                 String filename = @"Img\Elements\" + elementImagesFiles[randomFileIndex];
                 if (elementImagesFiles.Count() > 0)
                     image.Source = new BitmapImage(new Uri(filename, UriKind.Relative));
-                
-                
+
+
                 Viewport2DVisual3D viewport = new Viewport2DVisual3D();
                 viewport.Transform = tranformGroup;
                 viewport.Geometry = mesh;
@@ -188,6 +189,43 @@ namespace iMposter.View
                 angle = minAngle;
             }
             cameraTransformRotation.Angle = angle;
+        }
+
+
+        public void OnNavigationGesture(Nui.Vision.NuiUser user)
+        {
+            camera.Dispatcher.BeginInvoke((Action)delegate
+            {
+                if (user.GetZone() == 1)
+                {
+                    SetCamerLookDirection(
+                        new Vector3D(
+                            GetCamera().LookDirection.X - 0.004 * (user.RightHand.normalizedX() - 0.5),
+                            GetCamera().LookDirection.Y + 0.006 * (user.RightHand.normalizedY() - 0.1 - (0.5 * user.RightHip.normalizedY())),
+                            GetCamera().LookDirection.Z
+                        )
+                        );
+                }
+                if (user.GetZone() == 2)
+                {
+                    SetCameraRotation(GetRotationAngle() - 0.5 * (user.RightHand.normalizedX() - 0.5));
+                }
+            });
+        }
+
+
+        public void OnZoomGesture(double distance, double zoomDirection)
+        {
+            camera.Dispatcher.BeginInvoke((Action)delegate
+            {
+                SetCameraPosition(
+                    new Point3D(
+                        GetCamera().Position.X,
+                        GetCamera().Position.Y,
+                        GetCamera().Position.Z - (zoomDirection * distance)
+                    )
+                    );
+            });
         }
     }
 }

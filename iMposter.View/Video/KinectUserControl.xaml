@@ -5,12 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignWidth="640" d:DesignHeight="600" >
-    <Grid Opacity="0.4">
-        <StackPanel>
-            <Grid Width="640" Height="480">
+    <Grid>
+        <StackPanel >
+            <Grid x:Name="kinectImageGrid"  Opacity="0.4" Width="640" Height="480">
                 <Image x:Name="kinectImage" />
                 <Canvas Name="kinectImageCanvas" />
             </Grid>
+            <Button x:Name="kinectHideButton" Opacity="0.0" Content="Ukryj/Pokaż podgląd Kinecta" Click="kinectHideButton_Click" MouseEnter="kinectHideButton_MouseEnter" MouseLeave="kinectHideButton_MouseLeave" FontSize="16" />
         </StackPanel>
     </Grid>
 </UserControl>

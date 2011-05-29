@@ -15,6 +15,7 @@ using System.ComponentModel;
 using iMposter.Model.Sensor;
 using Nui.Vision;
 using iMposter.Model.ExtensionMethod;
+using System.Windows.Media.Animation;
 
 namespace iMposter.View.Video
 {
@@ -27,6 +28,7 @@ namespace iMposter.View.Video
         protected BackgroundWorker worker;
         protected BodyTracker bodyTracker;
         protected Color darkBlue = Color.FromArgb(200, 22, 44, 65);
+        protected bool hideControl = true;
 
         public KinectUserControl()
         {
@@ -39,8 +41,31 @@ namespace iMposter.View.Video
             worker.DoWork += new DoWorkEventHandler(worker_DoWork);
         }
 
+        protected void fade(UIElement element, double from, double to)
+        {
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                From = from,
+                To = to,
+                Duration = TimeSpan.FromSeconds(5.0),
+
+            };
+            element.BeginAnimation(OpacityProperty, animation);
+        }
+
         void Tracker_UserUpdated(object sender, Nui.Vision.NuiUserEventArgs e)
         {
+            kinectImageGrid.Dispatcher.BeginInvoke((Action)delegate
+            {
+                if (hideControl && kinectImageGrid.Opacity == 0.4)
+                {
+                    fade(kinectImageGrid, 0.4, 0.0);
+                }
+                if (!hideControl && kinectImageGrid.Opacity == 0.0)
+                {
+                    fade(kinectImageGrid, 0.0, 0.4);
+                }
+            });
             Dispatcher.BeginInvoke((Action)delegate
             {
                 kinectImageCanvas.Children.Clear();
@@ -94,6 +119,29 @@ namespace iMposter.View.Video
             if (!worker.IsBusy)
             {
                 worker.RunWorkerAsync();
+            }
+        }
+
+        private void kinectHideButton_Click(object sender, RoutedEventArgs e)
+        {
+            hideControl = !hideControl;
+        }
+
+        private void kinectHideButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            if (button.Opacity == 0.0)
+            {
+                fade(button, 0.0, 1.0);
+            }
+        }
+
+        private void kinectHideButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var button = sender as Button;
+            if (button.Opacity == 1.0)
+            {
+                fade(button, 1.0, 0.0);
             }
         }
     }
