@@ -31,14 +31,20 @@ namespace iMposter.Model.PeriodicTable
 
         public void SetNewImage()
         {
-            Image.Source = NewImageSource;
+            if (Image != null)
+            {
+                Image.Source = NewImageSource;
+            }
             IsOverridden = true;
 
         }
 
         public void RevertDefaultImage()
         {
-            Image.Source = DefaultImageSource;
+            if (Image != null)
+            {
+                Image.Source = DefaultImageSource;
+            }
             IsOverridden = false;
         }
 

@@ -35,9 +35,6 @@ namespace iMposter.View
         public PeriodicTableControl()
         {
             InitializeComponent();
-
-            //this.MouseMove += new MouseEventHandler(PeriodicTableControl_MouseMove);
-            //this.MouseWheel += new MouseWheelEventHandler(PeriodicTableControl_MouseWheel);
         }
 
         void PeriodicTableControl_MouseWheel(object sender, MouseWheelEventArgs e)

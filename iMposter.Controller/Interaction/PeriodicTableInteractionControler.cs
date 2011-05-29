@@ -15,6 +15,7 @@ using iMposter.Model.ExtensionMethod;
 using System.Windows.Media.Media3D;
 using iMposter.Controller.Gesture;
 using iMposter.Model;
+using System.ComponentModel;
 
 
 namespace iMposter.Controller.Interaction
@@ -44,16 +45,19 @@ namespace iMposter.Controller.Interaction
             this.faceDetector = new FaceDetector();
             this.facesToProcess = new List<BitmapSource>();
             // TODO change to settings and name it descriptively
-            int consecutiveGesturesRequired = 5;
+            int consecutiveGesturesRequired = ControllerSettings.Default.consecutiveGesturesRequired;
             this.lastGestureCodes = new BufferList<int>(consecutiveGesturesRequired);
             this.lastUserCoordinates = new BufferList<NuiUser>(consecutiveGesturesRequired);
 
             InitializePeriodicTableElementsExistance();
             this.periodicTableControl.InitializePeriodicTableElements(elements);
 
-            InitializeCollectThread();
-            InitializeProcessThread();
-
+            if (ControllerSettings.Default.interactionTableFaceStorageMaximalNumber > 0)
+            {
+                InitializeCollectThread();
+                InitializeProcessThread();
+            }
+            
             bodyTracker = BodyTracker.Instance;
             // Wskazanie metody, do której bedą przekazane dane dotyczące śledzenia użytkownika
             bodyTracker.AddNewUserGestureHander(

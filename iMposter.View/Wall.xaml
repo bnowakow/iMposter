@@ -5,6 +5,7 @@
         xmlns:local="clr-namespace:iMposter.View"
         xmlns:local.Video="clr-namespace:iMposter.View.Video"
         xmlns:local.Gesture="clr-namespace:iMposter.View.Gesture"
+        xmlns:local.SamplePeriodicTableSubsitute="clr-namespace:iMposter.View.SamplePeriodicTableSubsitute"
         mc:Ignorable="d" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="Wall" WindowState="Maximized" WindowStyle="None"  d:DesignHeight="288">
     <Grid x:Name="LayoutRoot" Background="#FF000000">
@@ -27,7 +28,7 @@
                     </RadialGradientBrush>
                 </Border.Background>
                 <Grid x:Name="wallLayout">
-                    <!-- Content omg -->
+                    <!-- Content -->
                     <StackPanel Panel.ZIndex="1000">
                         <local:PeriodicTableControl x:Name="periodicTableControl" 
                                                     HorizontalAlignment="Center" 
@@ -37,8 +38,18 @@
                                                     Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}" 
                                                     Height="{Binding ElementName=LayoutRoot, Path=ActualHeight}"
                                                      />
+
+                        <!--local.SamplePeriodicTableSubsitute:BallSmudgeControl x:Name="periodicTableControl" 
+                                                    HorizontalAlignment="Center" 
+                                                    VerticalAlignment="Top" 
+                                                    BorderBrush="Transparent" 
+                                                    BorderThickness="3" 
+                                                    Width="{Binding ElementName=LayoutRoot, Path=ActualWidth}" 
+                                                    Height="{Binding ElementName=LayoutRoot, Path=ActualHeight}"
+                                                     /-->
+
                     </StackPanel>
-                    <!-- /Content omg -->
+                    <!-- /Content -->
                     <Ellipse x:Name="lightFloor" Width="1258" Height="206" HorizontalAlignment="Center" Margin="0,0,0,-93" VerticalAlignment="Bottom" Opacity="0.3" IsHitTestVisible="False">
                         <Ellipse.Fill>
                             <RadialGradientBrush>

@@ -21,7 +21,7 @@ namespace iMposter.View
     public partial class Wall : Window
     {
         protected IPeriodicTableInteractionControler periodicTableInteractionControler;
-
+        
         public Wall()
         {
             InitializeComponent();

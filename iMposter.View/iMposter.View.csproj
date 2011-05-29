@@ -75,6 +75,12 @@
     <Compile Include="PeriodicTableControl.xaml.cs">
       <DependentUpon>PeriodicTableControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SamplePeriodicTableSubsitute\Ball.xaml.cs">
+      <DependentUpon>Ball.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SamplePeriodicTableSubsitute\BallSmudgeControl.xaml.cs">
+      <DependentUpon>BallSmudgeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sample\CameraFaceDetect.xaml.cs">
       <DependentUpon>CameraFaceDetect.xaml</DependentUpon>
     </Compile>
@@ -109,6 +115,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PeriodicTableControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SamplePeriodicTableSubsitute\Ball.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SamplePeriodicTableSubsitute\BallSmudgeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
